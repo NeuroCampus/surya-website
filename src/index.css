@@ -99,6 +99,27 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
+  /* Smooth scroll with momentum */
+  @supports (scrollbar-width: thin) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: hsl(var(--accent)) transparent;
+    }
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--accent));
+    border-radius: 3px;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-light tracking-wide;
   }
@@ -115,5 +136,47 @@ All colors MUST be HSL.
   
   .transition-fast {
     transition: var(--transition-fast);
+  }
+
+  /* Motion blur effect for fast movements */
+  .motion-blur {
+    filter: blur(0px);
+    transition: filter 0.3s ease-out;
+  }
+
+  .motion-blur:active {
+    filter: blur(2px);
+  }
+
+  /* Cinematic easing */
+  .ease-cinematic {
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  /* Text reveal utilities */
+  .text-reveal {
+    clip-path: inset(0 100% 0 0);
+    animation: reveal 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  }
+
+  @keyframes reveal {
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  /* Ambient glow effect */
+  .ambient-glow {
+    box-shadow: 0 0 60px -15px hsl(var(--accent) / 0.4);
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 60px -15px hsl(var(--accent) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 80px -10px hsl(var(--accent) / 0.6);
+    }
   }
 }
