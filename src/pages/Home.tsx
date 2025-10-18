@@ -67,15 +67,17 @@ const Home = () => {
               ease: "easeInOut"
             }}
           />
-          {/* Dark overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-background" />
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background"
+            style={{ opacity: heroOpacity }}
+          />
         </motion.div>
         
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-6 z-10">
+        <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           {/* Masked text animation */}
-          <div className="overflow-hidden mb-6">
+          <div className="overflow-hidden">
             <motion.h1 
-              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-white font-light"
+              className="text-5xl md:text-7xl lg:text-8xl mb-6 tracking-luxury-wide text-background mix-blend-difference"
             >
               {["Design", "•", "Space", "•", "Emotion"].map((word, index) => (
                 <motion.span
@@ -83,8 +85,8 @@ const Home = () => {
                   initial={{ opacity: 0, y: 100, filter: "blur(10px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ 
-                    delay: 3.2 + index * 0.15,
-                    duration: 0.8,
+                    delay: 3.5 + index * 0.15,
+                    duration: 1,
                     ease: [0.25, 0.1, 0.25, 1]
                   }}
                   className="inline-block mx-2"
@@ -97,8 +99,8 @@ const Home = () => {
           <motion.p 
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 4, duration: 0.8 }}
-            className="text-lg md:text-xl text-white/90 tracking-luxury max-w-md"
+            transition={{ delay: 4.5, duration: 1 }}
+            className="text-lg md:text-xl text-background mix-blend-difference tracking-luxury max-w-md"
           >
             Crafting timeless interiors for modern living
           </motion.p>
