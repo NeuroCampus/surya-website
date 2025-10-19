@@ -179,12 +179,7 @@ const Home = () => {
         </div>
       </SectionTransition>
 
-      {/* Scroll-controlled video section */}
-      <PinnedSection height="300vh">
-        <div className="h-screen flex items-center justify-center bg-background">
-          <ScrollVideo posterImage={project1} />
-        </div>
-      </PinnedSection>
+      
 
       {/* Services Section */}
       <SectionTransition className="py-32 px-6 bg-muted/30">
