@@ -99,29 +99,34 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
-  /* Smooth scroll with momentum */
-  @supports (scrollbar-width: thin) {
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: hsl(var(--accent)) transparent;
+  /* Ultra-smooth video optimizations for 8K UHD */
+  video {
+    /* Hardware acceleration for smooth 8K playback */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* Optimize rendering for high-resolution displays */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    /* Prevent layout shifts during loading */
+    contain: layout style paint;
+  }
+
+  /* Performance optimizations for scroll-controlled elements */
+  .scroll-video {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* GPU acceleration for ultra-smooth scrolling */
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* High-DPI display optimizations */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    video {
+      /* Enhanced contrast and sharpness for 8K displays */
+      filter: contrast(1.1) brightness(1.05) saturate(1.1);
     }
-  }
-
-  *::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--accent));
-    border-radius: 3px;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-light tracking-wide;
   }
 }
 

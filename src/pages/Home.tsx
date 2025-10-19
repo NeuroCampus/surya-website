@@ -31,7 +31,7 @@ const Home = () => {
   const [heroHeight, setHeroHeight] = useState(0);
   const { scrollY } = useScroll();
   
-  const videoOpacity = useTransform(scrollY, [0, heroHeight - 200, heroHeight], [1, 1, 0]);
+  const videoOpacity = useTransform(scrollY, [0, heroHeight - 400, heroHeight], [1, 1, 0]);
   
   // Check for reduced motion preference
   useEffect(() => {
@@ -44,19 +44,40 @@ const Home = () => {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
   
-  // Scroll-controlled video logic
+  // Scroll-controlled video logic with ultra-smooth 8K optimization
   useEffect(() => {
     if (isReducedMotion || !videoRef.current) return;
     
     const vid = videoRef.current;
-    const playbackConst = 2000; // Increased for smoother, finer control
+    const playbackConst = 2500; // Balanced for smooth 8K control without excessive scrolling
+    let ticking = false;
+    let lastScrollY = 0;
+    
+    // Preload video for instant playback
+    vid.preload = 'auto';
+    vid.load();
     
     const scrollPlay = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      // Map scroll only within hero height for precise control
-      const scrollFraction = Math.min(1, Math.max(0, scrollTop / heroHeight));
-      vid.currentTime = vid.duration * scrollFraction;
-      requestAnimationFrame(scrollPlay);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          
+          // Smooth interpolation for crisp video playback
+          const targetScroll = Math.min(heroHeight, Math.max(0, scrollTop));
+          const interpolatedScroll = lastScrollY + (targetScroll - lastScrollY) * 0.08; // Gentler interpolation
+          
+          // Map scroll only within hero height for precise 8K control
+          const scrollFraction = Math.min(1, Math.max(0, interpolatedScroll / heroHeight));
+          
+          if (vid.duration && !isNaN(vid.duration)) {
+            vid.currentTime = vid.duration * scrollFraction;
+          }
+          
+          lastScrollY = interpolatedScroll;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
     const handleLoadedMetadata = () => {
@@ -66,13 +87,26 @@ const Home = () => {
         setHeightRef.current.style.height = height + "px";
         setHeroHeight(height);
       }
+      // Start smooth scroll tracking
       scrollPlay();
     };
     
+    const handleCanPlayThrough = () => {
+      // Video is fully loaded and ready for ultra-smooth playback
+      vid.playbackRate = 1;
+    };
+    
     vid.addEventListener('loadedmetadata', handleLoadedMetadata);
+    vid.addEventListener('canplaythrough', handleCanPlayThrough);
+    
+    // Passive scroll listener for maximum performance
+    const throttledScroll = () => scrollPlay();
+    window.addEventListener('scroll', throttledScroll, { passive: true });
     
     return () => {
       vid.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      vid.removeEventListener('canplaythrough', handleCanPlayThrough);
+      window.removeEventListener('scroll', throttledScroll);
     };
   }, [isReducedMotion, heroHeight]);
   
@@ -96,15 +130,26 @@ const Home = () => {
             ref={videoRef}
             preload="auto"
             muted
+            playsInline
             poster={heroImage}
-            className="fixed top-0 left-0 w-full h-screen object-cover pointer-events-none"
-            style={{ zIndex: 0, willChange: 'transform' }}
+            className="fixed top-0 left-0 w-full h-screen object-cover pointer-events-none scroll-video"
+            style={{ 
+              zIndex: 0, 
+              willChange: 'transform',
+              transform: 'translateZ(0)', // Hardware acceleration for ultra-smooth 8K playback
+              backfaceVisibility: 'hidden', // Prevent flickering
+              imageRendering: 'auto', // Optimize for high-res displays
+              filter: 'contrast(1.02) brightness(1.01)' // Subtle enhancement for clarity
+            }}
+            onError={(e) => console.log('Video failed to load:', e)}
           >
             <source src={finalintVideo} type="video/mp4" />
+            {/* Fallback for browsers that don't support MP4 */}
+            Your browser does not support the video tag.
           </video>
         </motion.div>
         <div ref={setHeightRef} id="set-height" className="relative w-full">
-          <div className="relative h-screen flex flex-col items-center justify-center text-center px-6" style={{ zIndex: 1 }}>
+          <div className="relative h-screen flex flex-col items-center justify-center text-center px-6" style={{ zIndex: 10 }}>
             {/* Intro text overlay */}
             <motion.div 
               initial={{ opacity: 0 }}
@@ -124,8 +169,8 @@ const Home = () => {
       </section>
 
       {/* Vision Section */}
-      <SectionTransition className="py-32 px-6 bg-background">
-        <div className="container mx-auto max-w-6xl">
+      <SectionTransition className="relative pt-32 pb-32 px-6 bg-background">
+        <div className="container mx-auto max-w-6xl relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
