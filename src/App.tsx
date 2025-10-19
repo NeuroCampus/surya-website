@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { AnimatePresence, motion } from "framer-motion";
 import StructuredData from "./components/StructuredData";
 import IntroAnimation from "./components/IntroAnimation";
+import SmoothScroll from "./components/SmoothScroll";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import About from "./pages/About";
@@ -117,7 +118,9 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AnimatedRoutes />
+          <SmoothScroll>
+            <AnimatedRoutes />
+          </SmoothScroll>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

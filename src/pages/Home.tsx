@@ -12,7 +12,12 @@ import MagneticButton from "@/components/MagneticButton";
 import ImageReveal from "@/components/ImageReveal";
 import Card3DTilt from "@/components/Card3DTilt";
 import SectionTransition from "@/components/SectionTransition";
+import ScrollVideo from "@/components/ScrollVideo";
+import PinnedSection from "@/components/PinnedSection";
+import ScrollStack from "@/components/ScrollStack";
+import MaskedTextReveal from "@/components/MaskedTextReveal";
 import { useParallax } from "@/hooks/useParallax";
+import { useScrollVelocity } from "@/hooks/useScrollVelocity";
 import heroImage from "@/assets/hero-interior.jpg";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
@@ -23,6 +28,7 @@ const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
+  const { velocityFactor } = useScrollVelocity();
   
   const heroY = useParallax(heroRef, 150);
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
@@ -75,40 +81,36 @@ const Home = () => {
         
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           {/* Masked text animation */}
-          <div className="overflow-hidden">
-            <motion.h1 
-              className="text-5xl md:text-7xl lg:text-8xl mb-6 tracking-luxury-wide text-background mix-blend-difference"
+          <div className="overflow-hidden mb-6">
+            <MaskedTextReveal 
+              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-white"
+              delay={3.2}
+              staggerDelay={0.05}
             >
-              {["Design", "•", "Space", "•", "Emotion"].map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 100, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{ 
-                    delay: 3.5 + index * 0.15,
-                    duration: 1,
-                    ease: [0.25, 0.1, 0.25, 1]
-                  }}
-                  className="inline-block mx-2"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </motion.h1>
+              Design • Space • Emotion
+            </MaskedTextReveal>
           </div>
           <motion.p 
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 4.5, duration: 1 }}
-            className="text-lg md:text-xl text-background mix-blend-difference tracking-luxury max-w-md"
+            transition={{ delay: 4, duration: 0.8 }}
+            className="text-lg md:text-xl text-white tracking-luxury max-w-md"
           >
             Crafting timeless interiors for modern living
           </motion.p>
         </div>
       </section>
 
+      {/* Scroll-controlled video section */}
+      <PinnedSection height="300vh">
+        <div className="h-screen flex items-center justify-center bg-background">
+          <ScrollVideo posterImage={project1} />
+        </div>
+      </PinnedSection>
+
       {/* Featured Projects with 3D Tilt & Image Reveals */}
-      <SectionTransition className="py-32 px-6">
+      <ScrollStack>
+        <SectionTransition className="py-32 px-6 bg-background">
         <div ref={projectsRef} className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -124,18 +126,13 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 1.2 }}
             >
-              {"Featured Works".split("").map((char, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.03, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className="inline-block"
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+              <MaskedTextReveal 
+                className="text-4xl md:text-5xl tracking-luxury-wide"
+                delay={0}
+                staggerDelay={0.03}
+              >
+                Featured Works
+              </MaskedTextReveal>
             </motion.h2>
             <motion.p 
               className="text-muted-foreground tracking-luxury"
@@ -211,10 +208,12 @@ const Home = () => {
             </MagneticButton>
           </motion.div>
         </div>
-      </SectionTransition>
+        </SectionTransition>
+      </ScrollStack>
 
-      {/* Testimonials Section */}
-      <SectionTransition className="py-32 px-6 bg-muted">
+      {/* Testimonials Section with Scroll Stack */}
+      <ScrollStack>
+        <SectionTransition className="py-32 px-6 bg-muted">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -228,9 +227,15 @@ const Home = () => {
           <TestimonialCarousel />
         </div>
       </SectionTransition>
+      </ScrollStack>
 
-      <InstagramFeed />
-      <CTASection />
+      <ScrollStack>
+        <InstagramFeed />
+      </ScrollStack>
+      
+      <ScrollStack>
+        <CTASection />
+      </ScrollStack>
 
       <Footer />
     </div>
