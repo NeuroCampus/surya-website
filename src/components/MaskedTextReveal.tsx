@@ -34,10 +34,13 @@ const MaskedTextReveal = ({
               className="inline-block"
               style={{
                 textShadow: `
-                  2px 2px 0px rgba(0, 0, 0, 0.1),
-                  4px 4px 0px rgba(0, 0, 0, 0.08),
-                  6px 6px 0px rgba(0, 0, 0, 0.06),
-                  8px 8px 10px rgba(0, 0, 0, 0.15)
+                  0 1px 0 rgba(0, 0, 0, 0.3),
+                  0 2px 0 rgba(0, 0, 0, 0.25),
+                  0 3px 0 rgba(0, 0, 0, 0.2),
+                  0 4px 0 rgba(0, 0, 0, 0.15),
+                  0 5px 0 rgba(0, 0, 0, 0.1),
+                  0 6px 1px rgba(0, 0, 0, 0.05),
+                  0 10px 30px rgba(0, 0, 0, 0.4)
                 `
               }}
             >

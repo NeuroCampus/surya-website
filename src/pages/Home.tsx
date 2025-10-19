@@ -74,7 +74,7 @@ const Home = () => {
             }}
           />
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background"
+            className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-background"
             style={{ opacity: heroOpacity }}
           />
         </motion.div>
@@ -83,7 +83,7 @@ const Home = () => {
           {/* Masked text animation with 3D effect */}
           <div className="overflow-hidden mb-6">
             <MaskedTextReveal 
-              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-foreground font-bold"
+              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-white font-bold drop-shadow-2xl"
               delay={3.2}
               staggerDelay={0.05}
             >
@@ -94,10 +94,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 4, duration: 0.8 }}
-            className="text-lg md:text-xl text-foreground tracking-luxury max-w-md font-medium"
-            style={{
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1), 4px 4px 8px rgba(0, 0, 0, 0.05)"
-            }}
+            className="text-lg md:text-xl text-white tracking-luxury max-w-md font-light drop-shadow-lg"
           >
             Crafting timeless interiors for modern living
           </motion.p>
