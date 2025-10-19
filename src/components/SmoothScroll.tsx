@@ -16,9 +16,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
       orientation: "vertical",
       smoothWheel: true,
       touchMultiplier: 2,
-      // Performance optimizations for 8K video
-      normalizeWheel: true,
-      smoothTouch: true,
+      // Performance optimizations for 8K video (removed unsupported 'smoothTouch' option)
       // Reduce lerp for more responsive video control
       lerp: 0.08,
     });
