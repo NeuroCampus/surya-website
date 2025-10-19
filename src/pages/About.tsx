@@ -54,7 +54,7 @@ const About = () => {
             viewport={{ once: true }}
             className="text-center mb-24"
           >
-            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-8">Studio</h1>
+            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-8 font-display-1">Studio</h1>
             <p className="text-lg md:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto">
               Founded in 2025, Surya Architects & Interiors merges timeless design with modern 
               functionality — creating spaces defined by calmness, craftsmanship, and character.
@@ -81,7 +81,7 @@ const About = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 mb-6 border border-foreground">
                   <value.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl tracking-luxury-wide mb-3">{value.title}</h3>
+                <h3 className="text-xl tracking-luxury-wide mb-3 font-display-2">{value.title}</h3>
                 <p className="text-muted-foreground tracking-luxury">{value.description}</p>
               </motion.div>
             ))}

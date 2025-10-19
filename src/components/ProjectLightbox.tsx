@@ -73,7 +73,7 @@ const ProjectLightbox = ({ isOpen, onClose, images, title, description, caseStud
             </div>
 
             <div className="text-background text-center space-y-4">
-              <h3 className="text-3xl tracking-luxury-wide">{title}</h3>
+              <h3 className="text-3xl tracking-luxury-wide font-display-1">{title}</h3>
               <p className="text-background/70 tracking-luxury">{description}</p>
               {caseStudy && (
                 <p className="text-sm italic text-background/60 tracking-luxury max-w-2xl mx-auto">

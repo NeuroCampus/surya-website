@@ -168,7 +168,7 @@ const IntroAnimation = () => {
               transition={{ duration: 0.8, delay: 2 }}
               className="text-center"
             >
-              <h1 className="text-5xl md:text-6xl tracking-luxury-wide mb-2">
+              <h1 className="text-5xl md:text-6xl tracking-luxury-wide mb-2 font-display-1">
                 Surya Architects
               </h1>
               <motion.p

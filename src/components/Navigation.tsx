@@ -42,15 +42,6 @@ const Navigation = () => {
             >
               Surya Architects
             </motion.span>
-            <motion.span 
-              className="text-xs tracking-luxury text-muted-foreground"
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3.3, duration: 0.5 }}
-              whileHover={{ opacity: 1 }}
-            >
-              & Interiors
-            </motion.span>
           </Link>
         </MagneticButton>
         

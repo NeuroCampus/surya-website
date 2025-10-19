@@ -53,7 +53,7 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-6">
+            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-6 font-display-1">
               Let's Design Together
             </h1>
             <p className="text-muted-foreground tracking-luxury text-lg">

@@ -55,7 +55,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Source Sans 3', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Cormorant Garamond', 'serif'],
+        elegant: ['Cormorant Garamond', 'serif'],
       },
       letterSpacing: {
         luxury: '0.05em',

@@ -15,7 +15,6 @@ import SectionTransition from "@/components/SectionTransition";
 import ScrollVideo from "@/components/ScrollVideo";
 import PinnedSection from "@/components/PinnedSection";
 import ScrollStack from "@/components/ScrollStack";
-import MaskedTextReveal from "@/components/MaskedTextReveal";
 import { useParallax } from "@/hooks/useParallax";
 import { useScrollVelocity } from "@/hooks/useScrollVelocity";
 import heroImage from "@/assets/hero-interior.jpg";
@@ -80,16 +79,17 @@ const Home = () => {
         </motion.div>
         
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-          {/* Masked text animation with 3D effect */}
-          <div className="overflow-hidden mb-6">
-            <MaskedTextReveal 
-              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-white font-bold drop-shadow-2xl"
-              delay={3.2}
-              staggerDelay={0.05}
-            >
+          {/* Hero heading with elegant typography */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 3.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mb-6"
+          >
+            <h1 className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-white font-display-1 font-light">
               Design • Space • Emotion
-            </MaskedTextReveal>
-          </div>
+            </h1>
+          </motion.div>
           <motion.p 
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -120,19 +120,13 @@ const Home = () => {
             className="text-center mb-20"
           >
             <motion.h2 
-              className="text-4xl md:text-5xl tracking-luxury-wide mb-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              className="text-4xl md:text-5xl tracking-luxury-wide mb-4 font-display-1 font-light text-luxury-charcoal"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.2 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <MaskedTextReveal 
-                className="text-4xl md:text-5xl tracking-luxury-wide"
-                delay={0}
-                staggerDelay={0.03}
-              >
-                Featured Works
-              </MaskedTextReveal>
+              Featured Works
             </motion.h2>
             <motion.p 
               className="text-muted-foreground tracking-luxury"
@@ -222,7 +216,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl tracking-luxury-wide">What Our Clients Say</h2>
+            <h2 className="text-4xl md:text-5xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">What Our Clients Say</h2>
           </motion.div>
           <TestimonialCarousel />
         </div>

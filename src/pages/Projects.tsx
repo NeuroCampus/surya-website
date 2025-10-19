@@ -73,7 +73,7 @@ const Projects = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-6">Projects</h1>
+            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-6 font-display-1">Projects</h1>
             <p className="text-muted-foreground tracking-luxury text-lg mb-12">
               A collection of our recent work
             </p>
@@ -127,7 +127,7 @@ const Projects = () => {
                 
                 <div className="space-y-2">
                   <div className="flex items-baseline justify-between">
-                    <h2 className="text-2xl tracking-luxury-wide">{project.title}</h2>
+                    <h2 className="text-2xl tracking-luxury-wide font-display-2">{project.title}</h2>
                     <span className="text-sm text-muted-foreground tracking-luxury">{project.year}</span>
                   </div>
                   <p className="text-muted-foreground tracking-luxury">{project.description}</p>
