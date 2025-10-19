@@ -179,46 +179,121 @@ const Home = () => {
         >
           {/* No backgrounds or plates behind the title; only golden text remains */}
           <div className="max-w-5xl mx-auto relative">
-            <div className="relative z-10">
-              {/* Company Name: Elegant Gold */}
-              <motion.h1
-                className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-luxury-wide font-bold leading-tight mb-8 relative overflow-hidden"
-                style={{
-                  fontFamily: 'Cinzel, Cormorant Garamond, serif',
-                  position: 'relative',
-                  zIndex: 10,
-                  textRendering: 'optimizeLegibility',
-                  fontFeatureSettings: '"liga" 1, "calt" 1',
-                  background: 'linear-gradient(135deg, #F4E87C 0%, #E6B800 50%, #D4AF37 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  textShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                  filter: 'brightness(1.1) contrast(1.1)'
+            <div className="relative z-10 flex flex-col items-center">
+              {/* Elegant logo mark */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.2
                 }}
-                initial={{
-                  clipPath: 'inset(0 100% 0 0)',
-                  opacity: 0
-                }}
-                animate={{
-                  clipPath: 'inset(0 0% 0 0)',
-                  opacity: 1
-                }}
-                 transition={{
-                  clipPath: { duration: 2.5, ease: [0.25, 0.1, 0.25, 1] },
-                  opacity: { duration: 0.5, delay: 0.2 }
-                }}
+                className="mb-8"
               >
-                {displayText}
-              </motion.h1>
-              {/* Tagline: plain charcoal text, no gradient */}
-              <motion.p 
-                className="text-sm md:text-base lg:text-lg tracking-luxury max-w-3xl mx-auto font-medium leading-relaxed text-luxury-charcoal mb-8 font-sans"
-                initial={{ opacity: 0, y: 12 }}
+                <div className="w-28 h-28 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold/80 flex items-center justify-center shadow-2xl">
+                  <svg
+                    width="44"
+                    height="44"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V7l8-4v18"/>
+                    <path d="M19 21V11l-6-4"/>
+                    <path d="M9 9v.01"/>
+                    <path d="M9 12v.01"/>
+                    <path d="M9 15v.01"/>
+                    <path d="M9 18v.01"/>
+                  </svg>
+                </div>
+              </motion.div>
+
+              {/* Company name with staggered reveal */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.6 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.6
+                }}
+                className="mb-2"
               >
-                Crafting timeless spaces that reflect who you are
+                <h1 className="text-5xl md:text-7xl lg:text-9xl font-playfair font-bold text-luxury-charcoal tracking-tight text-center">
+                  SURYA
+                </h1>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.8
+                }}
+                className="mb-6"
+              >
+                <h2 className="text-2xl md:text-4xl lg:text-6xl font-elegant font-medium text-luxury-charcoal/80 tracking-wide text-center">
+                  ARCHITECTS
+                </h2>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 1.0
+                }}
+                className="mb-10"
+              >
+                <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light tracking-widest uppercase text-center">
+                  & Interiors
+                </p>
+              </motion.div>
+
+              {/* Minimal progress indicator */}
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 1.4
+                }}
+                className="w-40 h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent mb-8"
+              >
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{
+                    duration: 1.2,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    delay: 1.6
+                  }}
+                  className="h-full bg-luxury-gold origin-left"
+                />
+              </motion.div>
+
+              {/* Tagline */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 1.8
+                }}
+                className="text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wider text-center max-w-lg"
+              >
+                Crafting Timeless Spaces with Elegance and Precision  
               </motion.p>
             </div>
           </div>
