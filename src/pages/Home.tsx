@@ -175,7 +175,7 @@ const Home = () => {
             opacity: overlayOpacity,
             y: overlayY
           }}
-          className="fixed inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none z-30"
+          className="fixed inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none z-30"
         >
           {/* No backgrounds or plates behind the title; only golden text remains */}
           <div className="max-w-5xl mx-auto relative">
@@ -224,7 +224,7 @@ const Home = () => {
                 }}
                 className="mb-2"
               >
-                <h1 className="text-5xl md:text-7xl lg:text-9xl font-playfair font-bold text-luxury-charcoal tracking-tight text-center">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-playfair font-bold text-luxury-charcoal tracking-tight text-center">
                   SURYA
                 </h1>
               </motion.div>
@@ -239,7 +239,7 @@ const Home = () => {
                 }}
                 className="mb-6"
               >
-                <h2 className="text-2xl md:text-4xl lg:text-6xl font-elegant font-medium text-luxury-charcoal/80 tracking-wide text-center">
+                <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl font-elegant font-medium text-luxury-charcoal/80 tracking-wide text-center">
                   ARCHITECTS
                 </h2>
               </motion.div>
@@ -254,7 +254,7 @@ const Home = () => {
                 }}
                 className="mb-10"
               >
-                <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light tracking-widest uppercase text-center">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-light tracking-widest uppercase text-center">
                   & Interiors
                 </p>
               </motion.div>
@@ -291,7 +291,7 @@ const Home = () => {
                   ease: [0.25, 0.1, 0.25, 1],
                   delay: 1.8
                 }}
-                className="text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wider text-center max-w-lg"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wider text-center max-w-lg px-4"
               >
                 Crafting Timeless Spaces with Elegance and Precision  
               </motion.p>
@@ -300,14 +300,14 @@ const Home = () => {
         </motion.div>
         
         <div ref={setHeightRef} id="set-height" className="relative w-full">
-          <div className="relative h-screen flex flex-col items-center justify-center text-center px-6" style={{ zIndex: 10 }}>
+          <div className="relative h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6" style={{ zIndex: 10 }}>
             {/* Original content space - overlay moved outside */}
           </div>
         </div>
       </section>
 
       {/* Vision Section */}
-      <SectionTransition className="relative pt-20 pb-20 px-6 bg-background">
+      <SectionTransition className="relative pt-20 pb-20 px-4 sm:px-6 bg-background">
         <div className="container mx-auto max-w-6xl relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
@@ -316,10 +316,10 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
               We Create Homes With Love
             </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-4xl mx-auto font-light">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-4xl mx-auto font-light">
               Great design is about solving problems and creating spaces that bring you joy. We believe the spaces we spend time in affect how we feel and view the world around us.
             </p>
           </motion.div>
@@ -331,10 +331,10 @@ const Home = () => {
               transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl md:text-4xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
                 Our Vision
               </h3>
-              <p className="text-lg text-muted-foreground tracking-luxury leading-relaxed mb-8">
+              <p className="text-base sm:text-lg text-muted-foreground tracking-luxury leading-relaxed mb-8">
                 We are inspired daily to design spaces that ground us into who we uniquely are, so we move into the world renewed, energized and inspired to impact everyone in a positive way.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -353,8 +353,8 @@ const Home = () => {
             >
               <div className="aspect-square bg-gradient-to-br from-luxury-beige/20 to-luxury-gold/10 rounded-2xl flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-6xl md:text-8xl font-display-1 font-light text-luxury-gold mb-4">22+</div>
-                  <div className="text-lg tracking-luxury-wide uppercase text-luxury-charcoal font-medium">Years of Excellence</div>
+                  <div className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display-1 font-light text-luxury-gold mb-4">22+</div>
+                  <div className="text-base sm:text-lg tracking-luxury-wide uppercase text-luxury-charcoal font-medium">Years of Excellence</div>
                 </div>
               </div>
             </motion.div>
@@ -368,7 +368,7 @@ const Home = () => {
 
       {/* Featured Projects with 3D Tilt & Image Reveals */}
       <ScrollStack>
-        <SectionTransition className="py-20 px-6 bg-background">
+        <SectionTransition className="py-20 px-4 sm:px-6 bg-background">
         <div ref={projectsRef} className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -378,7 +378,7 @@ const Home = () => {
             className="text-center mb-20"
           >
             <motion.h2 
-              className="text-4xl md:text-5xl tracking-luxury-wide mb-4 font-display-1 font-light text-luxury-charcoal"
+              className="text-3xl sm:text-4xl md:text-5xl tracking-luxury-wide mb-4 font-display-1 font-light text-luxury-charcoal"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -387,7 +387,7 @@ const Home = () => {
               Featured Works
             </motion.h2>
             <motion.p 
-              className="text-muted-foreground tracking-luxury"
+              className="text-base sm:text-lg text-muted-foreground tracking-luxury"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -414,43 +414,51 @@ const Home = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 className="group"
               >
-                <Card3DTilt to="/projects" className="group block relative overflow-hidden aspect-[4/5] bg-background border border-border/30 hover:border-luxury-gold/50 transition-all duration-700 hover:shadow-2xl hover:shadow-luxury-gold/20 hover:-translate-y-3">
-                  <ImageReveal
-                    src={project.image}
-                    alt={`${project.title} - ${project.subtitle} interior design project`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                    <div className="p-8 text-white w-full">
-                      <motion.h3 
-                        className="text-2xl md:text-3xl tracking-luxury-wide mb-2 font-display-1 font-light"
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.1 }}
-                        viewport={{ once: false }}
-                      >
-                        {project.title}
-                      </motion.h3>
-                      <motion.p 
-                        className="text-sm md:text-base tracking-luxury opacity-90 mb-4"
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        viewport={{ once: false }}
-                      >
-                        {project.subtitle}
-                      </motion.p>
-                      <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                        viewport={{ once: false }}
-                        className="text-luxury-gold text-sm tracking-luxury-wide uppercase font-medium"
-                      >
-                        View Project →
-                      </motion.div>
-                    </div>
-                  </div>
+                <Card3DTilt to="/projects" className="block relative overflow-hidden aspect-[4/5] bg-background border border-border/30 hover:border-luxury-gold/50 active:border-luxury-gold/50 transition-all duration-700 hover:shadow-2xl hover:shadow-luxury-gold/20 active:shadow-2xl active:shadow-luxury-gold/20 hover:-translate-y-3 active:-translate-y-3 touch-manipulation">
+                  {(isActive) => (
+                    <>
+                      <ImageReveal
+                        src={project.image}
+                        alt={`${project.title} - ${project.subtitle} interior design project`}
+                        className={`w-full h-full object-cover transition-transform duration-700 ${
+                          isActive ? 'scale-105' : 'hover:scale-105'
+                        }`}
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 flex items-end ${
+                        isActive ? 'opacity-100' : 'hover:opacity-100 opacity-0'
+                      }`}>
+                        <div className="p-8 text-white w-full">
+                          <motion.h3
+                            className="text-xl sm:text-2xl md:text-3xl tracking-luxury-wide mb-2 font-display-1 font-light"
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.1 }}
+                            viewport={{ once: false }}
+                          >
+                            {project.title}
+                          </motion.h3>
+                          <motion.p
+                            className="text-sm sm:text-base md:text-base tracking-luxury opacity-90 mb-4"
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            viewport={{ once: false }}
+                          >
+                            {project.subtitle}
+                          </motion.p>
+                          <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                            viewport={{ once: false }}
+                            className="text-luxury-gold text-sm tracking-luxury-wide uppercase font-medium"
+                          >
+                            View Project →
+                          </motion.div>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </Card3DTilt>
               </motion.div>
             ))}
@@ -479,7 +487,7 @@ const Home = () => {
 
 
       {/* Services Section */}
-      <SectionTransition className="py-20 px-6 bg-muted/30">
+      <SectionTransition className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="container mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -488,10 +496,10 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
               Our Services
             </h2>
-            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto">
               From concept to completion, we offer comprehensive interior design solutions tailored to your vision
             </p>
           </motion.div>
@@ -534,10 +542,10 @@ const Home = () => {
                       <div className="w-12 h-12 bg-luxury-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-luxury-gold/20 transition-colors">
                         <span className="text-2xl text-luxury-gold font-display-1">0{index + 1}</span>
                       </div>
-                      <h3 className="text-2xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
+                      <h3 className="text-xl sm:text-2xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
                         {service.title}
                       </h3>
-                      <p className="text-muted-foreground tracking-luxury leading-relaxed mb-6">
+                      <p className="text-sm sm:text-base text-muted-foreground tracking-luxury leading-relaxed mb-6">
                         {service.description}
                       </p>
                     </div>
@@ -576,7 +584,7 @@ const Home = () => {
 
       {/* Testimonials Section with Enhanced Design */}
       <ScrollStack>
-        <SectionTransition className="py-20 px-6 bg-gradient-to-b from-background to-muted/20">
+        <SectionTransition className="py-20 px-4 sm:px-6 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -585,10 +593,10 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
               Client Stories
             </h2>
-            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
               Hear from our clients about their transformative experiences
             </p>
           </motion.div>
@@ -632,10 +640,10 @@ const Home = () => {
                 viewport={{ once: true }}
                 className="text-center group"
               >
-                <div className="text-3xl md:text-4xl font-display-1 font-light text-luxury-gold mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-display-1 font-light text-luxury-gold mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm tracking-luxury-wide uppercase text-muted-foreground font-medium">
+                <div className="text-sm sm:text-sm tracking-luxury-wide uppercase text-muted-foreground font-medium">
                   {stat.label}
                 </div>
               </motion.div>
@@ -650,7 +658,7 @@ const Home = () => {
       </ScrollStack>
       
       {/* About/Expertise Section */}
-      <SectionTransition className="py-20 px-6 bg-background">
+      <SectionTransition className="py-20 px-4 sm:px-6 bg-background">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -659,7 +667,7 @@ const Home = () => {
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
                 Why Choose Surya Luxe Canvas
               </h2>
               <div className="space-y-6">
@@ -703,7 +711,7 @@ const Home = () => {
               <div className="aspect-square bg-gradient-to-br from-luxury-beige/30 to-luxury-gold/20 rounded-2xl flex items-center justify-center">
                 <div className="text-center p-12">
                   <div className="text-6xl md:text-7xl font-display-1 font-light text-luxury-gold mb-6">"</div>
-                  <blockquote className="text-xl md:text-2xl font-display-1 font-light text-luxury-charcoal leading-relaxed mb-6">
+                  <blockquote className="text-lg sm:text-xl md:text-2xl font-display-1 font-light text-luxury-charcoal leading-relaxed mb-6">
                     Design is not just what it looks like and feels like. Design is how it works.
                   </blockquote>
                   <cite className="text-sm tracking-luxury-wide uppercase text-muted-foreground font-medium">

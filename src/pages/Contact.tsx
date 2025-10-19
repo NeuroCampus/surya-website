@@ -96,7 +96,7 @@ const Contact = () => {
         <Navigation />
 
         {/* Main Content */}
-        <main className="flex-1 flex items-center justify-center px-6 py-20">
+        <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-20">
           <div className="w-full max-w-7xl">
             {/* Header Section */}
             <motion.div
@@ -105,10 +105,10 @@ const Contact = () => {
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
               className="text-center mb-16"
             >
-              <h1 className="text-6xl md:text-8xl tracking-luxury-wide mb-6 font-display-1 font-light text-white">
+              <h1 className="text-5xl sm:text-6xl md:text-8xl tracking-luxury-wide mb-6 font-display-1 font-light text-white">
                 Let's Talk
               </h1>
-              <p className="text-xl md:text-2xl text-white/80 tracking-luxury leading-relaxed max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/80 tracking-luxury leading-relaxed max-w-2xl mx-auto">
                 Ready to transform your space into a masterpiece?
               </p>
             </motion.div>
@@ -135,10 +135,10 @@ const Contact = () => {
                         <info.icon className="w-6 h-6 text-white group-hover:text-luxury-gold transition-colors duration-300" />
                       </div>
                       <div className="flex-1">
-                        <div className="text-base md:text-lg tracking-luxury-wide uppercase text-white/70 font-medium mb-3 group-hover:text-white transition-colors duration-300">
+                        <div className="text-base sm:text-lg tracking-luxury-wide uppercase text-white/70 font-medium mb-3 group-hover:text-white transition-colors duration-300">
                           {info.label}
                         </div>
-                        <div className="text-xl md:text-2xl tracking-luxury text-white leading-tight group-hover:text-luxury-gold transition-colors duration-300 font-light">
+                        <div className="text-lg sm:text-xl md:text-2xl tracking-luxury text-white leading-tight group-hover:text-luxury-gold transition-colors duration-300 font-light">
                           {info.value}
                         </div>
                       </div>

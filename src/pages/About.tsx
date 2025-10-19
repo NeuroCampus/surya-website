@@ -73,7 +73,7 @@ const About = () => {
       <CustomCursor />
       <Navigation />
 
-      <div className="pt-32 pb-20 px-6">
+      <div className="pt-24 sm:pt-32 pb-20 px-4 sm:px-6">
         <div className="container mx-auto max-w-7xl">
           {/* Hero Section */}
           <motion.div
@@ -93,7 +93,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-5xl md:text-7xl lg:text-8xl tracking-tight mb-4 font-playfair font-bold"
+                className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight mb-4 font-playfair font-bold"
               >
                 Our Studio
               </motion.h1>
@@ -101,7 +101,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-xl md:text-2xl font-light tracking-wide max-w-2xl"
+                className="text-lg sm:text-xl md:text-2xl font-light tracking-wide max-w-2xl"
               >
                 Where vision meets craftsmanship, creating spaces that inspire and endure.
               </motion.p>
@@ -123,7 +123,7 @@ const About = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="text-4xl md:text-5xl font-playfair font-bold text-luxury-charcoal mb-8"
+                  className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-luxury-charcoal mb-8"
                 >
                   Crafting Timeless
                   <br />
@@ -134,7 +134,7 @@ const About = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="space-y-6 text-lg text-muted-foreground leading-relaxed"
+                  className="space-y-6 text-base sm:text-lg text-muted-foreground leading-relaxed"
                 >
                   <p>
                     Founded in 2003, Surya Architects has been at the forefront of luxury architectural design,
@@ -185,7 +185,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
+              className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
             >
               Our Values
             </motion.h2>
@@ -230,7 +230,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
+              className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
             >
               Our Process
             </motion.h2>
@@ -271,7 +271,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
+              className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
             >
               Meet Our Team
             </motion.h2>
@@ -321,10 +321,10 @@ const About = () => {
               className="text-center mb-16"
             >
               <Camera className="w-12 h-12 text-luxury-gold mx-auto mb-6" />
-              <h2 className="text-4xl md:text-5xl font-playfair font-bold text-luxury-charcoal mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-luxury-charcoal mb-4">
                 Our Work
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
                 A glimpse into the spaces we've crafted, where design meets functionality in perfect harmony.
               </p>
             </motion.div>
@@ -404,7 +404,7 @@ const About = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-luxury-charcoal mb-8">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-luxury-charcoal mb-8">
                   Where Ideas
                   <br />
                   <span className="text-luxury-gold">Come to Life</span>

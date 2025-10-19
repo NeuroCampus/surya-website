@@ -61,7 +61,7 @@ const Projects = () => {
       <CustomCursor />
       <Navigation />
       
-      <div className="pt-32 pb-20 px-6">
+      <div className="pt-24 sm:pt-32 pb-20 px-4 sm:px-6">
         <div className="container mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -69,10 +69,10 @@ const Projects = () => {
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             className="text-center mb-16"
           >
-            <h1 className="text-6xl md:text-8xl tracking-luxury-wide mb-6 font-display-1 font-light text-luxury-charcoal">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl tracking-luxury-wide mb-6 font-display-1 font-light text-luxury-charcoal">
               Projects
             </h1>
-            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
               Our work speaks for itself
             </p>
 
@@ -144,14 +144,14 @@ const Projects = () => {
 
                 <div className="space-y-3">
                   <div className="flex items-baseline justify-between">
-                    <h2 className="text-2xl md:text-3xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">
                       {project.title}
                     </h2>
                     <span className="text-sm text-muted-foreground tracking-luxury font-medium">
                       {project.year}
                     </span>
                   </div>
-                  <p className="text-muted-foreground tracking-luxury text-lg">
+                  <p className="text-base sm:text-lg text-muted-foreground tracking-luxury">
                     {project.description}
                   </p>
                   <div className="flex items-center justify-between">

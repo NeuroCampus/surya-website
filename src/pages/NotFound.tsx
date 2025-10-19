@@ -11,7 +11,7 @@ const NotFound = () => {
       <CustomCursor />
       <Navigation />
 
-      <div className="flex-1 flex items-center justify-center px-6 pt-32 pb-20">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 pt-32 pb-20">
         <div className="text-center max-w-2xl">
           {/* 404 Number */}
           <motion.div
@@ -20,7 +20,7 @@ const NotFound = () => {
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-8"
           >
-            <h1 className="text-8xl md:text-9xl font-display-1 font-light text-luxury-charcoal tracking-luxury-wide">
+            <h1 className="text-6xl sm:text-8xl md:text-9xl font-display-1 font-light text-luxury-charcoal tracking-luxury-wide">
               404
             </h1>
           </motion.div>
@@ -32,10 +32,10 @@ const NotFound = () => {
             transition={{ delay: 0.3, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-display-1 font-light text-luxury-charcoal tracking-luxury-wide mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display-1 font-light text-luxury-charcoal tracking-luxury-wide mb-6">
               Page Not Found
             </h2>
-            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed">
+            <p className="text-base sm:text-xl text-muted-foreground tracking-luxury leading-relaxed">
               The page you're looking for doesn't exist or has been moved.
             </p>
           </motion.div>

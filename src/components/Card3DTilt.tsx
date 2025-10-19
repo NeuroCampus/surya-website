@@ -1,18 +1,34 @@
+import { useState, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 interface Card3DTiltProps {
-  children: React.ReactNode;
+  children: (isActive: boolean) => ReactNode;
   to: string;
   className?: string;
 }
 
-// Simplified card wrapper — removed 3D tilt interactions to match a cleaner, gallery-style layout.
 const Card3DTilt = ({ children, to, className = "" }: Card3DTiltProps) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleTouchStart = () => {
+    setIsActive(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsActive(false);
+  };
+
   return (
-    <Link to={to} className="block">
-      <div className={className}>
-        {children}
-      </div>
+    <Link
+      to={to}
+      className={`block ${className} ${isActive ? 'active' : ''}`}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleTouchStart}
+      onMouseUp={handleTouchEnd}
+      onMouseLeave={handleTouchEnd}
+    >
+      {children(isActive)}
     </Link>
   );
 };
