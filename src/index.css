@@ -145,6 +145,10 @@ All colors MUST be HSL.
     color: hsl(var(--warm-gold));
   }
 
+  .bg-luxury-gold {
+    background-color: hsl(var(--warm-gold));
+  }
+
   .text-luxury-beige {
     color: hsl(var(--luxury-beige));
   }

@@ -22,8 +22,7 @@ const Projects = () => {
       description: "Contemporary Luxury", 
       image: project1,
       year: "2025",
-      category: "Residential",
-      caseStudy: "Timber & Light: Merging natural materials for a serene living space."
+      category: "Residential"
     },
     { 
       id: 2, 
@@ -31,8 +30,7 @@ const Projects = () => {
       description: "Minimalist Elegance", 
       image: project2,
       year: "2025",
-      category: "Residential",
-      caseStudy: "Form meets function in this contemporary culinary sanctuary."
+      category: "Residential"
     },
     { 
       id: 3, 
@@ -40,8 +38,7 @@ const Projects = () => {
       description: "City Views", 
       image: project3,
       year: "2025",
-      category: "Luxury Suites",
-      caseStudy: "Elevated living with panoramic vistas and refined interiors."
+      category: "Luxury Suites"
     },
     { 
       id: 4, 
@@ -49,8 +46,7 @@ const Projects = () => {
       description: "Serene Sanctuary", 
       image: project4,
       year: "2025",
-      category: "Renovation",
-      caseStudy: "A tranquil retreat inspired by natural stone and flowing water."
+      category: "Renovation"
     },
   ];
 
@@ -66,76 +62,114 @@ const Projects = () => {
       <Navigation />
       
       <div className="pt-32 pb-20 px-6">
-        <div className="container mx-auto">
+        <div className="container mx-auto max-w-7xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-7xl tracking-luxury-wide mb-6 font-display-1">Projects</h1>
-            <p className="text-muted-foreground tracking-luxury text-lg mb-12">
-              A collection of our recent work
+            <h1 className="text-6xl md:text-8xl tracking-luxury-wide mb-6 font-display-1 font-light text-luxury-charcoal">
+              Projects
+            </h1>
+            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
+              Our work speaks for itself
             </p>
 
             {/* Category Filters */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {categories.map((category) => (
-                <button
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+              className="flex flex-wrap items-center justify-center gap-4 mt-12"
+            >
+              {categories.map((category, index) => (
+                <motion.button
                   key={category}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 + 0.4, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2 text-sm tracking-luxury uppercase transition-smooth ${
+                  className={`px-6 py-3 text-sm tracking-luxury-wide uppercase transition-smooth border ${
                     selectedCategory === category
-                      ? "bg-foreground text-background"
-                      : "border border-foreground text-foreground hover:bg-foreground hover:text-background"
+                      ? "bg-luxury-charcoal text-luxury-white border-luxury-charcoal"
+                      : "border-luxury-charcoal/30 text-luxury-charcoal hover:bg-luxury-charcoal hover:text-luxury-white"
                   }`}
                 >
                   {category}
-                </button>
+                </motion.button>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+          >
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15, duration: 0.8 }}
-                viewport={{ once: true }}
+                layout
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ delay: index * 0.1, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                 className="group cursor-pointer"
                 onClick={() => setSelectedProject(project.id)}
               >
-                <div className="relative overflow-hidden aspect-[4/3] mb-6">
+                <div className="relative overflow-hidden aspect-[4/3] mb-6 bg-luxury-beige/10">
                   <motion.img
                     src={project.image}
                     alt={project.title}
                     whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-smooth" />
-                  
-                  {/* Hover icon for lightbox */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-smooth">
-                    <div className="bg-background/90 p-3 backdrop-blur-sm">
-                      <Maximize2 className="w-5 h-5" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Hover overlay */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <div className="bg-luxury-white/90 backdrop-blur-sm px-6 py-3 border border-luxury-charcoal/20">
+                      <span className="text-luxury-charcoal tracking-luxury-wide uppercase text-sm font-medium">
+                        View Project
+                      </span>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-                
-                <div className="space-y-2">
+
+                <div className="space-y-3">
                   <div className="flex items-baseline justify-between">
-                    <h2 className="text-2xl tracking-luxury-wide font-display-2">{project.title}</h2>
-                    <span className="text-sm text-muted-foreground tracking-luxury">{project.year}</span>
+                    <h2 className="text-2xl md:text-3xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">
+                      {project.title}
+                    </h2>
+                    <span className="text-sm text-muted-foreground tracking-luxury font-medium">
+                      {project.year}
+                    </span>
                   </div>
-                  <p className="text-muted-foreground tracking-luxury">{project.description}</p>
-                  <p className="text-xs text-muted-foreground tracking-luxury uppercase">{project.category}</p>
+                  <p className="text-muted-foreground tracking-luxury text-lg">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs tracking-luxury-wide uppercase text-luxury-gold font-medium">
+                      {project.category}
+                    </span>
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                      className="text-luxury-gold"
+                    >
+                      →
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -147,7 +181,6 @@ const Projects = () => {
           images={[projects.find(p => p.id === selectedProject)?.image || ""]}
           title={projects.find(p => p.id === selectedProject)?.title || ""}
           description={projects.find(p => p.id === selectedProject)?.description || ""}
-          caseStudy={projects.find(p => p.id === selectedProject)?.caseStudy}
         />
       )}
 

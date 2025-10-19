@@ -1,0 +1,48 @@
+Code at 01:43
+
+<video id="v0" preload="auto" muted>
+    <source src="sample.mp4" type="video/mp4">
+ </video>
+
+
+Code at 03:25
+
+<style>
+    /* Placeholder div for scrolling */
+    #set-height {
+      height: 300vh; /* Initial height, dynamically updated */
+      background: linear-gradient(to bottom, #ffffff, #cccccc);
+    }
+    /* Fixed video styling */
+    #v0 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  </style>
+  
+  <script>
+    var vid = document.getElementById('v0');
+    var setHeight = document.getElementById("set-height");
+    var playbackConst = 1000; // Adjusts scroll speed
+    vid.addEventListener('loadedmetadata', function () {
+      // Dynamically set page height based on video duration
+      setHeight.style.height = (vid.duration * playbackConst) + "px";
+      console.log("Video Duration: ", vid.duration);
+      scrollPlay(); // Ensure function starts after video metadata loads
+    });
+    function scrollPlay() {
+      let scrollTop = window.scrollY || document.documentElement.scrollTop;
+      let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      let scrollFraction = scrollTop / maxScroll;
+      // Map scroll to video time
+      vid.currentTime = vid.duration * scrollFraction;
+      requestAnimationFrame(scrollPlay);
+    }
+    // Start the scrollPlay function
+    requestAnimationFrame(scrollPlay);
+  </script>
+
