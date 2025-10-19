@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -15,24 +15,67 @@ import SectionTransition from "@/components/SectionTransition";
 import ScrollVideo from "@/components/ScrollVideo";
 import PinnedSection from "@/components/PinnedSection";
 import ScrollStack from "@/components/ScrollStack";
-import { useParallax } from "@/hooks/useParallax";
-import { useScrollVelocity } from "@/hooks/useScrollVelocity";
 import heroImage from "@/assets/hero-interior.jpg";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
+import finalintVideo from "@/assets/finalint.mp4";
 
 const Home = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
-  const { velocityFactor } = useScrollVelocity();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const setHeightRef = useRef<HTMLDivElement>(null);
+  const [videoDuration, setVideoDuration] = useState(0);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [heroHeight, setHeroHeight] = useState(0);
+  const { scrollY } = useScroll();
   
-  const heroY = useParallax(heroRef, 150);
-  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-
+  const videoOpacity = useTransform(scrollY, [0, heroHeight - 200, heroHeight], [1, 1, 0]);
+  
+  // Check for reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReducedMotion(mediaQuery.matches);
+    
+    const handleChange = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+  
+  // Scroll-controlled video logic
+  useEffect(() => {
+    if (isReducedMotion || !videoRef.current) return;
+    
+    const vid = videoRef.current;
+    const playbackConst = 2000; // Increased for smoother, finer control
+    
+    const scrollPlay = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      // Map scroll only within hero height for precise control
+      const scrollFraction = Math.min(1, Math.max(0, scrollTop / heroHeight));
+      vid.currentTime = vid.duration * scrollFraction;
+      requestAnimationFrame(scrollPlay);
+    };
+    
+    const handleLoadedMetadata = () => {
+      setVideoDuration(vid.duration);
+      if (setHeightRef.current) {
+        const height = vid.duration * playbackConst;
+        setHeightRef.current.style.height = height + "px";
+        setHeroHeight(height);
+      }
+      scrollPlay();
+    };
+    
+    vid.addEventListener('loadedmetadata', handleLoadedMetadata);
+    
+    return () => {
+      vid.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  }, [isReducedMotion, heroHeight]);
+  
   const projects = [
     { id: 1, title: "Bangalore Residence", subtitle: "Contemporary Luxury", image: project1 },
     { id: 2, title: "Modern Kitchen", subtitle: "Minimalist Elegance", image: project2 },
@@ -46,80 +89,37 @@ const Home = () => {
       <ScrollProgress />
       <Navigation />
       
-      {/* Hero Section with Parallax */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
-        <motion.div
-          style={{ y: heroY, scale: heroScale }}
-          className="absolute inset-0"
-        >
-          <motion.img
-            src={heroImage}
-            alt="Luxury interior design showcasing timeless architectural elegance"
-            className="w-full h-full object-cover"
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-          />
-          {/* Ambient light effect */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-transparent to-orange-900/10"
-            animate={{
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-background"
-            style={{ opacity: heroOpacity }}
-          />
+      {/* Hero Section with Scroll-Controlled Video */}
+      <section className="relative w-full overflow-hidden">
+        <motion.div style={{ opacity: videoOpacity }}>
+          <video
+            ref={videoRef}
+            preload="auto"
+            muted
+            poster={heroImage}
+            className="fixed top-0 left-0 w-full h-screen object-cover pointer-events-none"
+            style={{ zIndex: 0, willChange: 'transform' }}
+          >
+            <source src={finalintVideo} type="video/mp4" />
+          </video>
         </motion.div>
-        
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-          {/* Main hero heading */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mb-6"
-          >
-            <h1 className="text-6xl md:text-8xl lg:text-9xl tracking-luxury-wide text-white font-display-1 font-light leading-none">
-              SURYA
-            </h1>
-            <h2 className="text-2xl md:text-4xl lg:text-5xl tracking-luxury-wide text-luxury-gold font-display-1 font-light mt-4">
-              LUXE CANVAS
-            </h2>
-          </motion.div>
-
-          {/* Subtitle */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 3.8, duration: 0.8 }}
-            className="text-lg md:text-xl text-white tracking-luxury max-w-2xl font-light leading-relaxed"
-          >
-            Crafting timeless interiors for modern living • We design spaces that bring you joy
-          </motion.p>
-
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4.2, duration: 0.8 }}
-            className="mt-12"
-          >
-            <MagneticButton strength={0.4}>
-              <Link
-                to="/projects"
-                className="inline-block px-8 py-4 bg-luxury-gold text-luxury-charcoal tracking-luxury-wide uppercase text-sm font-medium hover:bg-luxury-gold/90 transition-smooth"
-              >
-                Explore Our Work
-              </Link>
-            </MagneticButton>
-          </motion.div>
+        <div ref={setHeightRef} id="set-height" className="relative w-full">
+          <div className="relative h-screen flex flex-col items-center justify-center text-center px-6" style={{ zIndex: 1 }}>
+            {/* Intro text overlay */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 1, 0] }}
+              transition={{ duration: 1.5, times: [0, 0.2, 0.8, 1] }}
+              className="mb-6"
+            >
+              <h1 className="text-6xl md:text-8xl lg:text-9xl tracking-luxury-wide text-white font-display-1 font-light leading-none">
+                SURYA ARCHITECTS & INTERIORS
+              </h1>
+              <p className="text-lg md:text-xl text-white tracking-luxury max-w-2xl font-light leading-relaxed mt-4">
+                Crafting timeless interiors for modern living • We design spaces that bring you joy
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -181,93 +181,7 @@ const Home = () => {
 
       
 
-      {/* Services Section */}
-      <SectionTransition className="py-32 px-6 bg-muted/30">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
-              Our Services
-            </h2>
-            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto">
-              From concept to completion, we offer comprehensive interior design solutions tailored to your vision
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Space Planning & Design",
-                description: "We design your space and provide detailed plans, color palettes, and furniture recommendations for a cohesive design.",
-                features: ["Dimensioned Plans", "Color Palettes", "Furniture Selection", "Lighting Design"]
-              },
-              {
-                title: "Full Service Design",
-                description: "Complete project management from initial concept through installation, handling every detail of your vision.",
-                features: ["Project Management", "Vendor Coordination", "Installation Oversight", "Quality Assurance"]
-              },
-              {
-                title: "Turnkey Solutions",
-                description: "Walk into your completely designed and furnished home with minimal involvement on your part.",
-                features: ["Complete Furnishing", "Soft Furnishings", "Accessories & Art", "Move-in Ready"]
-              }
-            ].map((service, index) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                  viewport={{ once: true }}
-                  className="group h-full bg-background border border-border/50 hover:border-luxury-gold/30 transition-colors duration-500 rounded-lg overflow-hidden"
-                >
-                  <div className="p-8">
-                    <div className="mb-6">
-                      <div className="w-12 h-12 bg-luxury-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-luxury-gold/20 transition-colors">
-                        <span className="text-2xl text-luxury-gold font-display-1">0{index + 1}</span>
-                      </div>
-                      <h3 className="text-2xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
-                        {service.title}
-                      </h3>
-                      <p className="text-muted-foreground tracking-luxury leading-relaxed mb-6">
-                        {service.description}
-                      </p>
-                    </div>
-
-                    <ul className="space-y-3">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm tracking-luxury">
-                          <span className="w-2 h-2 bg-luxury-gold rounded-full mr-3 flex-shrink-0"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mt-16"
-          >
-            <MagneticButton strength={0.4}>
-              <Link
-                to="/contact"
-                className="inline-block px-12 py-4 border border-luxury-charcoal text-luxury-charcoal tracking-luxury-wide uppercase text-sm hover:bg-luxury-charcoal hover:text-luxury-white transition-smooth"
-              >
-                Start Your Project
-              </Link>
-            </MagneticButton>
-          </motion.div>
-        </div>
-      </SectionTransition>
+      
 
       {/* Featured Projects with 3D Tilt & Image Reveals */}
       <ScrollStack>
@@ -375,6 +289,97 @@ const Home = () => {
         </div>
         </SectionTransition>
       </ScrollStack>
+
+
+
+      {/* Services Section */}
+      <SectionTransition className="py-32 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
+              Our Services
+            </h2>
+            <p className="text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto">
+              From concept to completion, we offer comprehensive interior design solutions tailored to your vision
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Space Planning & Design",
+                description: "We design your space and provide detailed plans, color palettes, and furniture recommendations for a cohesive design.",
+                features: ["Dimensioned Plans", "Color Palettes", "Furniture Selection", "Lighting Design"]
+              },
+              {
+                title: "Full Service Design",
+                description: "Complete project management from initial concept through installation, handling every detail of your vision.",
+                features: ["Project Management", "Vendor Coordination", "Installation Oversight", "Quality Assurance"]
+              },
+              {
+                title: "Turnkey Solutions",
+                description: "Walk into your completely designed and furnished home with minimal involvement on your part.",
+                features: ["Complete Furnishing", "Soft Furnishings", "Accessories & Art", "Move-in Ready"]
+              }
+            ].map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  viewport={{ once: true }}
+                  className="group h-full bg-background border border-border/50 hover:border-luxury-gold/30 transition-colors duration-500 rounded-lg overflow-hidden"
+                >
+                  <div className="p-8">
+                    <div className="mb-6">
+                      <div className="w-12 h-12 bg-luxury-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-luxury-gold/20 transition-colors">
+                        <span className="text-2xl text-luxury-gold font-display-1">0{index + 1}</span>
+                      </div>
+                      <h3 className="text-2xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
+                        {service.title}
+                      </h3>
+                      <p className="text-muted-foreground tracking-luxury leading-relaxed mb-6">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <ul className="space-y-3">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-sm tracking-luxury">
+                          <span className="w-2 h-2 bg-luxury-gold rounded-full mr-3 flex-shrink-0"></span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mt-16"
+          >
+            <MagneticButton strength={0.4}>
+              <Link
+                to="/contact"
+                className="inline-block px-12 py-4 border border-luxury-charcoal text-luxury-charcoal tracking-luxury-wide uppercase text-sm hover:bg-luxury-charcoal hover:text-luxury-white transition-smooth"
+              >
+                Start Your Project
+              </Link>
+            </MagneticButton>
+          </motion.div>
+        </div>
+      </SectionTransition>
 
       {/* Testimonials Section with Enhanced Design */}
       <ScrollStack>
