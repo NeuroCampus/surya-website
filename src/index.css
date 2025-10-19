@@ -142,6 +142,12 @@ All colors MUST be HSL.
     font-weight: 600;
   }
 
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
   .text-luxury-charcoal {
     color: hsl(var(--deep-charcoal));
   }
@@ -164,6 +170,13 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /* Vignette overlay for intros */
+  .vignette {
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.06) 70%, rgba(0,0,0,0.12) 100%);
+    mix-blend-mode: multiply;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -217,4 +230,31 @@ All colors MUST be HSL.
       box-shadow: 0 0 80px -10px hsl(var(--accent) / 0.6);
     }
   }
+}
+
+/* Subtle golden glow on strokes */
+.gold-glow {
+  filter: drop-shadow(0 0 6px hsl(var(--warm-gold) / 0.35)) drop-shadow(0 0 18px hsl(var(--warm-gold) / 0.18));
+}
+
+/* Gold shimmer text effect */
+.gold-shimmer {
+  position: relative;
+  color: hsl(var(--warm-gold));
+  background: linear-gradient(90deg, hsl(var(--warm-gold)) 0%, hsl(var(--warm-gold)) 30%, #fff5 45%, hsl(var(--warm-gold)) 60%, hsl(var(--warm-gold)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-move 3.2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  background-size: 200% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-shimmer { animation: none; background: none; -webkit-text-fill-color: currentColor; color: hsl(var(--warm-gold)); }
+}
+
+@keyframes shimmer-move {
+  0% { background-position: -120% 0; }
+  60% { background-position: 120% 0; }
+  100% { background-position: 120% 0; }
 }

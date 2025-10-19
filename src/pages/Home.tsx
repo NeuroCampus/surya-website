@@ -29,7 +29,7 @@ const Home = () => {
   const [videoDuration, setVideoDuration] = useState(0);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [heroHeight, setHeroHeight] = useState(0);
-  const [displayText, setDisplayText] = useState('SURYA ARCHITECTS & INTERIORS');
+  const [displayText, setDisplayText] = useState('SURYA ARCHITECTS');
   const [showCursor, setShowCursor] = useState(false);
   const { scrollY } = useScroll();
   
@@ -177,156 +177,49 @@ const Home = () => {
           }}
           className="fixed inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none z-30"
         >
-          {/* Cinematic Wall Background with Sunlight */}
-          <div className="absolute inset-0">
-            {/* Silky white wall base */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50/30 to-white"></div>
-            
-            {/* Sunlight streaming from left window */}
-            <div className="absolute left-0 top-0 bottom-0 w-1/3 bg-gradient-to-r from-yellow-50/80 via-yellow-100/40 to-transparent"></div>
-            <div className="absolute left-0 top-0 bottom-0 w-1/4 bg-gradient-to-r from-amber-50/60 via-orange-50/30 to-transparent"></div>
-            
-            {/* Warm light rays */}
-            <div className="absolute left-0 top-1/4 w-1/2 h-px bg-gradient-to-r from-yellow-200/60 via-yellow-100/30 to-transparent transform rotate-12"></div>
-            <div className="absolute left-0 top-1/2 w-1/3 h-px bg-gradient-to-r from-amber-200/50 via-amber-100/20 to-transparent transform -rotate-6"></div>
-            <div className="absolute left-0 top-3/4 w-2/5 h-px bg-gradient-to-r from-orange-200/40 via-orange-100/15 to-transparent transform rotate-3"></div>
-            
-            {/* Soft volumetric lighting */}
-            <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-white/20 via-white/5 to-transparent"></div>
-            
-            {/* Subtle wall texture simulation */}
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.8),transparent_70%)]"></div>
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(248,248,248,0.6),transparent_80%)]"></div>
-            </div>
-          </div>
-          
+          {/* No backgrounds or plates behind the title; only golden text remains */}
           <div className="max-w-5xl mx-auto relative">
             <div className="relative z-10">
-              {/* Company Name with Paint-on-Wall Effect */}
-              <motion.h1 
+              {/* Company Name: Elegant Gold */}
+              <motion.h1
                 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-luxury-wide font-bold leading-tight mb-8 relative overflow-hidden"
-                style={{ 
-                  fontFamily: 'Cormorant Garamond, serif',
-                  background: `
-                    linear-gradient(135deg, 
-                      rgba(212, 175, 55, 0.9) 0%, 
-                      rgba(255, 215, 0, 0.8) 30%, 
-                      rgba(184, 134, 11, 0.85) 70%, 
-                      rgba(212, 175, 55, 0.9) 100%
-                    )
-                  `,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  textShadow: 'none',
-                  filter: 'drop-shadow(0 0 30px rgba(212, 175, 55, 0.4)) drop-shadow(0 0 60px rgba(255, 215, 0, 0.2))',
+                style={{
+                  fontFamily: 'Cinzel, Cormorant Garamond, serif',
                   position: 'relative',
                   zIndex: 10,
                   textRendering: 'optimizeLegibility',
-                  fontFeatureSettings: '"liga" 1, "calt" 1'
+                  fontFeatureSettings: '"liga" 1, "calt" 1',
+                  background: 'linear-gradient(135deg, #F4E87C 0%, #E6B800 50%, #D4AF37 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  filter: 'brightness(1.1) contrast(1.1)'
                 }}
-                initial={{ 
+                initial={{
                   clipPath: 'inset(0 100% 0 0)',
-                  opacity: 0 
+                  opacity: 0
                 }}
-                animate={{ 
+                animate={{
                   clipPath: 'inset(0 0% 0 0)',
-                  opacity: 1 
+                  opacity: 1
                 }}
-                transition={{ 
+                 transition={{
                   clipPath: { duration: 2.5, ease: [0.25, 0.1, 0.25, 1] },
                   opacity: { duration: 0.5, delay: 0.2 }
                 }}
-                whileHover={{ 
-                  filter: 'drop-shadow(0 0 40px rgba(212, 175, 55, 0.6)) drop-shadow(0 0 80px rgba(255, 215, 0, 0.3))',
-                  transition: { duration: 0.3 }
-                }}
               >
                 {displayText}
-                
-                {/* Dancing shimmer effect */}
-                <motion.div 
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: `linear-gradient(90deg, 
-                      transparent 0%, 
-                      rgba(255, 215, 0, 0.3) 20%, 
-                      rgba(212, 175, 55, 0.4) 40%, 
-                      rgba(255, 215, 0, 0.3) 60%, 
-                      rgba(212, 175, 55, 0.4) 80%, 
-                      transparent 100%
-                    )`,
-                    opacity: 0
-                  }}
-                  animate={{ 
-                    opacity: [0, 0.6, 0],
-                    x: ['-100%', '100%']
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatDelay: 2,
-                    ease: "easeInOut"
-                  }}
-                />
-                
-                {/* Enhanced paint stroke effect with light distortion */}
-                <motion.div 
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: `linear-gradient(135deg, 
-                      transparent 0%, 
-                      rgba(212, 175, 55, 0.15) 15%, 
-                      rgba(255, 215, 0, 0.08) 40%, 
-                      rgba(184, 134, 11, 0.12) 60%, 
-                      rgba(212, 175, 55, 0.15) 85%, 
-                      transparent 100%
-                    )`,
-                    filter: 'blur(0.5px)',
-                    transform: 'scale(1.02)'
-                  }}
-                />
-                
-                {/* Subtle light reflection */}
-                <motion.div 
-                  className="absolute inset-0 pointer-events-none opacity-30"
-                  style={{
-                    background: `linear-gradient(45deg, 
-                      transparent 0%, 
-                      rgba(255, 255, 255, 0.4) 30%, 
-                      rgba(255, 255, 255, 0.2) 50%, 
-                      rgba(255, 255, 255, 0.4) 70%, 
-                      transparent 100%
-                    )`
-                  }}
-                />
               </motion.h1>
-              
-              {/* Tagline with elegant reveal */}
+              {/* Tagline: plain charcoal text, no gradient */}
               <motion.p 
-                className="text-sm md:text-base lg:text-lg text-luxury-charcoal/90 tracking-luxury max-w-3xl mx-auto font-medium leading-relaxed relative"
-                style={{ 
-                  textShadow: '0 1px 2px rgba(0,0,0,0.1)',
-                  filter: 'none'
-                }}
-                initial={{ opacity: 0, y: 20 }}
+                className="text-sm md:text-base lg:text-lg tracking-luxury max-w-3xl mx-auto font-medium leading-relaxed text-luxury-charcoal mb-8 font-sans"
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 2.5 }}
+                transition={{ duration: 0.7, delay: 0.6 }}
               >
-                Crafting timeless interiors for modern living • We design spaces that bring you joy
+                Crafting timeless spaces that reflect who you are
               </motion.p>
-              
-              {/* Elegant accent line with light reflection */}
-              <motion.div
-                className="mt-12 w-32 h-px mx-auto relative"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 3, ease: "easeOut" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-luxury-gold/80 to-transparent"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent blur-sm"></div>
-              </motion.div>
             </div>
           </div>
         </motion.div>
