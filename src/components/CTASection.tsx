@@ -13,22 +13,26 @@ const CTASection = () => {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl md:text-6xl tracking-luxury-wide mb-8"
+            className="text-4xl md:text-6xl tracking-luxury-wide mb-8 whitespace-nowrap"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            {"Let's craft your next space".split("").map((char, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.02, duration: 0.5 }}
-                viewport={{ once: true }}
-                className="inline-block"
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
+            {"Let's craft your next space".split(" ").map((word, wordIndex) => (
+              <span key={wordIndex} className="inline-block mr-3">
+                {word.split("").map((char, charIndex) => (
+                  <motion.span
+                    key={`${wordIndex}-${charIndex}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: (wordIndex * 5 + charIndex) * 0.02, duration: 0.5 }}
+                    viewport={{ once: true }}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
             ))}
           </motion.h2>
           <p className="text-lg text-muted-foreground tracking-luxury mb-12 max-w-2xl mx-auto">
