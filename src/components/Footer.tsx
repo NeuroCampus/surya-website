@@ -5,11 +5,11 @@ const Footer = () => {
     <footer className="border-t border-border py-8">
       <div className="container mx-auto px-6 flex items-center justify-between">
         <p className="text-sm text-muted-foreground tracking-luxury">
-          © {new Date().getFullYear()} Surya Architects & Interiors
+          © {new Date().getFullYear()} SURYA ARCHITECTS & INTERIOR DESIGNERS
         </p>
         
         <a
-          href="https://www.instagram.com/surya_architects_interiors/"
+          href="https://www.instagram.com/surya_architects_interiors?igsh=ZzlqYm55MTVid29r"
           target="_blank"
           rel="noopener noreferrer"
           className="text-muted-foreground hover:text-foreground transition-fast"

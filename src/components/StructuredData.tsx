@@ -8,16 +8,17 @@ const StructuredData = ({ type = "LocalBusiness" }: StructuredDataProps) => {
   const organizationData = {
     "@context": "https://schema.org",
     "@type": type,
-    "name": "Surya Architects & Interiors",
-    "description": "Crafting timeless interiors for modern living. Luxury architecture and interior design studio.",
+    "name": "SURYA ARCHITECTS & INTERIOR DESIGNERS",
+    "description": "Architecture | Interior Designer | Construction",
     "url": "https://lovable.dev/projects/4c5db8d0-0f37-448f-8170-7e4e52b3fc65",
     "logo": "https://lovable.dev/projects/4c5db8d0-0f37-448f-8170-7e4e52b3fc65/favicon.svg",
     "image": "https://lovable.dev/opengraph-image-p98pqg.png",
     "sameAs": [
-      "https://www.instagram.com/surya_architects_interiors/"
+      "https://www.instagram.com/surya_architects_interiors?igsh=ZzlqYm55MTVid29r"
     ],
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "Bangalore",
       "addressCountry": "IN"
     },
     "aggregateRating": {

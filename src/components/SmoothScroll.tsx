@@ -1,12 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import Lenis from "lenis";
 
 interface SmoothScrollProps {
   children: React.ReactNode;
 }
 
-const SmoothScroll = ({ children }: SmoothScrollProps) => {
+export interface SmoothScrollRef {
+  scrollToTop: () => void;
+}
+
+const SmoothScroll = forwardRef<SmoothScrollRef, SmoothScrollProps>(({ children }, ref) => {
   const lenisRef = useRef<Lenis | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    scrollToTop: () => {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: false });
+      }
+    }
+  }));
 
   useEffect(() => {
     // Initialize Lenis smooth scroll optimized for 8K video performance
@@ -41,6 +53,8 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
   }, []);
 
   return <>{children}</>;
-};
+});
+
+SmoothScroll.displayName = "SmoothScroll";
 
 export default SmoothScroll;

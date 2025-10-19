@@ -45,17 +45,17 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "hello@suryaluxecanvas.com"
+      value: "suryaarc.int@gmail.com"
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+91 98765 43210"
+      value: "+91 7483109814"
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Mumbai, India"
+      value: "Bangalore"
     }
   ];
 
