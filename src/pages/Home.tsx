@@ -80,10 +80,10 @@ const Home = () => {
         </motion.div>
         
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-          {/* Masked text animation */}
+          {/* Masked text animation with 3D effect */}
           <div className="overflow-hidden mb-6">
             <MaskedTextReveal 
-              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-white"
+              className="text-5xl md:text-7xl lg:text-8xl tracking-luxury-wide text-foreground font-bold"
               delay={3.2}
               staggerDelay={0.05}
             >
@@ -94,7 +94,10 @@ const Home = () => {
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ delay: 4, duration: 0.8 }}
-            className="text-lg md:text-xl text-white tracking-luxury max-w-md"
+            className="text-lg md:text-xl text-foreground tracking-luxury max-w-md font-medium"
+            style={{
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1), 4px 4px 8px rgba(0, 0, 0, 0.05)"
+            }}
           >
             Crafting timeless interiors for modern living
           </motion.p>

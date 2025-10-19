@@ -32,6 +32,14 @@ const MaskedTextReveal = ({
               }}
               viewport={{ once: true }}
               className="inline-block"
+              style={{
+                textShadow: `
+                  2px 2px 0px rgba(0, 0, 0, 0.1),
+                  4px 4px 0px rgba(0, 0, 0, 0.08),
+                  6px 6px 0px rgba(0, 0, 0, 0.06),
+                  8px 8px 10px rgba(0, 0, 0, 0.15)
+                `
+              }}
             >
               {char}
             </motion.span>
