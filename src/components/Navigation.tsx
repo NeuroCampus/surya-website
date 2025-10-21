@@ -53,8 +53,8 @@ const Navigation = () => {
         <MagneticButton strength={0.2}>
           <Link to="/" className="group flex flex-col" onClick={closeMobileMenu}>
             <motion.span 
-              className={`text-xl tracking-luxury-wide font-light transition-colors duration-300 ${
-                isDarkPage ? "text-white" : "text-foreground"
+              className={`text-xl tracking-luxury-wide font-light font-display-1 transition-colors duration-300 ${
+                isDarkPage ? "text-white" : "text-luxury-charcoal"
               }`}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
@@ -85,10 +85,10 @@ const Navigation = () => {
               <MagneticButton strength={0.15}>
                 <Link
                   to={link.path}
-                  className={`relative text-sm tracking-luxury uppercase transition-fast group ${
+                  className={`relative text-sm tracking-luxury uppercase font-medium transition-fast group ${
                     location.pathname === link.path
-                      ? isDarkPage ? "text-white" : "text-foreground"
-                      : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
+                      ? isDarkPage ? "text-white" : "text-luxury-charcoal"
+                      : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-luxury-charcoal"
                   }`}
                 >
                   {link.label}
@@ -113,7 +113,7 @@ const Navigation = () => {
           transition={{ delay: 3.2, duration: 0.8 }}
           onClick={toggleMobileMenu}
           className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
-            isDarkPage ? "text-white hover:bg-white/10" : "text-foreground hover:bg-foreground/10"
+            isDarkPage ? "text-white hover:bg-white/10" : "text-luxury-charcoal hover:bg-foreground/10"
           }`}
           aria-label="Toggle mobile menu"
         >
@@ -149,10 +149,10 @@ const Navigation = () => {
                   <Link
                     to={link.path}
                     onClick={closeMobileMenu}
-                    className={`block py-3 text-lg tracking-luxury uppercase transition-colors duration-300 ${
+                    className={`block py-3 text-lg tracking-luxury uppercase font-medium transition-colors duration-300 ${
                       location.pathname === link.path
-                        ? isDarkPage ? "text-white font-medium" : "text-foreground font-medium"
-                        : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
+                        ? isDarkPage ? "text-white font-semibold" : "text-luxury-charcoal font-semibold"
+                        : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-luxury-charcoal"
                     }`}
                   >
                     {link.label}

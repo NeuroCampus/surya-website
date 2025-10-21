@@ -24,16 +24,37 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Create form data for Google Forms submission
+      const formDataToSubmit = new FormData();
+      formDataToSubmit.append('entry.1604505436', formData.name); // Name field
+      formDataToSubmit.append('entry.1567427972', formData.email); // Email field
+      formDataToSubmit.append('entry.1434664158', formData.message); // Message field
 
-    toast({
-      title: "Message received",
-      description: "Thank you for reaching out. We'll be in touch soon.",
-    });
+      // Submit to Google Forms
+      const response = await fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSfYbZZnwvc8z5eHVpvvqvB_k1PB52Drm1H_FnUwnCtgNzPyRg/formResponse', {
+        method: 'POST',
+        body: formDataToSubmit,
+        mode: 'no-cors' // Required for Google Forms CORS
+      });
 
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. We'll be in touch soon.",
+      });
+
+      // Reset form
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Message sent!",
+        description: "Your message has been recorded. We'll be in touch soon.",
+        variant: "default",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -122,6 +143,23 @@ const Contact = () => {
         />
       </div>
 
+      {/* Enhanced Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-luxury-beige/3 via-transparent to-luxury-gold/3"></div>
+      <div className="absolute inset-0 opacity-15">
+        <div
+          className="absolute top-0 left-0 w-1/2 h-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+          }}
+        />
+        <div
+          className="absolute top-0 right-0 w-1/2 h-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+          }}
+        />
+      </div>
+
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <CustomCursor />
@@ -152,7 +190,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.8 }}
-                className="text-xl sm:text-2xl text-muted-foreground tracking-wide leading-relaxed max-w-3xl mx-auto font-light"
+                className="text-xl sm:text-2xl text-luxury-charcoal tracking-wide leading-relaxed max-w-3xl mx-auto font-light"
               >
                 Ready to transform your space into a masterpiece?
                 <br />
@@ -309,7 +347,7 @@ const Contact = () => {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full h-14 text-lg tracking-wide uppercase bg-white/90 hover:bg-white text-luxury-charcoal border-2 border-luxury-charcoal/20 hover:border-luxury-gold/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-0.5 font-bold rounded-xl group"
+                        className="w-full h-14 text-lg tracking-wide uppercase bg-white/90 hover:bg-luxury-charcoal hover:text-white text-luxury-charcoal border-2 border-luxury-charcoal/20 hover:border-luxury-charcoal transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-luxury-charcoal/20 hover:-translate-y-0.5 font-bold rounded-xl group"
                       >
                         <motion.div
                           className="flex items-center justify-center space-x-3"

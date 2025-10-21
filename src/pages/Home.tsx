@@ -1020,7 +1020,7 @@ const Home = () => {
       </ScrollStack>
       
       {/* About/Expertise Section - Enhanced Visual Design */}
-      <SectionTransition className="relative py-20 px-4 sm:px-6 bg-background overflow-hidden">
+      <SectionTransition className="relative py-20 px-4 sm:px-6 bg-background overflow-hidden mt-16">
         {/* Enhanced Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-luxury-beige/3 via-transparent to-luxury-gold/3"></div>
         <div className="absolute inset-0 opacity-2">
