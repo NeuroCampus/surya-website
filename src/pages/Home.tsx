@@ -437,37 +437,88 @@ const Home = () => {
 
           {/* Visual Elements Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-            {/* Left Image */}
+            {/* Left Image - Enhanced Scroll Animation */}
             <motion.div
-              initial={{ opacity: 0, x: -80, rotateY: 15 }}
-              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-              viewport={{ once: true, amount: 0.3 }}
+              initial={{ opacity: 0, x: -120, rotateY: 25, scale: 0.8 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
+              transition={{ 
+                duration: 1.4, 
+                delay: 0.2,
+                ease: [0.23, 1, 0.32, 1],
+                type: "spring",
+                stiffness: 80,
+                damping: 20
+              }}
+              viewport={{ once: true, amount: 0.4 }}
               className="relative group gpu-accelerated"
             >
               <div className="aspect-[4/5] bg-gradient-to-br from-luxury-beige/30 via-luxury-gold/10 to-luxury-beige/20 rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
-                {/* Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
+                {/* Enhanced Shimmer Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[300%] transition-transform duration-1200 ease-out"
+                  animate={{
+                    translateX: ["-200%", "300%"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatDelay: 5,
+                    ease: "easeInOut"
+                  }}
+                />
 
                 <motion.div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
                   style={{
                     backgroundImage: `url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')`
                   }}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.6 }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
+                
+                {/* Enhanced Content Animation */}
                 <motion.div
                   className="absolute bottom-8 left-8 right-8 text-white"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  <h3 className="text-2xl font-display-1 font-light mb-2">Craftsmanship</h3>
-                  <p className="text-sm opacity-90 leading-relaxed">Attention to every detail</p>
+                  <motion.h3
+                    className="text-2xl font-display-1 font-light mb-2"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                  >
+                    Craftsmanship
+                  </motion.h3>
+                  <motion.p
+                    className="text-sm opacity-90 leading-relaxed"
+                    initial={{ opacity: 0, x: -15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 1.2 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                  >
+                    Attention to every detail
+                  </motion.p>
                 </motion.div>
+                
+                {/* Floating Accent Elements */}
+                <motion.div
+                  className="absolute top-6 right-6 w-3 h-3 bg-luxury-gold/60 rounded-full blur-sm"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.4, 0.8, 0.4]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                />
               </div>
             </motion.div>
 
@@ -592,37 +643,89 @@ const Home = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right Image */}
+            {/* Right Image - Enhanced Scroll Animation */}
             <motion.div
-              initial={{ opacity: 0, x: 80, rotateY: -15 }}
-              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-              transition={{ duration: 1.2, delay: 0.7, ease: [0.23, 1, 0.32, 1] }}
-              viewport={{ once: true, amount: 0.3 }}
+              initial={{ opacity: 0, x: 120, rotateY: -25, scale: 0.8 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
+              transition={{ 
+                duration: 1.4, 
+                delay: 0.4,
+                ease: [0.23, 1, 0.32, 1],
+                type: "spring",
+                stiffness: 80,
+                damping: 20
+              }}
+              viewport={{ once: true, amount: 0.4 }}
               className="relative group gpu-accelerated"
             >
               <div className="aspect-[4/5] bg-gradient-to-br from-luxury-gold/20 via-luxury-beige/10 to-luxury-gold/30 rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
-                {/* Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
+                {/* Enhanced Shimmer Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[300%] transition-transform duration-1200 ease-out"
+                  animate={{
+                    translateX: ["-200%", "300%"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatDelay: 5,
+                    ease: "easeInOut",
+                    delay: 1.5
+                  }}
+                />
 
                 <motion.div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
                   style={{
                     backgroundImage: `url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')`
                   }}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.6 }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
+                
+                {/* Enhanced Content Animation */}
                 <motion.div
                   className="absolute bottom-8 left-8 right-8 text-white"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 1.2 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  <h3 className="text-2xl font-display-1 font-light mb-2">Harmony</h3>
-                  <p className="text-sm opacity-90 leading-relaxed">Balance in every design</p>
+                  <motion.h3
+                    className="text-2xl font-display-1 font-light mb-2"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 1.4 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                  >
+                    Harmony
+                  </motion.h3>
+                  <motion.p
+                    className="text-sm opacity-90 leading-relaxed"
+                    initial={{ opacity: 0, x: 15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 1.6 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                  >
+                    Balance in every design
+                  </motion.p>
                 </motion.div>
+                
+                {/* Floating Accent Elements */}
+                <motion.div
+                  className="absolute top-6 left-6 w-3 h-3 bg-luxury-gold/60 rounded-full blur-sm"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.4, 0.8, 0.4]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2
+                  }}
+                />
               </div>
             </motion.div>
           </div>
@@ -917,7 +1020,7 @@ const Home = () => {
       </ScrollStack>
       
       {/* About/Expertise Section - Enhanced Visual Design */}
-      <SectionTransition className="relative py-32 px-4 sm:px-6 bg-background overflow-hidden">
+      <SectionTransition className="relative py-20 px-4 sm:px-6 bg-background overflow-hidden">
         {/* Enhanced Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-luxury-beige/3 via-transparent to-luxury-gold/3"></div>
         <div className="absolute inset-0 opacity-2">
@@ -925,6 +1028,12 @@ const Home = () => {
             className="absolute top-0 left-0 w-1/2 h-full bg-cover bg-center"
             style={{
               backgroundImage: `url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+            }}
+          />
+          <div
+            className="absolute top-0 right-0 w-1/2 h-full bg-cover bg-center"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
             }}
           />
         </div>
@@ -973,7 +1082,7 @@ const Home = () => {
             >
               Why Choose
               <motion.span
-                className="block text-luxury-gold"
+                className="block text-luxury-charcoal"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -997,7 +1106,7 @@ const Home = () => {
           {/* Enhanced Content Grid - Full Screen Before & After Showcase */}
           <div className="relative w-full">
             {/* Full Screen Before & After Images */}
-            <div className="grid grid-cols-2 gap-8 h-[80vh] min-h-[600px]">
+            <div className="grid grid-cols-2 gap-16 h-[80vh] min-h-[600px]">
               {/* Before Image - Left Side */}
               <motion.div
                 className="relative group overflow-hidden rounded-3xl"
@@ -1106,7 +1215,7 @@ const Home = () => {
 
             {/* Bottom Content Section */}
             <motion.div
-              className="mt-16 text-center"
+              className="mt-8 text-center"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
