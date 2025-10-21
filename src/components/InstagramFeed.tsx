@@ -64,7 +64,7 @@ const InstagramFeed = () => {
             transition={{ duration: 0.6 }}
           >
             <Instagram className="w-6 h-6" />
-            <h2 className="text-3xl tracking-luxury-wide font-display-1">Follow Our Journey</h2>
+            <h2 className="text-4xl md:text-5xl tracking-luxury-wide font-display-1">Follow Our Journey</h2>
           </motion.div>
           <a
             href="https://www.instagram.com/surya_architects_interiors/"
@@ -96,7 +96,7 @@ const InstagramFeed = () => {
                 <ImageReveal
                   src={post.image}
                   alt={post.alt}
-                  className="w-full h-full object-cover filter grayscale transition-all duration-500 group-hover:grayscale-0"
+                  className="w-full h-full object-cover transition-all duration-500"
                 />
                 <motion.div
                   className="absolute inset-0 bg-black/40 flex items-center justify-center"
@@ -122,7 +122,7 @@ const InstagramFeed = () => {
                 <ImageReveal
                   src={post.image}
                   alt={post.alt}
-                  className="w-full h-full object-cover filter grayscale transition-all duration-500 group-hover:grayscale-0"
+                  className="w-full h-full object-cover transition-all duration-500"
                 />
                 <motion.div
                   className="absolute inset-0 bg-black/40 flex items-center justify-center"

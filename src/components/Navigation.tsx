@@ -19,7 +19,7 @@ const Navigation = () => {
   }, []);
 
   // Check if current page has dark background
-  const isDarkPage = location.pathname === '/contact';
+  const isDarkPage = false; // location.pathname === '/contact';
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -59,7 +59,7 @@ const Navigation = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              Surya Architects
+              Surya Architects & Interiors
             </motion.span>
           </Link>
         </MagneticButton>

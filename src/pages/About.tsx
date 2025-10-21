@@ -162,7 +162,7 @@ const About = () => {
                   className="relative aspect-square overflow-hidden rounded-2xl shadow-2xl group"
                 >
                   <motion.img
-                    src={studioImage}
+                    src={heroInterior}
                     alt="Surya Architects Studio workspace"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
@@ -172,52 +172,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Values */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="mb-32"
-          >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
-            >
-              Our Values
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {values.map((value, index) => (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                  viewport={{ once: true }}
-                  className="text-center group"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                    className="inline-flex items-center justify-center w-24 h-24 mb-8 bg-gradient-to-br from-luxury-beige to-luxury-white border border-luxury-charcoal/20 group-hover:border-luxury-gold/50 transition-all duration-500 shadow-lg"
-                  >
-                    <value.icon className="w-10 h-10 text-luxury-charcoal group-hover:text-luxury-gold transition-colors duration-300" />
-                  </motion.div>
-                  <h3 className="text-2xl font-playfair font-bold mb-4 text-luxury-charcoal">
-                    {value.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-lg">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Process */}
+          {/* Values & Process Combined */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -230,27 +185,32 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
+              className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-center text-luxury-charcoal mb-16"
             >
-              Our Process
+              Our Philosophy
             </motion.h2>
+
+            
+
+            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {process.map((step, index) => (
                 <motion.div
                   key={step.step}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
                   className="text-center group"
                 >
-                  <div className="text-6xl font-playfair font-bold text-luxury-gold/30 mb-4 group-hover:text-luxury-gold/60 transition-colors duration-300">
+                  <div className="text-3xl font-playfair font-bold text-luxury-gold mb-4">
                     {step.step}
                   </div>
-                  <h3 className="text-xl font-playfair font-bold mb-3 text-luxury-charcoal">
+                  <h4 className="text-lg font-playfair font-bold mb-2 text-luxury-charcoal">
                     {step.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  </h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </motion.div>

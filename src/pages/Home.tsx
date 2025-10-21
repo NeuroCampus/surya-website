@@ -31,6 +31,7 @@ const Home = () => {
   const [heroHeight, setHeroHeight] = useState(0);
   const [displayText, setDisplayText] = useState('SURYA ARCHITECTS');
   const [showCursor, setShowCursor] = useState(false);
+  const [currentStatIndex, setCurrentStatIndex] = useState(0);
   const { scrollY } = useScroll();
   
   const videoOpacity = useTransform(scrollY, [0, heroHeight - 400, heroHeight], [1, 1, 0]);
@@ -138,6 +139,16 @@ const Home = () => {
     { id: 4, title: "Spa Bathroom", subtitle: "Serene Sanctuary", image: project4 },
   ];
 
+  // Dynamic stats for center card
+  const stats = [
+    { number: "22", unit: "Years", subtitle: "of Excellence", description: "Creating spaces that become part of your story" },
+    { number: "500+", unit: "Projects", subtitle: "Completed", description: "Transforming dreams into reality" },
+    { number: "98%", unit: "Satisfaction", subtitle: "Rate", description: "Happy clients who trust our vision" },
+    { number: "15+", unit: "Awards", subtitle: "Won", description: "Recognition for outstanding design excellence" },
+    { number: "50+", unit: "Team", subtitle: "Members", description: "Expert designers and craftsmen" },
+    { number: "24/7", unit: "Support", subtitle: "Available", description: "Always here when you need us" }
+  ];
+
   // Preload critical assets for ultra-smooth experience
   useEffect(() => {
     const preloadAssets = () => {
@@ -161,6 +172,15 @@ const Home = () => {
     
     preloadAssets();
   }, [projects, heroImage, finalintVideo]);
+
+  // Auto-cycle through stats every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentStatIndex((prevIndex) => (prevIndex + 1) % stats.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [stats.length]);
 
   return (
     <div className="min-h-screen bg-background cursor-none overflow-x-hidden ultra-smooth">
@@ -331,60 +351,306 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Vision Section */}
-      <SectionTransition className="relative pt-20 pb-20 px-4 sm:px-6 bg-background">
-        <div className="container mx-auto max-w-6xl relative z-20">
+      {/* Vision Section - Redesigned with Images & Animations */}
+      <SectionTransition className="relative py-32 px-4 sm:px-6 bg-background overflow-hidden">
+        {/* Enhanced Background with Gradient & Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-luxury-beige/5 via-transparent to-luxury-gold/5"></div>
+        <div className="absolute inset-0 opacity-3">
+          <div
+            className="absolute top-0 left-0 w-1/3 h-full bg-cover bg-center"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+            }}
+          />
+          <div
+            className="absolute top-0 right-0 w-1/3 h-full bg-cover bg-center"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+            }}
+          />
+        </div>
+
+        {/* Floating Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-luxury-gold/20 rounded-full blur-sm"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [-20, -100, -20],
+                x: [0, Math.random() * 50 - 25, 0],
+                opacity: [0, 0.6, 0],
+                scale: [0.5, 1.2, 0.5],
+              }}
+              transition={{
+                duration: 8 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container mx-auto max-w-7xl relative z-20">
+          {/* Main Title */}
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            initial={{ opacity: 0, y: 60, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-            viewport={{ once: true }}
-            className="text-center mb-20 gpu-accelerated"
+            transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-center mb-24 gpu-accelerated"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
-              We Create Homes With Love
-            </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-4xl mx-auto font-light">
-              Great design is about solving problems and creating spaces that bring you joy. We believe the spaces we spend time in affect how we feel and view the world around us.
-            </p>
+            <motion.h2
+              className="text-3xl sm:text-4xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8 relative"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              We Create Inspired Spaces
+              <motion.span
+                className="block text-luxury-gold"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.6 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                With Love
+              </motion.span>
+            </motion.h2>
+
+            <motion.p
+              className="text-xl sm:text-2xl md:text-3xl text-muted-foreground tracking-luxury leading-relaxed max-w-4xl mx-auto font-light"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              Every space tells a story. We craft environments that inspire, comfort, and endure.
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Visual Elements Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            {/* Left Image */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-              viewport={{ once: true }}
-              className="gpu-accelerated"
+              initial={{ opacity: 0, x: -80, rotateY: 15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="relative group gpu-accelerated"
             >
-              <h3 className="text-2xl sm:text-3xl md:text-4xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
-                Our Vision
-              </h3>
-              <p className="text-base sm:text-lg text-muted-foreground tracking-luxury leading-relaxed mb-8">
-                We are inspired daily to design spaces that ground us into who we uniquely are, so we move into the world renewed, energized and inspired to impact everyone in a positive way.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <span className="px-4 py-2 bg-luxury-beige text-luxury-charcoal text-sm tracking-luxury-wide uppercase font-medium">Luxury Design</span>
-                <span className="px-4 py-2 bg-luxury-beige text-luxury-charcoal text-sm tracking-luxury-wide uppercase font-medium">Timeless Spaces</span>
-                <span className="px-4 py-2 bg-luxury-beige text-luxury-charcoal text-sm tracking-luxury-wide uppercase font-medium">Modern Living</span>
+              <div className="aspect-[4/5] bg-gradient-to-br from-luxury-beige/30 via-luxury-gold/10 to-luxury-beige/20 rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
+
+                <motion.div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')`
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
+                <motion.div
+                  className="absolute bottom-8 left-8 right-8 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <h3 className="text-2xl font-display-1 font-light mb-2">Craftsmanship</h3>
+                  <p className="text-sm opacity-90 leading-relaxed">Attention to every detail</p>
+                </motion.div>
               </div>
             </motion.div>
 
+            {/* Center Content */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
-              viewport={{ once: true }}
-              className="relative gpu-accelerated"
+              initial={{ opacity: 0, y: 60, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1.4, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="text-center gpu-accelerated"
             >
-              <div className="aspect-square bg-gradient-to-br from-luxury-beige/20 to-luxury-gold/10 rounded-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-display-1 font-light text-luxury-gold mb-4">22+</div>
-                  <div className="text-base sm:text-lg tracking-luxury-wide uppercase text-luxury-charcoal font-medium">Years of Excellence</div>
+              <motion.div
+                className="relative mb-8"
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                {/* Enhanced Glowing Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/15 via-luxury-beige/8 to-luxury-gold/15 rounded-2xl blur-xl scale-110" />
+
+                <div className="relative bg-gradient-to-br from-background/95 via-luxury-beige/5 to-background/95 backdrop-blur-md border border-luxury-gold/30 rounded-2xl p-6 shadow-xl shadow-luxury-gold/10 hover:shadow-2xl hover:shadow-luxury-gold/20 transition-all duration-500 hover:-translate-y-1">
+                  {/* Main Number Display */}
+                  <motion.div 
+                    key={`number-${currentStatIndex}`}
+                    className="text-center mb-4"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                  >
+                    <div className="text-5xl md:text-6xl font-bold text-luxury-gold mb-1 font-display-1 tracking-tight">
+                      {stats[currentStatIndex].number}
+                    </div>
+                    <div className="w-12 h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent mx-auto" />
+                  </motion.div>
+
+                  {/* Unit and Subtitle */}
+                  <motion.div 
+                    key={`unit-${currentStatIndex}`}
+                    className="text-center mb-3"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                  >
+                    <div className="text-lg md:text-xl font-semibold text-luxury-charcoal uppercase tracking-wider font-display-1 mb-1">
+                      {stats[currentStatIndex].unit}
+                    </div>
+                    <div className="text-sm md:text-base text-muted-foreground font-medium tracking-wide">
+                      {stats[currentStatIndex].subtitle}
+                    </div>
+                  </motion.div>
+
+                  {/* Enhanced Decorative Elements */}
+                  <motion.div
+                    className="absolute -top-2 -right-2 w-8 h-8 bg-luxury-gold/20 rounded-full blur-lg"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.4, 0.8, 0.4]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute -bottom-3 -left-3 w-10 h-10 bg-luxury-beige/30 rounded-full blur-xl"
+                    animate={{
+                      scale: [1.1, 1, 1.1],
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
+
+                  {/* Subtle Sparkle Effects */}
+                  {[...Array(4)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-luxury-gold/60 rounded-full"
+                      style={{
+                        left: `${25 + Math.random() * 50}%`,
+                        top: `${25 + Math.random() * 50}%`,
+                      }}
+                      animate={{
+                        scale: [0, 1, 0],
+                        opacity: [0, 0.8, 0],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        delay: Math.random() * 2,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  ))}
                 </div>
+              </motion.div>
+
+              <motion.div
+                className="space-y-4"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.2 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                <div className="w-16 h-px bg-gradient-to-r from-transparent via-luxury-gold/60 to-transparent mx-auto" />
+                <motion.p 
+                  key={`description-${currentStatIndex}`}
+                  className="text-base md:text-lg text-muted-foreground tracking-wide leading-relaxed font-light max-w-xs mx-auto text-center italic"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                >
+                  {stats[currentStatIndex].description}
+                </motion.p>
+                <div className="w-16 h-px bg-gradient-to-r from-transparent via-luxury-gold/60 to-transparent mx-auto" />
+              </motion.div>
+            </motion.div>
+
+            {/* Right Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 80, rotateY: -15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 1.2, delay: 0.7, ease: [0.23, 1, 0.32, 1] }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="relative group gpu-accelerated"
+            >
+              <div className="aspect-[4/5] bg-gradient-to-br from-luxury-gold/20 via-luxury-beige/10 to-luxury-gold/30 rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
+                {/* Shimmer Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
+
+                <motion.div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')`
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
+                <motion.div
+                  className="absolute bottom-8 left-8 right-8 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1.2 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  <h3 className="text-2xl font-display-1 font-light mb-2">Harmony</h3>
+                  <p className="text-sm opacity-90 leading-relaxed">Balance in every design</p>
+                </motion.div>
               </div>
             </motion.div>
           </div>
+
+          {/* Bottom decorative line with enhanced styling */}
+          <motion.div
+            className="mt-24 flex justify-center"
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1.5, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <div className="relative">
+              <div className="w-32 h-px bg-gradient-to-r from-transparent via-luxury-gold/50 to-transparent" />
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-luxury-gold rounded-full"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          </motion.div>
         </div>
       </SectionTransition>
 
@@ -423,7 +689,7 @@ const Home = () => {
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -440,7 +706,7 @@ const Home = () => {
                 viewport={{ once: true, amount: 0.3 }}
                 className="group gpu-accelerated"
               >
-                <Card3DTilt to="/projects" className="block relative overflow-hidden aspect-[4/5] bg-background border border-border/30 hover:border-luxury-gold/50 active:border-luxury-gold/50 transition-all duration-700 hover:shadow-2xl hover:shadow-luxury-gold/20 active:shadow-2xl active:shadow-luxury-gold/20 hover:-translate-y-3 active:-translate-y-3 touch-manipulation gpu-accelerated">
+                <Card3DTilt to="/projects" className="block relative overflow-hidden aspect-[5/4] bg-background border border-border/30 hover:border-luxury-gold/50 active:border-luxury-gold/50 transition-all duration-700 hover:shadow-2xl hover:shadow-luxury-gold/20 active:shadow-2xl active:shadow-luxury-gold/20 hover:-translate-y-3 active:-translate-y-3 touch-manipulation gpu-accelerated">
                   {(isActive) => (
                     <>
                       <ImageReveal
@@ -519,71 +785,76 @@ const Home = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="text-center mb-20 gpu-accelerated"
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-center mb-16 gpu-accelerated"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
               Our Services
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto">
-              From concept to completion, we offer comprehensive interior design solutions tailored to your vision
+            <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
+              Comprehensive design solutions from concept to completion
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                title: "Space Planning & Design",
-                description: "We design your space and provide detailed plans, color palettes, and furniture recommendations for a cohesive design.",
-                features: ["Dimensioned Plans", "Color Palettes", "Furniture Selection", "Lighting Design"]
+                title: "Design & Planning",
+                description: "Strategic space planning with detailed layouts and material selections",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               },
               {
                 title: "Full Service Design",
-                description: "Complete project management from initial concept through installation, handling every detail of your vision.",
-                features: ["Project Management", "Vendor Coordination", "Installation Oversight", "Quality Assurance"]
+                description: "End-to-end project management with expert coordination",
+                image: "https://images.unsplash.com/photo-1503387837-b154d5074bd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               },
               {
                 title: "Turnkey Solutions",
-                description: "Walk into your completely designed and furnished home with minimal involvement on your part.",
-                features: ["Complete Furnishing", "Soft Furnishings", "Accessories & Art", "Move-in Ready"]
+                description: "Complete furnishing and styling for move-in ready spaces",
+                image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               }
             ].map((service, index) => (
                 <motion.div
                   key={service.title}
                   initial={{ opacity: 0, y: 60, rotateX: 15 }}
                   whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: index * 0.15, 
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.15,
                     ease: [0.25, 0.46, 0.45, 0.94],
                     type: "spring",
                     stiffness: 120,
                     damping: 20
                   }}
-                  viewport={{ once: true }}
-                  className="group h-full bg-background border border-border/50 hover:border-luxury-gold/30 transition-ultra-smooth rounded-lg overflow-hidden hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-2 cursor-pointer micro-hover micro-glow"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="group h-full bg-background border border-border/50 hover:border-luxury-gold/30 transition-ultra-smooth rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-2 cursor-pointer micro-hover micro-glow relative"
+                  style={{ minHeight: '300px' }}
                 >
-                  <div className="p-8">
-                    <div className="mb-6">
-                      <div className="w-12 h-12 bg-luxury-gold/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-luxury-gold/20 transition-colors">
-                        <span className="text-2xl text-luxury-gold font-display-1">0{index + 1}</span>
-                      </div>
-                      <h3 className="text-xl sm:text-2xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${service.image})` }}
+                  />
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-500" />
+
+                  {/* Content */}
+                  <div className="relative z-10 p-8 h-full flex flex-col justify-end text-center">
+                    <motion.div
+                      className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      <h3 className="text-xl sm:text-2xl tracking-luxury-wide font-display-1 font-light text-white mb-4 drop-shadow-lg">
                         {service.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-muted-foreground tracking-luxury leading-relaxed mb-6">
+                      <motion.p
+                        className="text-sm sm:text-base text-white/90 tracking-luxury leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 drop-shadow-md"
+                      >
                         {service.description}
-                      </p>
-                    </div>
-
-                    <ul className="space-y-3">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm tracking-luxury">
-                          <span className="w-2 h-2 bg-luxury-gold rounded-full mr-3 flex-shrink-0"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                      </motion.p>
+                    </motion.div>
                   </div>
                 </motion.div>
             ))}
@@ -594,7 +865,7 @@ const Home = () => {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mt-16"
+            className="text-center mt-12"
           >
             <MagneticButton strength={0.4}>
               <Link
@@ -645,153 +916,290 @@ const Home = () => {
         <InstagramFeed />
       </ScrollStack>
       
-      {/* About/Expertise Section - Minimalistic & Animated */}
-      <SectionTransition className="py-32 px-4 sm:px-6 bg-background">
-        <div className="container mx-auto max-w-5xl">
+      {/* About/Expertise Section - Enhanced Visual Design */}
+      <SectionTransition className="relative py-32 px-4 sm:px-6 bg-background overflow-hidden">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-luxury-beige/3 via-transparent to-luxury-gold/3"></div>
+        <div className="absolute inset-0 opacity-2">
+          <div
+            className="absolute top-0 left-0 w-1/2 h-full bg-cover bg-center"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+            }}
+          />
+        </div>
+
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-3 h-3 bg-luxury-gold/15 rounded-full blur-sm"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [-30, -80, -30],
+                x: [0, Math.random() * 60 - 30, 0],
+                opacity: [0, 0.4, 0],
+                scale: [0.8, 1.4, 0.8],
+              }}
+              transition={{
+                duration: 10 + Math.random() * 6,
+                repeat: Infinity,
+                delay: Math.random() * 8,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container mx-auto max-w-7xl relative z-20">
+          {/* Enhanced Title */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-center mb-24 gpu-accelerated"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-12">
-              Why Choose Surya Architects & Interiors?
-            </h2>
+            <motion.h2
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8 relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              Why Choose
+              <motion.span
+                className="block text-luxury-gold"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                Surya Architects & Interiors?
+              </motion.span>
+            </motion.h2>
+
+            <motion.p
+              className="text-lg sm:text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto font-light"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.7 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              Discover what sets us apart in creating extraordinary living spaces
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <motion.p
-                className="text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed font-light"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.6 }}
-                viewport={{ once: true }}
-              >
-                With over two decades of experience in luxury interior design, we specialize in creating timeless spaces that reflect your unique personality and lifestyle.
-              </motion.p>
-
+          {/* Enhanced Content Grid - Full Screen Before & After Showcase */}
+          <div className="relative w-full">
+            {/* Full Screen Before & After Images */}
+            <div className="grid grid-cols-2 gap-8 h-[80vh] min-h-[600px]">
+              {/* Before Image - Left Side */}
               <motion.div
-                className="grid grid-cols-1 gap-4"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.8 }}
-                viewport={{ once: true }}
+                className="relative group overflow-hidden rounded-3xl"
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+                viewport={{ once: true, amount: 0.3 }}
               >
-                {[
-                  "Bespoke Design Solutions",
-                  "Premium Material Selection",
-                  "Expert Project Management",
-                  "Post-Installation Support"
-                ].map((feature, index) => (
-                  <motion.div
-                    key={feature}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 1 + index * 0.1,
-                      ease: [0.25, 0.1, 0.25, 1]
-                    }}
-                    viewport={{ once: true }}
-                    className="group flex items-center space-x-4 hover:bg-luxury-beige/10 p-3 rounded-xl transition-all duration-500 cursor-pointer"
-                  >
-                    <motion.div
-                      className="w-3 h-3 bg-luxury-gold rounded-full flex-shrink-0"
-                      whileHover={{ scale: 1.5 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <span className="text-base tracking-luxury font-medium text-luxury-charcoal group-hover:text-luxury-gold transition-colors duration-300">
-                      {feature}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
 
-            <motion.div
-              initial={{ opacity: 0, x: 60, scale: 0.9 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 1.4, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <motion.div
-                className="aspect-square bg-gradient-to-br from-luxury-beige/20 to-luxury-gold/10 rounded-3xl flex items-center justify-center shadow-2xl shadow-luxury-gold/5"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="text-center p-12">
+                {/* Content Overlay */}
+                <div className="relative z-10 h-full flex flex-col justify-center p-12 text-white">
                   <motion.div
-                    className="text-7xl md:text-8xl font-display-1 font-light text-luxury-gold/30 mb-8"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    "
-                  </motion.div>
-                  <motion.blockquote
-                    className="text-xl md:text-2xl font-display-1 font-light text-luxury-charcoal leading-relaxed mb-8 italic"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 1 }}
-                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                   >
-                    Design is not just what it looks like and feels like. Design is how it works.
-                  </motion.blockquote>
-                  <motion.cite
-                    className="text-sm tracking-luxury-wide uppercase text-luxury-gold font-medium"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                    viewport={{ once: true }}
-                  >
-                    — Steve Jobs
-                  </motion.cite>
+                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-display-1 font-light mb-4">Before</h3>
+                    <p className="text-lg md:text-xl opacity-90 leading-relaxed mb-8">Empty & Uninspired Space</p>
+                    <div className="w-16 h-px bg-luxury-gold mb-6" />
+                    <p className="text-base opacity-80 leading-relaxed">
+                      Just another ordinary room waiting for transformation
+                    </p>
+                  </motion.div>
                 </div>
               </motion.div>
 
-              {/* Decorative elements */}
+              {/* After Image - Right Side */}
               <motion.div
-                className="absolute -top-4 -right-4 w-24 h-24 bg-luxury-gold/10 rounded-full blur-xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
+                className="relative group overflow-hidden rounded-3xl"
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.2, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1615874959474-d609969a20ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent" />
+
+                {/* Content Overlay */}
+                <div className="relative z-10 h-full flex flex-col justify-center p-12 text-white text-right">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                  >
+                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-display-1 font-light mb-4">After</h3>
+                    <p className="text-lg md:text-xl opacity-90 leading-relaxed mb-8">Luxurious & Inviting Space</p>
+                    <div className="w-16 h-px bg-luxury-gold ml-auto mb-6" />
+                    <p className="text-base opacity-80 leading-relaxed">
+                      A masterpiece of design and functionality
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Center Arrow and Transformation Text */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.8 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <div className="bg-luxury-gold/95 backdrop-blur-sm rounded-full p-6 shadow-2xl shadow-luxury-gold/50 border border-white/20">
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="animate-pulse"
+                >
+                  <path d="M5 12h14"/>
+                  <path d="M12 5l7 7-7 7"/>
+                </svg>
+              </div>
               <motion.div
-                className="absolute -bottom-6 -left-6 w-32 h-32 bg-luxury-beige/20 rounded-full blur-2xl"
-                animate={{
-                  scale: [1.2, 1, 1.2],
-                  opacity: [0.2, 0.4, 0.2]
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-              />
+                className="text-center mt-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                <p className="text-luxury-gold font-display-1 font-medium text-lg tracking-luxury-wide uppercase">
+                  Transformation
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Bottom Content Section */}
+            <motion.div
+              className="mt-16 text-center"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <div className="max-w-4xl mx-auto">
+                <motion.p
+                  className="text-xl md:text-2xl text-luxury-charcoal tracking-luxury leading-relaxed font-light mb-8"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  Transform your space from ordinary to extraordinary. Our expert designers blend timeless elegance with modern functionality, creating interiors that tell your unique story.
+                </motion.p>
+
+                {/* Enhanced Features Grid */}
+                <motion.div
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                >
+                  {[
+                    { title: "Vision to Reality", desc: "From concept sketches to stunning finished spaces" },
+                    { title: "Luxury Materials", desc: "Premium finishes that stand the test of time" },
+                    { title: "Personalized Service", desc: "Dedicated team committed to your satisfaction" },
+                    { title: "Timeless Design", desc: "Spaces that remain beautiful for generations" }
+                  ].map((feature, index) => (
+                    <motion.div
+                      key={feature.title}
+                      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 1.2 + index * 0.1,
+                        ease: [0.23, 1, 0.32, 1]
+                      }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      className="group bg-gradient-to-br from-background/90 via-luxury-beige/5 to-background/90 backdrop-blur-sm border border-luxury-gold/10 hover:border-luxury-gold/30 p-6 rounded-2xl transition-all duration-500 hover:shadow-lg hover:shadow-luxury-gold/10 cursor-pointer"
+                    >
+                      <div className="text-center">
+                        <motion.div
+                          className="w-6 h-6 bg-luxury-gold rounded-full mx-auto mb-4"
+                          whileHover={{ scale: 1.5 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        <h4 className="text-lg font-display-1 font-medium text-luxury-charcoal mb-2 group-hover:text-luxury-gold transition-colors duration-300">
+                          {feature.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground tracking-luxury leading-relaxed">
+                          {feature.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
             </motion.div>
           </div>
+
+          {/* Enhanced Bottom Accent */}
+          <motion.div
+            className="mt-20 flex justify-center"
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1.5, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <div className="relative">
+              <div className="w-40 h-px bg-gradient-to-r from-transparent via-luxury-gold/40 to-transparent" />
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-luxury-gold rounded-full"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          </motion.div>
         </div>
       </SectionTransition>
 
       <ScrollStack>
-        <CTASection />
+        <SectionTransition className="pt-32 pb-48 px-4 sm:px-6 bg-background">
+          <CTASection />
+        </SectionTransition>
       </ScrollStack>
 
       <Footer />

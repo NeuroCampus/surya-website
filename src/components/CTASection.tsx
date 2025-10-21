@@ -4,30 +4,62 @@ import MagneticButton from "./MagneticButton";
 
 const CTASection = () => {
   return (
-    <section className="py-32 px-6">
-      <div className="container mx-auto max-w-4xl text-center">
+    <div className="relative py-20 flex items-center justify-center overflow-hidden">
+      {/* Subtle Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-luxury-beige/30 to-background" />
+
+      {/* Minimal Decorative Elements */}
+      <div className="absolute inset-0">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.05, 0.1, 0.05]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-20 left-20 w-32 h-32 bg-luxury-gold/10 rounded-full blur-2xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1.1, 1, 1.1],
+            opacity: [0.03, 0.08, 0.03]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute bottom-20 right-20 w-40 h-40 bg-luxury-beige/20 rounded-full blur-2xl"
+        />
+      </div>
+
+      <div className="relative z-10 container mx-auto max-w-4xl text-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true }}
         >
-          <motion.h2 
-            className="text-4xl md:text-6xl tracking-luxury-wide mb-8 whitespace-nowrap"
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl tracking-luxury-wide mb-6 font-display-1 font-light text-luxury-charcoal"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
             {"Let's craft your next space".split(" ").map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block mr-3">
+              <span key={wordIndex} className="inline-block mr-3 last:mr-0">
                 {word.split("").map((char, charIndex) => (
                   <motion.span
                     key={`${wordIndex}-${charIndex}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: (wordIndex * 5 + charIndex) * 0.02, duration: 0.5 }}
+                    transition={{ delay: (wordIndex * 5 + charIndex) * 0.02, duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="inline-block"
+                    className="inline-block hover:text-luxury-gold/70 transition-colors duration-300"
                   >
                     {char}
                   </motion.span>
@@ -35,20 +67,37 @@ const CTASection = () => {
               </span>
             ))}
           </motion.h2>
-          <p className="text-lg text-muted-foreground tracking-luxury mb-12 max-w-2xl mx-auto">
-            Transform your vision into reality with timeless design and expert craftsmanship
-          </p>
-          <MagneticButton strength={0.5}>
-            <Link
-              to="/contact"
-              className="inline-block px-16 py-5 border-2 border-foreground text-foreground tracking-luxury-wide uppercase text-sm hover:bg-foreground hover:text-background transition-smooth ambient-glow"
-            >
-              Start a Project
-            </Link>
-          </MagneticButton>
+
+          <motion.p
+            className="text-lg md:text-xl text-muted-foreground tracking-luxury leading-relaxed mb-10 max-w-2xl mx-auto font-light"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Transform your vision into reality with{" "}
+            <span className="text-luxury-gold/80 font-medium">timeless design</span>{" "}
+            and expert craftsmanship
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <MagneticButton strength={0.4}>
+              <Link
+                to="/contact"
+                className="inline-block px-12 py-4 bg-luxury-gold/10 hover:bg-black text-luxury-charcoal hover:text-white border border-luxury-gold/30 hover:border-black tracking-luxury-wide uppercase text-sm font-medium hover:shadow-lg hover:shadow-black/10 transition-all duration-300 rounded-xl"
+              >
+                Start a Project
+              </Link>
+            </MagneticButton>
+          </motion.div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

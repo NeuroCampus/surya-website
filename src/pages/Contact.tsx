@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone, MapPin } from "lucide-react";
-import heroInterior from "@/assets/hero-interior.jpg";
+import { Mail, Phone, MapPin, Send, Sparkles, ArrowRight } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -18,6 +17,8 @@ const Contact = () => {
     email: "",
     message: ""
   });
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,156 +64,275 @@ const Contact = () => {
       icon: Mail,
       label: "Email",
       value: "suryaarc.int@gmail.com",
-      type: "Email"
+      type: "Email",
+      description: "Drop us a line anytime"
     },
     {
       icon: Phone,
       label: "Phone",
       value: "+91 7483109814",
-      type: "Phone"
+      type: "Phone",
+      description: "Let's have a conversation"
     },
     {
       icon: MapPin,
       label: "Location",
       value: "Bangalore",
-      type: "Location"
+      type: "Location",
+      description: "Visit our studio"
     }
   ];
 
   return (
-    <div className="min-h-screen relative flex flex-col">
-      {/* Background Image */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroInterior})` }}
-      />
-      
-      {/* Overlay for transparency */}
-      <div className="fixed inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
-      
+    <div ref={containerRef} className="min-h-screen relative flex flex-col bg-gradient-to-br from-luxury-beige via-background to-luxury-beige/30">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-32 h-32 border border-luxury-gold/20 rounded-full" />
+        <div className="absolute top-40 right-32 w-24 h-24 border border-luxury-gold/20 rounded-full" />
+        <div className="absolute bottom-32 left-1/3 w-40 h-40 border border-luxury-gold/20 rounded-full" />
+        <div className="absolute bottom-20 right-20 w-28 h-28 border border-luxury-gold/20 rounded-full" />
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-32 right-16 w-64 h-64 bg-luxury-gold/10 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            y: [0, 20, 0],
+            opacity: [0.05, 0.15, 0.05]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute bottom-32 left-16 w-80 h-80 bg-luxury-beige/20 rounded-full blur-3xl"
+        />
+      </div>
+
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <CustomCursor />
         <Navigation />
 
-        {/* Main Content */}
-        <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-20">
+        {/* Hero Section */}
+        <section className="flex-1 flex items-center justify-center px-4 sm:px-6 py-20">
           <div className="w-full max-w-7xl">
-            {/* Header Section */}
+            {/* Header */}
             <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="text-center mb-16"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-center mb-20"
             >
-              <h1 className="text-5xl sm:text-6xl md:text-8xl tracking-luxury-wide mb-6 font-display-1 font-light text-white">
+             
+
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="text-6xl sm:text-7xl md:text-8xl tracking-tight mb-6 font-playfair font-bold text-luxury-charcoal"
+              >
                 Let's Talk
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-white/80 tracking-luxury leading-relaxed max-w-2xl mx-auto">
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.8 }}
+                className="text-xl sm:text-2xl text-muted-foreground tracking-wide leading-relaxed max-w-3xl mx-auto font-light"
+              >
                 Ready to transform your space into a masterpiece?
-              </p>
+                <br />
+                <span className="text-luxury-gold font-medium">Let's create something extraordinary together.</span>
+              </motion.p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-              {/* Left Side - Contact Info */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+              {/* Contact Info */}
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -60 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                className="lg:col-span-1 space-y-8"
+                transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                className="space-y-8"
               >
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="text-3xl sm:text-4xl font-playfair font-bold text-luxury-charcoal mb-8"
+                >
+                  Get In Touch
+                </motion.h2>
+
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <motion.div
                       key={info.label}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 + 0.4, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                      className="flex items-start space-x-4 group cursor-pointer"
+                      transition={{ delay: index * 0.15 + 0.7, duration: 0.8 }}
+                      className="group cursor-pointer"
                       onClick={() => handleContactClick(info.type, info.value)}
                     >
-                      <div className="w-14 h-14 border border-white/40 group-hover:border-luxury-gold/60 flex items-center justify-center transition-all duration-300 backdrop-blur-sm bg-white/5 group-hover:bg-white/10">
-                        <info.icon className="w-6 h-6 text-white group-hover:text-luxury-gold transition-colors duration-300" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-base sm:text-lg tracking-luxury-wide uppercase text-white/70 font-medium mb-3 group-hover:text-white transition-colors duration-300">
-                          {info.label}
+                      <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm border border-luxury-charcoal/10 rounded-2xl hover:bg-white hover:border-luxury-gold/30 transition-all duration-500 hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-1">
+                        <motion.div
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                          className="w-16 h-16 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center rounded-xl group-hover:bg-luxury-gold/20 transition-all duration-300 flex-shrink-0"
+                        >
+                          <info.icon className="w-7 h-7 text-luxury-gold" />
+                        </motion.div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm uppercase tracking-widest text-muted-foreground font-medium mb-2 group-hover:text-luxury-gold transition-colors duration-300">
+                            {info.label}
+                          </div>
+                          <div className="text-xl sm:text-2xl font-playfair font-bold text-luxury-charcoal mb-1 group-hover:text-luxury-gold transition-colors duration-300 leading-tight">
+                            {info.value}
+                          </div>
+                          <div className="text-muted-foreground text-sm leading-relaxed">
+                            {info.description}
+                          </div>
                         </div>
-                        <div className="text-lg sm:text-xl md:text-2xl tracking-luxury text-white leading-tight group-hover:text-luxury-gold transition-colors duration-300 font-light">
-                          {info.value}
-                        </div>
+
+                        <motion.div
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.15 + 1, duration: 0.5 }}
+                          className="flex-shrink-0"
+                        >
+                          <ArrowRight className="w-5 h-5 text-luxury-gold group-hover:translate-x-1 transition-transform duration-300" />
+                        </motion.div>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Right Side - Contact Form */}
+              {/* Contact Form */}
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                className="lg:col-span-2"
+                transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                className="flex items-center"
               >
-                <motion.form
+                <motion.div
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                  onSubmit={handleSubmit}
-                  className="space-y-8 bg-white/10 backdrop-blur-md border border-white/20 p-8 md:p-12 shadow-2xl"
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="w-full bg-white/90 backdrop-blur-xl border border-luxury-charcoal/10 p-8 md:p-10 rounded-3xl shadow-2xl hover:shadow-luxury-gold/10 transition-all duration-500"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Input
-                        type="text"
-                        name="name"
-                        placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="h-16 text-lg tracking-luxury border-white/30 focus:border-luxury-gold bg-white/5 text-white placeholder:text-white/50 backdrop-blur-sm"
-                      />
-                    </div>
-
-                    <div>
-                      <Input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="h-16 text-lg tracking-luxury border-white/30 focus:border-luxury-gold bg-white/5 text-white placeholder:text-white/50 backdrop-blur-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Textarea
-                      name="message"
-                      placeholder="Tell us about your project vision"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={8}
-                      className="text-lg tracking-luxury resize-none border-white/30 focus:border-luxury-gold bg-white/5 text-white placeholder:text-white/50 backdrop-blur-sm"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-16 text-lg tracking-luxury-wide uppercase bg-luxury-gold text-luxury-charcoal hover:bg-luxury-gold/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8, duration: 0.6 }}
+                    className="text-2xl sm:text-3xl font-playfair font-bold text-luxury-charcoal mb-8"
                   >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </Button>
-                </motion.form>
+                    Start Your Project
+                  </motion.h3>
+
+                  <motion.form
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.8 }}
+                    onSubmit={handleSubmit}
+                    className="space-y-6"
+                  >
+                    <div className="grid grid-cols-1 gap-6">
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.1, duration: 0.6 }}
+                      >
+                        <Input
+                          type="text"
+                          name="name"
+                          placeholder="Your Name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          className="h-14 text-lg border-luxury-charcoal/20 focus:border-luxury-gold bg-white/50 text-luxury-charcoal placeholder:text-muted-foreground/60 rounded-xl hover:bg-white transition-all duration-300"
+                        />
+                      </motion.div>
+
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.2, duration: 0.6 }}
+                      >
+                        <Input
+                          type="email"
+                          name="email"
+                          placeholder="Your Email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          className="h-14 text-lg border-luxury-charcoal/20 focus:border-luxury-gold bg-white/50 text-luxury-charcoal placeholder:text-muted-foreground/60 rounded-xl hover:bg-white transition-all duration-300"
+                        />
+                      </motion.div>
+                    </div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.3, duration: 0.6 }}
+                    >
+                      <Textarea
+                        name="message"
+                        placeholder="Tell us about your vision and project requirements..."
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={5}
+                        className="text-lg resize-none border-luxury-charcoal/20 focus:border-luxury-gold bg-white/50 text-luxury-charcoal placeholder:text-muted-foreground/60 rounded-xl hover:bg-white transition-all duration-300"
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.4, duration: 0.6 }}
+                    >
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full h-14 text-lg tracking-wide uppercase bg-white/90 hover:bg-white text-luxury-charcoal border-2 border-luxury-charcoal/20 hover:border-luxury-gold/40 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-0.5 font-bold rounded-xl group"
+                      >
+                        <motion.div
+                          className="flex items-center justify-center space-x-3"
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                          <motion.div
+                            animate={isSubmitting ? { rotate: 360 } : { rotate: 0 }}
+                            transition={{ duration: 0.5, repeat: isSubmitting ? Infinity : 0 }}
+                          >
+                            <Send className="w-5 h-5" />
+                          </motion.div>
+                        </motion.div>
+                      </Button>
+                    </motion.div>
+                  </motion.form>
+                </motion.div>
               </motion.div>
             </div>
           </div>
-        </main>
+        </section>
 
-        {/* Footer */}
         <Footer />
       </div>
     </div>
