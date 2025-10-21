@@ -22,43 +22,30 @@ const TestimonialCarousel = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="relative h-48 flex items-center justify-center">
+    <div className="relative flex items-center justify-center min-h-[300px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl px-6"
+          exit={{ opacity: 0, y: -30 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-center max-w-4xl px-6"
         >
-          <p className="text-xl md:text-2xl mb-6 tracking-luxury leading-relaxed font-light italic">
+          <blockquote className="text-lg sm:text-xl md:text-2xl font-display-1 font-light italic text-luxury-charcoal leading-relaxed mb-8 tracking-luxury">
             "{testimonials[current].quote}"
-          </p>
-          <p className="text-sm tracking-luxury-wide uppercase text-muted-foreground">
+          </blockquote>
+          <cite className="text-lg sm:text-xl md:text-2xl tracking-luxury-wide uppercase text-luxury-gold font-medium">
             — {testimonials[current].client}
-          </p>
+          </cite>
         </motion.div>
       </AnimatePresence>
-
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2">
-        {testimonials.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrent(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === current ? "bg-foreground w-8" : "bg-foreground/30"
-            }`}
-            aria-label={`Go to testimonial ${index + 1}`}
-          />
-        ))}
-      </div>
     </div>
   );
 };

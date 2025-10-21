@@ -21,16 +21,17 @@ const SmoothScroll = forwardRef<SmoothScrollRef, SmoothScrollProps>(({ children 
   }));
 
   useEffect(() => {
-    // Initialize Lenis smooth scroll optimized for 8K video performance
+    // Initialize Lenis smooth scroll optimized for ultra-smooth 8K video performance
     const lenis = new Lenis({
-      duration: 1.4, // Slightly longer for ultra-smooth video sync
+      duration: 1.2, // Slightly longer for ultra-smooth video sync
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       smoothWheel: true,
       touchMultiplier: 2,
       // Performance optimizations for 8K video (removed unsupported 'smoothTouch' option)
       // Reduce lerp for more responsive video control
-      lerp: 0.08,
+      lerp: 0.1, // Even smoother interpolation
+      wheelMultiplier: 0.8, // Gentler wheel scrolling
     });
 
     lenisRef.current = lenis;

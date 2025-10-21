@@ -52,16 +52,7 @@ const Home = () => {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Subtle shimmer effect for the text
-  useEffect(() => {
-    const shimmerInterval = setInterval(() => {
-      // Gentle shimmer animation will be handled by CSS
-    }, 3000);
-    
-    return () => clearInterval(shimmerInterval);
-  }, []);
-  
-  // Scroll-controlled video logic with ultra-smooth 8K optimization
+  // Ultra-smooth scroll-controlled video logic with optimized 8K performance
   useEffect(() => {
     if (isReducedMotion || !videoRef.current) return;
     
@@ -69,34 +60,42 @@ const Home = () => {
     const playbackConst = 2500; // Balanced for smooth 8K control without excessive scrolling
     let ticking = false;
     let lastScrollY = 0;
+    let rafId: number;
     
     // Preload video for instant playback
     vid.preload = 'auto';
     vid.load();
     
-    const scrollPlay = () => {
+    const updateVideoTime = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      
+      // Ultra-smooth interpolation for crisp video playback with spring physics
+      const targetScroll = Math.min(heroHeight, Math.max(0, scrollTop));
+      const currentScroll = lastScrollY;
+      const delta = targetScroll - currentScroll;
+      
+      // Spring-based interpolation for natural movement
+      const springStrength = 0.12; // Lower = smoother, more lag
+      const interpolatedScroll = currentScroll + delta * springStrength;
+      
+      // Only calculate scroll fraction if heroHeight is set (video metadata loaded)
+      if (heroHeight > 0) {
+        // Map scroll only within hero height for precise 8K control
+        const scrollFraction = Math.min(1, Math.max(0, interpolatedScroll / heroHeight));
+        
+        if (vid.duration && !isNaN(vid.duration)) {
+          vid.currentTime = vid.duration * scrollFraction;
+        }
+      }
+      
+      lastScrollY = interpolatedScroll;
+      ticking = false;
+    };
+    
+    const scrollHandler = () => {
       if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollTop = window.scrollY || document.documentElement.scrollTop;
-          
-          // Smooth interpolation for crisp video playback
-          const targetScroll = Math.min(heroHeight, Math.max(0, scrollTop));
-          const interpolatedScroll = lastScrollY + (targetScroll - lastScrollY) * 0.08; // Gentler interpolation
-          
-          // Only calculate scroll fraction if heroHeight is set (video metadata loaded)
-          if (heroHeight > 0) {
-            // Map scroll only within hero height for precise 8K control
-            const scrollFraction = Math.min(1, Math.max(0, interpolatedScroll / heroHeight));
-            
-            if (vid.duration && !isNaN(vid.duration)) {
-              vid.currentTime = vid.duration * scrollFraction;
-            }
-          }
-          
-          lastScrollY = interpolatedScroll;
-          ticking = false;
-        });
         ticking = true;
+        rafId = requestAnimationFrame(updateVideoTime);
       }
     };
     
@@ -108,7 +107,7 @@ const Home = () => {
         setHeroHeight(height);
       }
       // Start smooth scroll tracking
-      scrollPlay();
+      scrollHandler();
     };
     
     const handleCanPlayThrough = () => {
@@ -120,13 +119,15 @@ const Home = () => {
     vid.addEventListener('canplaythrough', handleCanPlayThrough);
     
     // Passive scroll listener for maximum performance
-    const throttledScroll = () => scrollPlay();
-    window.addEventListener('scroll', throttledScroll, { passive: true });
+    window.addEventListener('scroll', scrollHandler, { passive: true });
     
     return () => {
       vid.removeEventListener('loadedmetadata', handleLoadedMetadata);
       vid.removeEventListener('canplaythrough', handleCanPlayThrough);
-      window.removeEventListener('scroll', throttledScroll);
+      window.removeEventListener('scroll', scrollHandler);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, [isReducedMotion, heroHeight]);
   
@@ -137,8 +138,32 @@ const Home = () => {
     { id: 4, title: "Spa Bathroom", subtitle: "Serene Sanctuary", image: project4 },
   ];
 
+  // Preload critical assets for ultra-smooth experience
+  useEffect(() => {
+    const preloadAssets = () => {
+      // Preload hero image
+      const heroImg = new Image();
+      heroImg.src = heroImage;
+      
+      // Preload project images
+      projects.forEach(project => {
+        const img = new Image();
+        img.src = project.image;
+      });
+      
+      // Preload video (already handled in video logic, but ensure it's cached)
+      if (finalintVideo) {
+        const video = document.createElement('video');
+        video.preload = 'auto';
+        video.src = finalintVideo;
+      }
+    };
+    
+    preloadAssets();
+  }, [projects, heroImage, finalintVideo]);
+
   return (
-    <div className="min-h-screen bg-background cursor-none overflow-x-hidden">
+    <div className="min-h-screen bg-background cursor-none overflow-x-hidden ultra-smooth">
       <CustomCursor />
       <ScrollProgress />
       <Navigation />
@@ -152,7 +177,7 @@ const Home = () => {
             muted
             playsInline
             poster={heroImage}
-            className="fixed top-0 left-0 w-full h-screen object-cover pointer-events-none scroll-video"
+            className="fixed top-0 left-0 w-full h-screen object-cover pointer-events-none scroll-video gpu-accelerated"
             style={{ 
               zIndex: 0, 
               willChange: 'transform',
@@ -175,7 +200,7 @@ const Home = () => {
             opacity: overlayOpacity,
             y: overlayY
           }}
-          className="fixed inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none z-30"
+          className="fixed inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none z-30 gpu-accelerated"
         >
           {/* No backgrounds or plates behind the title; only golden text remains */}
           <div className="max-w-5xl mx-auto relative">
@@ -186,10 +211,10 @@ const Home = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
                   duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: [0.23, 1, 0.32, 1],
                   delay: 0.2
                 }}
-                className="mb-8"
+                className="mb-8 gpu-accelerated"
               >
                 <div className="w-28 h-28 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold/80 flex items-center justify-center shadow-2xl">
                   <svg
@@ -219,10 +244,10 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: [0.23, 1, 0.32, 1],
                   delay: 0.6
                 }}
-                className="mb-2"
+                className="mb-2 gpu-accelerated"
               >
                 <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-playfair font-bold text-luxury-charcoal tracking-tight text-center">
                   SURYA
@@ -234,10 +259,10 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: [0.23, 1, 0.32, 1],
                   delay: 0.8
                 }}
-                className="mb-6"
+                className="mb-6 gpu-accelerated"
               >
                 <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl font-elegant font-medium text-luxury-charcoal/80 tracking-wide text-center">
                   ARCHITECTS
@@ -249,10 +274,10 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
                   duration: 0.6,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: [0.23, 1, 0.32, 1],
                   delay: 1.0
                 }}
-                className="mb-10"
+                className="mb-10 gpu-accelerated"
               >
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-light tracking-widest uppercase text-center">
                   & Interiors
@@ -265,20 +290,20 @@ const Home = () => {
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{
                   duration: 0.6,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: [0.23, 1, 0.32, 1],
                   delay: 1.4
                 }}
-                className="w-40 h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent mb-8"
+                className="w-40 h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent mb-8 gpu-accelerated"
               >
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{
                     duration: 1.2,
-                    ease: [0.25, 0.1, 0.25, 1],
+                    ease: [0.23, 1, 0.32, 1],
                     delay: 1.6
                   }}
-                  className="h-full bg-luxury-gold origin-left"
+                  className="h-full bg-luxury-gold origin-left gpu-accelerated"
                 />
               </motion.div>
 
@@ -288,10 +313,10 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{
                   duration: 0.8,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  ease: [0.23, 1, 0.32, 1],
                   delay: 1.8
                 }}
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wider text-center max-w-lg px-4"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wider text-center max-w-lg px-4 gpu-accelerated"
               >
                 Crafting Timeless Spaces with Elegance and Precision  
               </motion.p>
@@ -312,9 +337,9 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-20 gpu-accelerated"
           >
             <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
               We Create Homes With Love
@@ -328,8 +353,9 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
               viewport={{ once: true }}
+              className="gpu-accelerated"
             >
               <h3 className="text-2xl sm:text-3xl md:text-4xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
                 Our Vision
@@ -347,9 +373,9 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative gpu-accelerated"
             >
               <div className="aspect-square bg-gradient-to-br from-luxury-beige/20 to-luxury-gold/10 rounded-2xl flex items-center justify-center">
                 <div className="text-center">
@@ -375,7 +401,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-20 gpu-accelerated"
           >
             <motion.h2 
               className="text-3xl sm:text-4xl md:text-5xl tracking-luxury-wide mb-4 font-display-1 font-light text-luxury-charcoal"
@@ -406,15 +432,15 @@ const Home = () => {
                 transition={{ 
                   delay: index * 0.15, 
                   duration: 0.8,
-                  ease: [0.25, 0.46, 0.45, 0.94],
+                  ease: [0.23, 1, 0.32, 1],
                   type: "spring",
                   stiffness: 100,
                   damping: 15
                 }}
                 viewport={{ once: true, amount: 0.3 }}
-                className="group"
+                className="group gpu-accelerated"
               >
-                <Card3DTilt to="/projects" className="block relative overflow-hidden aspect-[4/5] bg-background border border-border/30 hover:border-luxury-gold/50 active:border-luxury-gold/50 transition-all duration-700 hover:shadow-2xl hover:shadow-luxury-gold/20 active:shadow-2xl active:shadow-luxury-gold/20 hover:-translate-y-3 active:-translate-y-3 touch-manipulation">
+                <Card3DTilt to="/projects" className="block relative overflow-hidden aspect-[4/5] bg-background border border-border/30 hover:border-luxury-gold/50 active:border-luxury-gold/50 transition-all duration-700 hover:shadow-2xl hover:shadow-luxury-gold/20 active:shadow-2xl active:shadow-luxury-gold/20 hover:-translate-y-3 active:-translate-y-3 touch-manipulation gpu-accelerated">
                   {(isActive) => (
                     <>
                       <ImageReveal
@@ -474,7 +500,7 @@ const Home = () => {
             <MagneticButton strength={0.4}>
               <Link
                 to="/projects"
-                className="inline-block px-12 py-4 border border-foreground text-foreground tracking-luxury uppercase text-sm hover:bg-foreground hover:text-background transition-smooth"
+                className="inline-block px-12 py-4 border border-foreground text-foreground tracking-luxury uppercase text-sm hover:bg-foreground hover:text-background transition-ultra-smooth micro-hover micro-glow"
               >
                 View All Projects
               </Link>
@@ -494,7 +520,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-20 gpu-accelerated"
           >
             <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
               Our Services
@@ -535,7 +561,7 @@ const Home = () => {
                     damping: 20
                   }}
                   viewport={{ once: true }}
-                  className="group h-full bg-background border border-border/50 hover:border-luxury-gold/30 transition-all duration-500 rounded-lg overflow-hidden hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-2 cursor-pointer"
+                  className="group h-full bg-background border border-border/50 hover:border-luxury-gold/30 transition-ultra-smooth rounded-lg overflow-hidden hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-2 cursor-pointer micro-hover micro-glow"
                 >
                   <div className="p-8">
                     <div className="mb-6">
@@ -573,7 +599,7 @@ const Home = () => {
             <MagneticButton strength={0.4}>
               <Link
                 to="/contact"
-                className="inline-block px-12 py-4 border border-luxury-charcoal text-luxury-charcoal tracking-luxury-wide uppercase text-sm hover:bg-luxury-charcoal hover:text-luxury-white transition-smooth"
+                className="inline-block px-12 py-4 border border-luxury-charcoal text-luxury-charcoal tracking-luxury-wide uppercase text-sm hover:bg-luxury-charcoal hover:text-luxury-white transition-ultra-smooth micro-hover micro-glow"
               >
                 Start Your Project
               </Link>
@@ -582,72 +608,34 @@ const Home = () => {
         </div>
       </SectionTransition>
 
-      {/* Testimonials Section with Enhanced Design */}
+      {/* Testimonials Section - Minimalistic Design */}
       <ScrollStack>
-        <SectionTransition className="py-20 px-4 sm:px-6 bg-gradient-to-b from-background to-muted/20">
-        <div className="container mx-auto max-w-6xl">
+        <SectionTransition className="py-32 px-4 sm:px-6 bg-background">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">
               Client Stories
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
-              Hear from our clients about their transformative experiences
-            </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
-            className="bg-background border border-border/50 rounded-2xl p-12 shadow-lg"
+            className="relative"
           >
+            {/* Elegant quote mark */}
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-8xl md:text-9xl font-display-1 font-light text-luxury-gold/20">
+              "
+            </div>
             <TestimonialCarousel />
-          </motion.div>
-
-          {/* Stats Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
-          >
-            {[
-              { number: "200+", label: "Projects Completed" },
-              { number: "22+", label: "Years Experience" },
-              { number: "50+", label: "Happy Clients" },
-              { number: "15+", label: "Design Awards" }
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 30, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1,
-                  ease: [0.68, -0.55, 0.265, 1.55],
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 10
-                }}
-                viewport={{ once: true }}
-                className="text-center group"
-              >
-                <div className="text-2xl sm:text-3xl md:text-4xl font-display-1 font-light text-luxury-gold mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-sm sm:text-sm tracking-luxury-wide uppercase text-muted-foreground font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </SectionTransition>
@@ -657,29 +645,46 @@ const Home = () => {
         <InstagramFeed />
       </ScrollStack>
       
-      {/* About/Expertise Section */}
-      <SectionTransition className="py-20 px-4 sm:px-6 bg-background">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8">
-                Why Choose Surya Luxe Canvas
-              </h2>
-              <div className="space-y-6">
-                <p className="text-lg text-muted-foreground tracking-luxury leading-relaxed">
-                  With over two decades of experience in luxury interior design, we specialize in creating timeless spaces that reflect your unique personality and lifestyle.
-                </p>
-                <p className="text-lg text-muted-foreground tracking-luxury leading-relaxed">
-                  Our approach combines artistic vision with technical expertise, ensuring every detail contributes to a harmonious and functional environment.
-                </p>
-              </div>
+      {/* About/Expertise Section - Minimalistic & Animated */}
+      <SectionTransition className="py-32 px-4 sm:px-6 bg-background">
+        <div className="container mx-auto max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-4xl sm:text-5xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-12">
+              Why Choose Surya Architects & Interiors?
+            </h2>
+          </motion.div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <motion.p
+                className="text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed font-light"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.6 }}
+                viewport={{ once: true }}
+              >
+                With over two decades of experience in luxury interior design, we specialize in creating timeless spaces that reflect your unique personality and lifestyle.
+              </motion.p>
+
+              <motion.div
+                className="grid grid-cols-1 gap-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                viewport={{ once: true }}
+              >
                 {[
                   "Bespoke Design Solutions",
                   "Premium Material Selection",
@@ -688,37 +693,98 @@ const Home = () => {
                 ].map((feature, index) => (
                   <motion.div
                     key={feature}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 1 + index * 0.1,
+                      ease: [0.25, 0.1, 0.25, 1]
+                    }}
                     viewport={{ once: true }}
-                    className="flex items-center space-x-3 group/item hover:bg-luxury-beige/20 p-2 rounded-lg transition-colors duration-300 cursor-pointer"
+                    className="group flex items-center space-x-4 hover:bg-luxury-beige/10 p-3 rounded-xl transition-all duration-500 cursor-pointer"
                   >
-                    <div className="w-2 h-2 bg-luxury-gold rounded-full flex-shrink-0 group-hover/item:scale-125 transition-transform duration-300"></div>
-                    <span className="text-sm tracking-luxury font-medium text-luxury-charcoal">{feature}</span>
+                    <motion.div
+                      className="w-3 h-3 bg-luxury-gold rounded-full flex-shrink-0"
+                      whileHover={{ scale: 1.5 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <span className="text-base tracking-luxury font-medium text-luxury-charcoal group-hover:text-luxury-gold transition-colors duration-300">
+                      {feature}
+                    </span>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              initial={{ opacity: 0, x: 60, scale: 0.9 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.4, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-luxury-beige/30 to-luxury-gold/20 rounded-2xl flex items-center justify-center">
+              <motion.div
+                className="aspect-square bg-gradient-to-br from-luxury-beige/20 to-luxury-gold/10 rounded-3xl flex items-center justify-center shadow-2xl shadow-luxury-gold/5"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.6 }}
+              >
                 <div className="text-center p-12">
-                  <div className="text-6xl md:text-7xl font-display-1 font-light text-luxury-gold mb-6">"</div>
-                  <blockquote className="text-lg sm:text-xl md:text-2xl font-display-1 font-light text-luxury-charcoal leading-relaxed mb-6">
+                  <motion.div
+                    className="text-7xl md:text-8xl font-display-1 font-light text-luxury-gold/30 mb-8"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.8 }}
+                    viewport={{ once: true }}
+                  >
+                    "
+                  </motion.div>
+                  <motion.blockquote
+                    className="text-xl md:text-2xl font-display-1 font-light text-luxury-charcoal leading-relaxed mb-8 italic"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 1 }}
+                    viewport={{ once: true }}
+                  >
                     Design is not just what it looks like and feels like. Design is how it works.
-                  </blockquote>
-                  <cite className="text-sm tracking-luxury-wide uppercase text-muted-foreground font-medium">
+                  </motion.blockquote>
+                  <motion.cite
+                    className="text-sm tracking-luxury-wide uppercase text-luxury-gold font-medium"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 1.2 }}
+                    viewport={{ once: true }}
+                  >
                     — Steve Jobs
-                  </cite>
+                  </motion.cite>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* Decorative elements */}
+              <motion.div
+                className="absolute -top-4 -right-4 w-24 h-24 bg-luxury-gold/10 rounded-full blur-xl"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <motion.div
+                className="absolute -bottom-6 -left-6 w-32 h-32 bg-luxury-beige/20 rounded-full blur-2xl"
+                animate={{
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0.2, 0.4, 0.2]
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+              />
             </motion.div>
           </div>
         </div>
