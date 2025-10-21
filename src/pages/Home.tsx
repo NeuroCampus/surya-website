@@ -21,6 +21,7 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import finalintVideo from "@/assets/finalint.mp4";
+import suryaLogo from "@/assets/suryalogo.png";
 
 const Home = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -220,7 +221,7 @@ const Home = () => {
             opacity: overlayOpacity,
             y: overlayY
           }}
-          className="fixed inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none z-30 gpu-accelerated"
+          className="fixed inset-0 flex flex-col items-center justify-start pt-20 text-center px-4 sm:px-6 pointer-events-none z-30 gpu-accelerated"
         >
           {/* No backgrounds or plates behind the title; only golden text remains */}
           <div className="max-w-5xl mx-auto relative">
@@ -236,110 +237,12 @@ const Home = () => {
                 }}
                 className="mb-8 gpu-accelerated"
               >
-                <div className="w-28 h-28 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold/80 flex items-center justify-center shadow-2xl">
-                  <svg
-                    width="44"
-                    height="44"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M3 21h18"/>
-                    <path d="M5 21V7l8-4v18"/>
-                    <path d="M19 21V11l-6-4"/>
-                    <path d="M9 9v.01"/>
-                    <path d="M9 12v.01"/>
-                    <path d="M9 15v.01"/>
-                    <path d="M9 18v.01"/>
-                  </svg>
-                </div>
-              </motion.div>
-
-              {/* Company name with staggered reveal */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.23, 1, 0.32, 1],
-                  delay: 0.6
-                }}
-                className="mb-2 gpu-accelerated"
-              >
-                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-playfair font-bold text-luxury-charcoal tracking-tight text-center">
-                  SURYA
-                </h1>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.23, 1, 0.32, 1],
-                  delay: 0.8
-                }}
-                className="mb-6 gpu-accelerated"
-              >
-                <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-6xl font-elegant font-medium text-luxury-charcoal/80 tracking-wide text-center">
-                  ARCHITECTS
-                </h2>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  ease: [0.23, 1, 0.32, 1],
-                  delay: 1.0
-                }}
-                className="mb-10 gpu-accelerated"
-              >
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground font-light tracking-widest uppercase text-center">
-                  & Interiors
-                </p>
-              </motion.div>
-
-              {/* Minimal progress indicator */}
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={{ opacity: 1, scaleX: 1 }}
-                transition={{
-                  duration: 0.6,
-                  ease: [0.23, 1, 0.32, 1],
-                  delay: 1.4
-                }}
-                className="w-40 h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent mb-8 gpu-accelerated"
-              >
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{
-                    duration: 1.2,
-                    ease: [0.23, 1, 0.32, 1],
-                    delay: 1.6
-                  }}
-                  className="h-full bg-luxury-gold origin-left gpu-accelerated"
+                <img
+                  src={suryaLogo}
+                  alt="Surya Architects & Interiors"
+                  className="h-64 sm:h-80 md:h-96 lg:h-[32rem] w-auto mx-auto"
                 />
               </motion.div>
-
-              {/* Tagline */}
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 0.8,
-                  ease: [0.23, 1, 0.32, 1],
-                  delay: 1.8
-                }}
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground font-light tracking-wider text-center max-w-lg px-4 gpu-accelerated"
-              >
-                Crafting Timeless Spaces with Elegance and Precision  
-              </motion.p>
             </div>
           </div>
         </motion.div>
