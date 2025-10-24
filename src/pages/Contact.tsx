@@ -181,7 +181,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-6xl sm:text-7xl md:text-8xl tracking-tight mb-6 font-playfair font-bold text-luxury-charcoal"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight mb-6 font-playfair font-bold text-luxury-charcoal"
               >
                 Let's Talk
               </motion.h1>
@@ -190,7 +190,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.8 }}
-                className="text-xl sm:text-2xl text-luxury-charcoal tracking-wide leading-relaxed max-w-3xl mx-auto font-light"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-luxury-charcoal tracking-wide leading-relaxed max-w-3xl mx-auto font-light"
               >
                 Ready to transform your space into a masterpiece?
                 <br />
@@ -198,7 +198,7 @@ const Contact = () => {
               </motion.p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
               {/* Contact Info */}
               <motion.div
                 initial={{ opacity: 0, x: -60 }}
@@ -210,7 +210,7 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="text-3xl sm:text-4xl font-playfair font-bold text-luxury-charcoal mb-8"
+                  className="text-2xl sm:text-3xl md:text-4xl font-playfair font-bold text-luxury-charcoal mb-6 md:mb-8"
                 >
                   Get In Touch
                 </motion.h2>
@@ -225,20 +225,20 @@ const Contact = () => {
                       className="group cursor-pointer"
                       onClick={() => handleContactClick(info.type, info.value)}
                     >
-                      <div className="flex items-start space-x-6 p-6 bg-white/80 backdrop-blur-sm border border-luxury-charcoal/10 rounded-2xl hover:bg-white hover:border-luxury-gold/30 transition-all duration-500 hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-1">
+                      <div className="flex items-start space-x-4 md:space-x-6 p-4 md:p-6 bg-white/80 backdrop-blur-sm border border-luxury-charcoal/10 rounded-2xl hover:bg-white hover:border-luxury-gold/30 transition-all duration-500 hover:shadow-xl hover:shadow-luxury-gold/10 hover:-translate-y-1">
                         <motion.div
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ duration: 0.3 }}
-                          className="w-16 h-16 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center rounded-xl group-hover:bg-luxury-gold/20 transition-all duration-300 flex-shrink-0"
+                          className="w-12 h-12 md:w-16 md:h-16 bg-luxury-gold/10 border border-luxury-gold/30 flex items-center justify-center rounded-xl group-hover:bg-luxury-gold/20 transition-all duration-300 flex-shrink-0"
                         >
-                          <info.icon className="w-7 h-7 text-luxury-gold" />
+                          <info.icon className="w-5 h-5 md:w-7 md:h-7 text-luxury-gold" />
                         </motion.div>
 
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm uppercase tracking-widest text-muted-foreground font-medium mb-2 group-hover:text-luxury-gold transition-colors duration-300">
+                          <div className="text-xs md:text-sm uppercase tracking-widest text-muted-foreground font-medium mb-2 group-hover:text-luxury-gold transition-colors duration-300">
                             {info.label}
                           </div>
-                          <div className="text-xl sm:text-2xl font-playfair font-bold text-luxury-charcoal mb-1 group-hover:text-luxury-gold transition-colors duration-300 leading-tight">
+                          <div className="text-lg sm:text-xl md:text-2xl font-playfair font-bold text-luxury-charcoal mb-1 group-hover:text-luxury-gold transition-colors duration-300 leading-tight break-words">
                             {info.value}
                           </div>
                           <div className="text-muted-foreground text-sm leading-relaxed">
@@ -271,13 +271,13 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
-                  className="w-full bg-white/90 backdrop-blur-xl border border-luxury-charcoal/10 p-8 md:p-10 rounded-3xl shadow-2xl hover:shadow-luxury-gold/10 transition-all duration-500"
+                  className="w-full bg-white/90 backdrop-blur-xl border border-luxury-charcoal/10 p-6 md:p-8 lg:p-10 rounded-3xl shadow-2xl hover:shadow-luxury-gold/10 transition-all duration-500"
                 >
                   <motion.h3
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.6 }}
-                    className="text-2xl sm:text-3xl font-playfair font-bold text-luxury-charcoal mb-8"
+                    className="text-xl sm:text-2xl md:text-3xl font-playfair font-bold text-luxury-charcoal mb-6 md:mb-8"
                   >
                     Start Your Project
                   </motion.h3>
@@ -289,7 +289,7 @@ const Contact = () => {
                     onSubmit={handleSubmit}
                     className="space-y-6"
                   >
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid grid-cols-1 gap-4 md:gap-6">
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}

@@ -49,11 +49,11 @@ const Navigation = () => {
           : "bg-transparent backdrop-blur-0"
       }`}
     >
-      <div className="container mx-auto px-6 py-6 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 py-4 md:py-6 flex items-center justify-between">
         <MagneticButton strength={0.2}>
           <Link to="/" className="group flex flex-col" onClick={closeMobileMenu}>
             <motion.span 
-              className={`text-xl tracking-luxury-wide font-light font-display-1 transition-colors duration-300 ${
+              className={`text-base sm:text-lg md:text-xl tracking-luxury-wide font-light font-display-1 transition-colors duration-300 ${
                 isDarkPage ? "text-white" : "text-luxury-charcoal"
               }`}
               whileHover={{ scale: 1.02 }}
@@ -138,7 +138,7 @@ const Navigation = () => {
               isDarkPage ? "border-white/20 bg-black/90" : "border-border/40 bg-background/95"
             } backdrop-blur-xl`}
           >
-            <div className="container mx-auto px-6 py-6 space-y-4">
+            <div className="container mx-auto px-4 sm:px-6 py-4 md:py-6 space-y-2 md:space-y-4">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.path}
@@ -149,7 +149,7 @@ const Navigation = () => {
                   <Link
                     to={link.path}
                     onClick={closeMobileMenu}
-                    className={`block py-3 text-lg tracking-luxury uppercase font-medium transition-colors duration-300 ${
+                    className={`block py-2 md:py-3 text-base md:text-lg tracking-luxury uppercase font-medium transition-colors duration-300 touch-target ${
                       location.pathname === link.path
                         ? isDarkPage ? "text-white font-semibold" : "text-luxury-charcoal font-semibold"
                         : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-luxury-charcoal"

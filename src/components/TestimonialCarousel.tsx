@@ -28,7 +28,7 @@ const TestimonialCarousel = () => {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center min-h-[300px]">
+    <div className="relative flex items-center justify-center min-h-[250px] sm:min-h-[280px] md:min-h-[300px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -36,12 +36,12 @@ const TestimonialCarousel = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-center max-w-4xl px-6"
+          className="text-center max-w-4xl px-4 sm:px-6 md:px-8"
         >
-          <blockquote className="text-lg sm:text-xl md:text-2xl font-display-1 font-light italic text-luxury-charcoal leading-relaxed mb-8 tracking-luxury">
+          <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl font-display-1 font-light italic text-luxury-charcoal leading-relaxed mb-6 sm:mb-8 tracking-luxury">
             "{testimonials[current].quote}"
           </blockquote>
-          <cite className="text-lg sm:text-xl md:text-2xl tracking-luxury-wide uppercase text-luxury-gold font-medium">
+          <cite className="text-base sm:text-lg md:text-xl lg:text-2xl tracking-luxury-wide uppercase text-luxury-gold font-medium">
             — {testimonials[current].client}
           </cite>
         </motion.div>

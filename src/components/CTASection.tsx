@@ -4,7 +4,7 @@ import MagneticButton from "./MagneticButton";
 
 const CTASection = () => {
   return (
-    <div className="relative py-20 flex items-center justify-center overflow-hidden">
+    <div className="relative py-12 md:py-16 lg:py-20 flex items-center justify-center overflow-hidden">
       {/* Subtle Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-luxury-beige/30 to-background" />
 
@@ -20,7 +20,7 @@ const CTASection = () => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-20 left-20 w-32 h-32 bg-luxury-gold/10 rounded-full blur-2xl"
+          className="absolute top-10 md:top-20 left-10 md:left-20 w-24 h-24 md:w-32 md:h-32 bg-luxury-gold/10 rounded-full blur-2xl"
         />
         <motion.div
           animate={{
@@ -33,11 +33,11 @@ const CTASection = () => {
             ease: "easeInOut",
             delay: 2
           }}
-          className="absolute bottom-20 right-20 w-40 h-40 bg-luxury-beige/20 rounded-full blur-2xl"
+          className="absolute bottom-10 md:bottom-20 right-10 md:right-20 w-32 h-32 md:w-40 md:h-40 bg-luxury-beige/20 rounded-full blur-2xl"
         />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-4xl text-center px-6">
+      <div className="relative z-10 container mx-auto max-w-4xl text-center px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ const CTASection = () => {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl tracking-luxury-wide mb-6 font-display-1 font-light text-luxury-charcoal"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide mb-4 md:mb-6 font-display-1 font-light text-luxury-charcoal"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -69,7 +69,7 @@ const CTASection = () => {
           </motion.h2>
 
           <motion.p
-            className="text-lg md:text-xl text-muted-foreground tracking-luxury leading-relaxed mb-10 max-w-2xl mx-auto font-light"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground tracking-luxury leading-relaxed mb-6 md:mb-8 lg:mb-10 max-w-2xl mx-auto font-light px-4"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -89,7 +89,7 @@ const CTASection = () => {
             <MagneticButton strength={0.4}>
               <Link
                 to="/contact"
-                className="inline-block px-12 py-4 bg-luxury-gold/10 hover:bg-black text-luxury-charcoal hover:text-white border border-luxury-gold/30 hover:border-black tracking-luxury-wide uppercase text-sm font-medium hover:shadow-lg hover:shadow-black/10 transition-all duration-300 rounded-xl"
+                className="inline-block px-8 sm:px-10 md:px-12 py-3 md:py-4 bg-luxury-gold/10 hover:bg-black text-luxury-charcoal hover:text-white border border-luxury-gold/30 hover:border-black tracking-luxury-wide uppercase text-xs sm:text-sm font-medium hover:shadow-lg hover:shadow-black/10 transition-all duration-300 rounded-xl touch-target"
               >
                 Start a Project
               </Link>

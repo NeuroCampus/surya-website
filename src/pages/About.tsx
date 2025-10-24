@@ -164,7 +164,7 @@ const About = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <h1 className="text-5xl sm:text-6xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
                   Our Studio
                 </h1>
                 <div className="w-24 h-1 bg-gradient-to-r from-luxury-gold to-luxury-gold/50 mb-8" />
@@ -174,7 +174,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-xl sm:text-2xl text-muted-foreground tracking-luxury leading-relaxed"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground tracking-luxury leading-relaxed"
               >
                 Where architectural vision meets unparalleled craftsmanship, creating extraordinary spaces that inspire and endure through generations.
               </motion.p>
@@ -234,9 +234,9 @@ const About = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative"
+              className="relative mt-8 lg:mt-0"
             >
-              <div className="relative max-w-md mx-auto lg:mx-0">
+              <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] lg:max-w-[260px] mx-auto lg:mx-0">
                 <video
                   className="w-full aspect-[9/16] object-cover rounded-2xl shadow-2xl border border-luxury-gold/20"
                   autoPlay
@@ -290,7 +290,7 @@ const About = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="text-4xl sm:text-5xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8"
                 >
                   Crafting Timeless
                   <br />
@@ -522,7 +522,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-center text-luxury-charcoal mb-16"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-center text-luxury-charcoal mb-12 md:mb-16"
             >
               Our Philosophy
             </motion.h2>
@@ -537,7 +537,7 @@ const About = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {process.map((step, index) => (
                   <motion.div
                     key={step.step}
@@ -586,11 +586,11 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-center text-luxury-charcoal mb-16"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-center text-luxury-charcoal mb-12 md:mb-16"
             >
               Meet Our Team
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
               {team.map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -634,7 +634,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-32"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 mb-20 md:mb-32"
           >
             {[
               { number: "22+", label: "Years of Excellence", icon: Compass },
@@ -657,7 +657,7 @@ const About = () => {
                 >
                   <stat.icon className="w-6 h-6 text-luxury-gold" />
                 </motion.div>
-                <div className="text-4xl md:text-5xl font-display-1 font-light text-luxury-charcoal mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-display-1 font-light text-luxury-charcoal mb-2">
                   {stat.number}
                 </div>
                 <div className="text-sm tracking-wide uppercase text-muted-foreground font-medium leading-tight">
