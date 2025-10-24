@@ -240,7 +240,7 @@ const Home = () => {
                 <img
                   src={suryaLogo}
                   alt="Surya Architects & Interiors"
-                  className="h-64 sm:h-80 md:h-96 lg:h-[32rem] w-auto mx-auto"
+                  className="h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[32rem] w-auto mx-auto"
                 />
               </motion.div>
             </div>
@@ -309,7 +309,7 @@ const Home = () => {
             className="text-center mb-24 gpu-accelerated"
           >
             <motion.h2
-              className="text-3xl sm:text-4xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8 relative"
+              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6 md:mb-8 relative px-4"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.2 }}
@@ -328,7 +328,7 @@ const Home = () => {
             </motion.h2>
 
             <motion.p
-              className="text-xl sm:text-2xl md:text-3xl text-muted-foreground tracking-luxury leading-relaxed max-w-4xl mx-auto font-light"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground tracking-luxury leading-relaxed max-w-4xl mx-auto font-light px-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.8 }}
@@ -339,7 +339,7 @@ const Home = () => {
           </motion.div>
 
           {/* Visual Elements Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 items-stretch">
             {/* Left Image - Enhanced Scroll Animation */}
             <motion.div
               initial={{ opacity: 0, x: -120, rotateY: 25, scale: 0.8 }}
@@ -353,9 +353,9 @@ const Home = () => {
                 damping: 20
               }}
               viewport={{ once: true, amount: 0.4 }}
-              className="relative group gpu-accelerated"
+              className="relative group gpu-accelerated w-full md:-ml-4 lg:-ml-6"
             >
-              <div className="aspect-[4/5] bg-gradient-to-br from-luxury-beige/30 via-luxury-gold/10 to-luxury-beige/20 rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
+              <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[4/5] bg-gradient-to-br from-luxury-beige/30 via-luxury-gold/10 to-luxury-beige/20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
                 {/* Enhanced Shimmer Effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[300%] transition-transform duration-1200 ease-out"
@@ -378,18 +378,18 @@ const Home = () => {
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent sm:from-black/70 sm:via-black/20 group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
                 
                 {/* Enhanced Content Animation */}
                 <motion.div
-                  className="absolute bottom-8 left-8 right-8 text-white"
+                  className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-8 text-white"
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
                   <motion.h3
-                    className="text-2xl font-display-1 font-light mb-2"
+                    className="text-base sm:text-lg md:text-xl lg:text-2xl font-display-1 font-light mb-1 sm:mb-2"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 1 }}
@@ -398,13 +398,14 @@ const Home = () => {
                     Craftsmanship
                   </motion.h3>
                   <motion.p
-                    className="text-sm opacity-90 leading-relaxed"
+                    className="text-xs sm:text-sm opacity-90 leading-relaxed"
                     initial={{ opacity: 0, x: -15 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 1.2 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    Attention to every detail
+                    <span className="hidden md:inline">Attention to every detail</span>
+                    <span className="md:hidden">Every detail matters</span>
                   </motion.p>
                 </motion.div>
                 
@@ -559,9 +560,9 @@ const Home = () => {
                 damping: 20
               }}
               viewport={{ once: true, amount: 0.4 }}
-              className="relative group gpu-accelerated"
+              className="relative group gpu-accelerated w-full"
             >
-              <div className="aspect-[4/5] bg-gradient-to-br from-luxury-gold/20 via-luxury-beige/10 to-luxury-gold/30 rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
+              <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[4/5] bg-gradient-to-br from-luxury-gold/20 via-luxury-beige/10 to-luxury-gold/30 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-luxury-gold/10 hover:shadow-3xl hover:shadow-luxury-gold/20 transition-all duration-700 relative">
                 {/* Enhanced Shimmer Effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[300%] transition-transform duration-1200 ease-out"
@@ -585,18 +586,18 @@ const Home = () => {
                   whileHover={{ scale: 1.08 }}
                   transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent sm:from-black/70 sm:via-black/20 group-hover:from-black/80 group-hover:via-black/30 transition-all duration-500" />
                 
                 {/* Enhanced Content Animation */}
                 <motion.div
-                  className="absolute bottom-8 left-8 right-8 text-white"
+                  className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-8 text-white"
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 1.2 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
                   <motion.h3
-                    className="text-2xl font-display-1 font-light mb-2"
+                    className="text-lg sm:text-xl md:text-2xl font-display-1 font-light mb-1 sm:mb-2"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 1.4 }}
@@ -605,7 +606,7 @@ const Home = () => {
                     Harmony
                   </motion.h3>
                   <motion.p
-                    className="text-sm opacity-90 leading-relaxed"
+                    className="text-xs sm:text-sm opacity-90 leading-relaxed"
                     initial={{ opacity: 0, x: 15 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 1.6 }}
@@ -676,7 +677,7 @@ const Home = () => {
             className="text-center mb-20 gpu-accelerated"
           >
             <motion.h2 
-              className="text-3xl sm:text-4xl md:text-5xl tracking-luxury-wide mb-4 font-display-1 font-light text-luxury-charcoal"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-luxury-wide mb-4 font-display-1 font-light text-luxury-charcoal"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -792,9 +793,9 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true, amount: 0.3 }}
-            className="text-center mb-16 gpu-accelerated"
+            className="text-center mb-12 md:mb-16 gpu-accelerated"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
               Our Services
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground tracking-luxury leading-relaxed max-w-2xl mx-auto">
@@ -802,7 +803,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
               {
                 title: "Design & Planning",
@@ -894,9 +895,9 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal">
               Client Stories
             </h2>
           </motion.div>
@@ -974,10 +975,10 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
             viewport={{ once: true, amount: 0.3 }}
-            className="text-center mb-24 gpu-accelerated"
+            className="text-center mb-16 md:mb-20 lg:mb-24 gpu-accelerated px-4"
           >
             <motion.h2
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-8 relative"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6 md:mb-8 relative"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.2 }}
@@ -996,7 +997,7 @@ const Home = () => {
             </motion.h2>
 
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto font-light"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto font-light"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
@@ -1009,7 +1010,7 @@ const Home = () => {
           {/* Enhanced Content Grid - Full Screen Before & After Showcase */}
           <div className="relative w-full">
             {/* Full Screen Before & After Images */}
-            <div className="grid grid-cols-2 gap-16 h-[80vh] min-h-[600px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-16 min-h-[400px] md:h-[60vh] lg:h-[80vh] md:min-h-[500px] lg:min-h-[600px]">
               {/* Before Image - Left Side */}
               <motion.div
                 className="relative group overflow-hidden rounded-3xl"
@@ -1027,15 +1028,15 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
 
                 {/* Content Overlay */}
-                <div className="relative z-10 h-full flex flex-col justify-center p-12 text-white">
+                <div className="relative z-10 h-full flex flex-col justify-center p-6 md:p-8 lg:p-12 text-white">
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-display-1 font-light mb-4">Before</h3>
-                    <p className="text-lg md:text-xl opacity-90 leading-relaxed mb-8">Empty & Uninspired Space</p>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display-1 font-light mb-3 md:mb-4">Before</h3>
+                    <p className="text-base md:text-lg lg:text-xl opacity-90 leading-relaxed mb-4 md:mb-8">Empty & Uninspired Space</p>
                     <div className="w-16 h-px bg-luxury-gold mb-6" />
                     <p className="text-base opacity-80 leading-relaxed">
                       Just another ordinary room waiting for transformation
@@ -1061,15 +1062,15 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent" />
 
                 {/* Content Overlay */}
-                <div className="relative z-10 h-full flex flex-col justify-center p-12 text-white text-right">
+                <div className="relative z-10 h-full flex flex-col justify-center p-6 md:p-8 lg:p-12 text-white text-right">
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                     viewport={{ once: true, amount: 0.3 }}
                   >
-                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-display-1 font-light mb-4">After</h3>
-                    <p className="text-lg md:text-xl opacity-90 leading-relaxed mb-8">Luxurious & Inviting Space</p>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display-1 font-light mb-3 md:mb-4">After</h3>
+                    <p className="text-base md:text-lg lg:text-xl opacity-90 leading-relaxed mb-4 md:md-8">Luxurious & Inviting Space</p>
                     <div className="w-16 h-px bg-luxury-gold ml-auto mb-6" />
                     <p className="text-base opacity-80 leading-relaxed">
                       A masterpiece of design and functionality
@@ -1081,13 +1082,13 @@ const Home = () => {
 
             {/* Center Arrow and Transformation Text */}
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+              className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.8 }}
               viewport={{ once: true, amount: 0.3 }}
             >
-              <div className="bg-luxury-gold/95 backdrop-blur-sm rounded-full p-6 shadow-2xl shadow-luxury-gold/50 border border-white/20">
+              <div className="bg-luxury-gold/95 backdrop-blur-sm rounded-full p-4 md:p-6 shadow-2xl shadow-luxury-gold/50 border border-white/20">
                 <svg
                   width="48"
                   height="48"
@@ -1126,7 +1127,7 @@ const Home = () => {
             >
               <div className="max-w-4xl mx-auto">
                 <motion.p
-                  className="text-xl md:text-2xl text-luxury-charcoal tracking-luxury leading-relaxed font-light mb-8"
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-luxury-charcoal tracking-luxury leading-relaxed font-light mb-6 md:mb-8"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 1, delay: 0.8 }}
@@ -1137,7 +1138,7 @@ const Home = () => {
 
                 {/* Enhanced Features Grid */}
                 <motion.div
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-12"
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 1 }}

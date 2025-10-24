@@ -124,7 +124,7 @@ const Projects = () => {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.3, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <h1 className="text-6xl sm:text-7xl md:text-9xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
                 Projects
               </h1>
               <div className="w-24 h-1 bg-gradient-to-r from-luxury-gold to-luxury-gold/50 mx-auto mb-8" />
@@ -134,7 +134,7 @@ const Projects = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-xl sm:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto"
             >
               Crafting extraordinary spaces that tell your unique story
             </motion.p>
@@ -144,9 +144,9 @@ const Projects = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mt-16 relative"
+              className="mt-8 md:mt-12 lg:mt-16 relative"
             >
-              <div className="relative max-w-lg mx-auto">
+              <div className="relative max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
                 <video
                   className="w-full aspect-[9/16] object-cover rounded-2xl shadow-2xl border border-luxury-gold/20 transform rotate-[270deg]"
                   autoPlay
@@ -156,7 +156,7 @@ const Projects = () => {
                 >
                   <source src={visualVideo} type="video/mp4" />
                 </video>
-                <div className="absolute -inset-4 bg-gradient-to-r from-luxury-gold/20 to-transparent rounded-2xl blur-xl -z-10" />
+                <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-luxury-gold/20 to-transparent rounded-2xl blur-xl -z-10" />
               </div>
             </motion.div>
           </motion.div>
@@ -192,9 +192,9 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-6">
               Our Portfolio
             </h2>
             <p className="text-lg text-muted-foreground tracking-luxury max-w-2xl mx-auto">
@@ -208,10 +208,10 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12"
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 mb-8 md:mb-12"
           >
             {/* Category Filters */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 w-full md:w-auto">
               <Filter className="w-5 h-5 text-luxury-gold mr-2" />
               {categories.map((category, index) => (
                 <motion.button
@@ -223,7 +223,7 @@ const Projects = () => {
                   onClick={() => setSelectedCategory(category)}
                   onHoverStart={() => setHoveredCategory(category)}
                   onHoverEnd={() => setHoveredCategory(null)}
-                  className={`relative px-6 py-3 text-sm tracking-luxury-wide uppercase transition-all duration-300 rounded-full border ${
+                  className={`relative px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm tracking-luxury-wide uppercase transition-all duration-300 rounded-full border ${
                     selectedCategory === category
                       ? "bg-luxury-charcoal text-luxury-white border-luxury-charcoal shadow-lg"
                       : "border-luxury-charcoal/30 text-luxury-charcoal hover:bg-luxury-charcoal hover:text-luxury-white hover:border-luxury-charcoal"
@@ -242,12 +242,12 @@ const Projects = () => {
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center gap-2 bg-luxury-beige/10 rounded-full p-1">
+            <div className="flex items-center gap-2 bg-luxury-beige/10 rounded-full p-1 w-full md:w-auto justify-center md:justify-start">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setViewMode("grid")}
-                className={`p-3 rounded-full transition-all duration-300 ${
+                className={`p-2 md:p-3 rounded-full transition-all duration-300 ${
                   viewMode === "grid"
                     ? "bg-luxury-charcoal text-luxury-white shadow-lg"
                     : "text-luxury-charcoal hover:bg-luxury-charcoal/10"
@@ -259,7 +259,7 @@ const Projects = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setViewMode("masonry")}
-                className={`p-3 rounded-full transition-all duration-300 ${
+                className={`p-2 md:p-3 rounded-full transition-all duration-300 ${
                   viewMode === "masonry"
                     ? "bg-luxury-charcoal text-luxury-white shadow-lg"
                     : "text-luxury-charcoal hover:bg-luxury-charcoal/10"
@@ -280,8 +280,8 @@ const Projects = () => {
               exit={{ opacity: 0, scale: 0.95 }}
               className={
                 viewMode === "grid"
-                  ? "grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
-                  : "columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8"
+                  ? "grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-12"
+                  : "columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-8 space-y-6 md:space-y-8"
               }
             >
               {filteredProjects.map((project, index) => (
@@ -290,7 +290,7 @@ const Projects = () => {
                   variants={itemVariants}
                   layout
                   className={`group cursor-pointer break-inside-avoid ${
-                    viewMode === "masonry" ? "mb-8" : ""
+                    viewMode === "masonry" ? "mb-6 md:mb-8" : ""
                   }`}
                   onClick={() => setSelectedProject(project.id)}
                   whileHover={{ y: -8 }}
@@ -298,8 +298,8 @@ const Projects = () => {
                 >
                   <div className={`relative overflow-hidden ${
                     viewMode === "masonry"
-                      ? "aspect-[4/5] mb-6"
-                      : "aspect-[4/3] mb-6"
+                      ? "aspect-[4/5] mb-4 md:mb-6"
+                      : "aspect-[4/3] mb-4 md:mb-6"
                   } bg-gradient-to-br from-luxury-beige/20 to-luxury-beige/5 rounded-2xl shadow-lg`}>
                     <motion.img
                       src={project.image}
@@ -329,11 +329,11 @@ const Projects = () => {
                       <div className="text-luxury-white">
                         <div className="flex items-center gap-2 mb-2">
                           <Eye className="w-4 h-4" />
-                          <span className="text-sm tracking-luxury-wide uppercase opacity-80">
+                          <span className="text-xs md:text-sm tracking-luxury-wide uppercase opacity-80">
                             View Project
                           </span>
                         </div>
-                        <h3 className="text-xl sm:text-2xl tracking-luxury-wide font-display-1 font-light mb-1">
+                        <h3 className="text-lg sm:text-xl md:text-2xl tracking-luxury-wide font-display-1 font-light mb-1">
                           {project.title}
                         </h3>
                         <p className="text-sm opacity-90 mb-3">
@@ -361,11 +361,11 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mt-16"
+            className="text-center mt-12 md:mt-16"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 max-w-2xl mx-auto">
               <div className="space-y-2">
-                <div className="text-3xl font-display-1 font-light text-luxury-charcoal">
+                <div className="text-2xl md:text-3xl font-display-1 font-light text-luxury-charcoal">
                   {projects.length}+
                 </div>
                 <div className="text-sm text-muted-foreground tracking-luxury uppercase">
@@ -373,7 +373,7 @@ const Projects = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-display-1 font-light text-luxury-charcoal">
+                <div className="text-2xl md:text-3xl font-display-1 font-light text-luxury-charcoal">
                   5+
                 </div>
                 <div className="text-sm text-muted-foreground tracking-luxury uppercase">
@@ -381,7 +381,7 @@ const Projects = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-display-1 font-light text-luxury-charcoal">
+                <div className="text-2xl md:text-3xl font-display-1 font-light text-luxury-charcoal">
                   100%
                 </div>
                 <div className="text-sm text-muted-foreground tracking-luxury uppercase">
@@ -389,7 +389,7 @@ const Projects = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="text-3xl font-display-1 font-light text-luxury-charcoal">
+                <div className="text-2xl md:text-3xl font-display-1 font-light text-luxury-charcoal">
                   24/7
                 </div>
                 <div className="text-sm text-muted-foreground tracking-luxury uppercase">
