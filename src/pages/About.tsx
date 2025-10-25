@@ -236,9 +236,9 @@ const About = () => {
               transition={{ delay: 0.8, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative mt-8 lg:mt-0"
             >
-              <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] lg:max-w-[260px] mx-auto lg:mx-0">
+              <div className="relative w-full max-w-[160px] sm:max-w-[180px] md:max-w-[200px] lg:max-w-[240px] mx-auto px-4 sm:px-6 md:px-8 lg:px-0">
                 <video
-                  className="w-full aspect-[9/16] object-cover rounded-2xl shadow-2xl border border-luxury-gold/20"
+                  className="w-full aspect-[9/16] object-cover rounded-3xl shadow-2xl border border-luxury-gold/20"
                   autoPlay
                   muted
                   loop
@@ -246,7 +246,7 @@ const About = () => {
                 >
                   <source src={visual1Video} type="video/mp4" />
                 </video>
-                <div className="absolute -inset-4 bg-gradient-to-r from-luxury-gold/20 to-transparent rounded-2xl blur-xl -z-10" />
+                <div className="absolute -inset-4 bg-gradient-to-r from-luxury-gold/20 to-transparent rounded-3xl blur-xl -z-10" />
               </div>
             </motion.div>
           </motion.div>
