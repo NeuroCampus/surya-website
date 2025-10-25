@@ -382,7 +382,7 @@ const Home = () => {
                 
                 {/* Enhanced Content Animation */}
                 <motion.div
-                  className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-8 md:right-8 text-white"
+                  className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 md:bottom-8 md:left-7 md:right-7 text-white"
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
@@ -997,7 +997,7 @@ const Home = () => {
             </motion.h2>
 
             <motion.p
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground tracking-luxury leading-relaxed max-w-3xl mx-auto font-light"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-black tracking-luxury leading-relaxed max-w-3xl mx-auto font-light"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
@@ -1080,43 +1080,6 @@ const Home = () => {
               </motion.div>
             </div>
 
-            {/* Center Arrow and Transformation Text */}
-            <motion.div
-              className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <div className="bg-luxury-gold/95 backdrop-blur-sm rounded-full p-4 md:p-6 shadow-2xl shadow-luxury-gold/50 border border-white/20">
-                <svg
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="animate-pulse"
-                >
-                  <path d="M5 12h14"/>
-                  <path d="M12 5l7 7-7 7"/>
-                </svg>
-              </div>
-              <motion.div
-                className="text-center mt-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                <p className="text-luxury-gold font-display-1 font-medium text-lg tracking-luxury-wide uppercase">
-                  Transformation
-                </p>
-              </motion.div>
-            </motion.div>
-
             {/* Bottom Content Section */}
             <motion.div
               className="mt-8 text-center"
@@ -1127,7 +1090,7 @@ const Home = () => {
             >
               <div className="max-w-4xl mx-auto">
                 <motion.p
-                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-luxury-charcoal tracking-luxury leading-relaxed font-light mb-6 md:mb-8"
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-white tracking-luxury leading-relaxed font-light mb-6 md:mb-8"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 1, delay: 0.8 }}
@@ -1135,49 +1098,6 @@ const Home = () => {
                 >
                   Transform your space from ordinary to extraordinary. Our expert designers blend timeless elegance with modern functionality, creating interiors that tell your unique story.
                 </motion.p>
-
-                {/* Enhanced Features Grid */}
-                <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-12"
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                >
-                  {[
-                    { title: "Vision to Reality", desc: "From concept sketches to stunning finished spaces" },
-                    { title: "Luxury Materials", desc: "Premium finishes that stand the test of time" },
-                    { title: "Personalized Service", desc: "Dedicated team committed to your satisfaction" },
-                    { title: "Timeless Design", desc: "Spaces that remain beautiful for generations" }
-                  ].map((feature, index) => (
-                    <motion.div
-                      key={feature.title}
-                      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{
-                        duration: 0.8,
-                        delay: 1.2 + index * 0.1,
-                        ease: [0.23, 1, 0.32, 1]
-                      }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      className="group bg-gradient-to-br from-background/90 via-luxury-beige/5 to-background/90 backdrop-blur-sm border border-luxury-gold/10 hover:border-luxury-gold/30 p-6 rounded-2xl transition-all duration-500 hover:shadow-lg hover:shadow-luxury-gold/10 cursor-pointer"
-                    >
-                      <div className="text-center">
-                        <motion.div
-                          className="w-6 h-6 bg-luxury-gold rounded-full mx-auto mb-4"
-                          whileHover={{ scale: 1.5 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                        <h4 className="text-lg font-display-1 font-medium text-luxury-charcoal mb-2 group-hover:text-luxury-gold transition-colors duration-300">
-                          {feature.title}
-                        </h4>
-                        <p className="text-sm text-muted-foreground tracking-luxury leading-relaxed">
-                          {feature.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
               </div>
             </motion.div>
           </div>
