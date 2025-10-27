@@ -118,7 +118,7 @@ const About = () => {
     {
       id: 2,
       title: "Studio Tour",
-      description: "Explore our creative workspace",
+      description: "Explore our creative workspace at Surya Architects",
       video: visual2Video,
       thumbnail: project2,
       duration: "3:12"
