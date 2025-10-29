@@ -18,10 +18,12 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import suryaLogo from "@/assets/suryalogo.png";
+import { Phone, Mail, MapPin, Instagram, Youtube, Facebook } from "lucide-react";
 
 const Home = () => {
   const [isReducedMotion, setIsReducedMotion] = useState(false);
   const [currentStatIndex, setCurrentStatIndex] = useState(0);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const { scrollY } = useScroll();
   
   // Hero section height and opacity transforms
@@ -56,6 +58,34 @@ const Home = () => {
     { number: "25+", unit: "Awards", subtitle: "Won", description: "Recognition for outstanding design excellence" }
   ];
 
+  // Architecture quotes inspired by ARK Architects
+  const quotes = [
+    {
+      text: "Designing Is Not A Profession But An Attitude",
+      author: "László Moholy-Nagy"
+    },
+    {
+      text: "God Is In The Details",
+      author: "Mies van der Rohe"
+    },
+    {
+      text: "Less Is More",
+      author: "Mies van der Rohe"
+    },
+    {
+      text: "Form Ever Follows Function",
+      author: "Louis Sullivan"
+    },
+    {
+      text: "Simplicity Is The Ultimate Sophistication",
+      author: "Leonardo da Vinci"
+    },
+    {
+      text: "The Sun Never Knew How Great It Was Until It Hit The Side Of A Building",
+      author: "Louis Kahn"
+    }
+  ];
+
   // Auto-cycle through stats every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,6 +94,15 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [stats.length]);
+
+  // Auto-cycle through quotes every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [quotes.length]);
 
   return (
     <div className="min-h-screen bg-background cursor-none overflow-x-hidden ultra-smooth">
@@ -84,7 +123,7 @@ const Home = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ 
-              backgroundImage: `url('https://images.unsplash.com/photo-1615529162924-f8605388463a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`,
+              backgroundImage: `url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')`,
               backgroundAttachment: 'fixed'
             }}
           />
@@ -146,35 +185,146 @@ const Home = () => {
             ))}
             
             {/* Floating images */}
-            <motion.div
-              className="absolute top-20 right-20 w-32 h-32 rounded-2xl overflow-hidden shadow-2xl"
-              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-              animate={{ opacity: 0.3, scale: 1, rotate: 0 }}
-              transition={{ duration: 2, delay: 1 }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                alt="Luxury interior"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
             
-            <motion.div
-              className="absolute bottom-32 left-20 w-24 h-36 rounded-xl overflow-hidden shadow-2xl"
-              initial={{ opacity: 0, scale: 0.8, rotate: 10 }}
-              animate={{ opacity: 0.3, scale: 1, rotate: 0 }}
-              transition={{ duration: 2, delay: 1.5 }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
-                alt="Modern design"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
+            
+           
           </div>
         </motion.div>
         
-        {/* Minimal Hero Content */}
+        {/* Authentic Sidebar */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          className="fixed left-0 top-0 h-screen w-20 lg:w-24 z-20 hidden lg:flex flex-col items-center justify-center bg-gradient-to-b from-luxury-white/95 via-luxury-beige/90 to-luxury-white/95 backdrop-blur-xl border-r-2 border-luxury-gold/40 shadow-2xl shadow-luxury-charcoal/10"
+        >
+          {/* Subtle background pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-10 left-1/2 transform -translate-x-1/2 w-px h-16 bg-luxury-gold/30"></div>
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-px h-16 bg-luxury-gold/30"></div>
+          </div>
+
+          <div className="relative space-y-6 lg:space-y-8">
+            {[
+              {
+                icon: Phone,
+                value: "+91 7483109814",
+                href: "tel:+917483109814",
+                label: "Phone",
+                color: "from-blue-500/20 to-cyan-500/20",
+                hoverColor: "from-blue-500/30 to-cyan-500/30"
+              },
+              {
+                icon: Mail,
+                value: "suryaarc.int@gmail.com",
+                href: "mailto:suryaarc.int@gmail.com",
+                label: "Email",
+                color: "from-purple-500/20 to-pink-500/20",
+                hoverColor: "from-purple-500/30 to-pink-500/30"
+              },
+              {
+                icon: MapPin,
+                value: "Bangalore",
+                href: "https://maps.app.goo.gl/kdvQjZzf9X2R9MnX8?g_st=aw",
+                label: "Location",
+                color: "from-green-500/20 to-emerald-500/20",
+                hoverColor: "from-green-500/30 to-emerald-500/30"
+              },
+              {
+                icon: Instagram,
+                value: "@surya_architects_interiors",
+                href: "https://www.instagram.com/surya_architects_interiors?igsh=ZzlqYm55MTVid29r",
+                label: "Instagram",
+                color: "from-pink-500/20 to-rose-500/20",
+                hoverColor: "from-pink-500/30 to-rose-500/30"
+              },
+              {
+                icon: Youtube,
+                value: "YouTube",
+                href: "#",
+                label: "YouTube",
+                color: "from-red-500/20 to-orange-500/20",
+                hoverColor: "from-red-500/30 to-orange-500/30"
+              },
+              {
+                icon: Facebook,
+                value: "Facebook",
+                href: "#",
+                label: "Facebook",
+                color: "from-blue-600/20 to-blue-800/20",
+                hoverColor: "from-blue-600/30 to-blue-800/30"
+              }
+            ].map((item, index) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.8 + index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                className="group relative flex flex-col items-center space-y-3 p-3 rounded-xl hover:bg-gradient-to-br hover:from-luxury-gold/10 hover:to-luxury-beige/10 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-luxury-gold/20"
+                title={item.value}
+              >
+                {/* Glow effect on hover */}
+                <motion.div
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: `linear-gradient(135deg, ${item.color.replace('/20', '/10')}, ${item.hoverColor.replace('/30', '/15')})`,
+                    filter: 'blur(8px)'
+                  }}
+                />
+
+                <motion.div
+                  whileHover={{
+                    scale: 1.3,
+                    rotate: [0, -5, 5, 0],
+                    transition: { duration: 0.6, ease: "easeInOut" }
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`relative w-12 h-12 lg:w-14 lg:h-14 bg-gradient-to-br ${item.color} border border-luxury-gold/50 flex items-center justify-center rounded-xl group-hover:bg-gradient-to-br group-hover:${item.hoverColor} transition-all duration-500 shadow-md group-hover:shadow-xl group-hover:shadow-luxury-gold/30`}
+                >
+                  <item.icon className="w-5 h-5 lg:w-6 lg:h-6 text-luxury-charcoal group-hover:text-luxury-gold transition-colors duration-300" />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 + index * 0.1 }}
+                  className="text-xs text-luxury-charcoal/60 font-medium text-center leading-tight max-w-full truncate group-hover:text-luxury-charcoal group-hover:font-semibold transition-all duration-300"
+                >
+                  {item.label}
+                </motion.div>
+
+                {/* Subtle connecting line */}
+                {index < 5 && (
+                  <motion.div
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: 1 }}
+                    transition={{ delay: 1.5 + index * 0.1, duration: 0.8 }}
+                    className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-px h-6 bg-gradient-to-b from-luxury-gold/40 to-transparent"
+                  />
+                )}
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Bottom decorative element */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 2, duration: 0.8 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <div className="w-8 h-1 bg-gradient-to-r from-transparent via-luxury-gold/60 to-transparent rounded-full"></div>
+          </motion.div>
+        </motion.div>
+        
+        {/* Minimal Hero Content - ARK Architects Style */}
         <motion.div 
           style={{ 
             opacity: overlayOpacity,
@@ -182,7 +332,8 @@ const Home = () => {
           }}
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10"
         >
-          <div className="max-w-4xl mx-auto relative">
+          <div className="max-w-6xl mx-auto relative">
+            {/* Logo */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -191,35 +342,79 @@ const Home = () => {
                 ease: [0.23, 1, 0.32, 1],
                 delay: 0.2
               }}
-              className="mb-8"
+              className="mb-16"
             >
               <img
                 src={suryaLogo}
                 alt="Surya Architects & Interiors"
-                className="h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 w-auto mx-auto drop-shadow-2xl filter brightness-0 invert"
+                className="h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[32rem] w-auto mx-auto drop-shadow-2xl filter brightness-0 invert"
               />
             </motion.div>
-            
-            <motion.p 
-              className="text-xl sm:text-2xl md:text-3xl text-luxury-white max-w-2xl mx-auto mb-12 font-light tracking-wide"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8 }}
-            >
-              Luxury Design & Architecture
-            </motion.p>
-            
+
+            {/* Rotating Quotes Section */}
+            <div className="mb-20">
+              <motion.div
+                key={quotes[currentQuoteIndex].text}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+                className="space-y-6"
+              >
+                <motion.blockquote
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-luxury-white leading-tight tracking-wide max-w-4xl mx-auto"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                >
+                  "{quotes[currentQuoteIndex].text}"
+                </motion.blockquote>
+
+                <motion.cite
+                  className="text-lg sm:text-xl md:text-2xl text-luxury-gold font-light tracking-wider"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                >
+                  — {quotes[currentQuoteIndex].author}
+                </motion.cite>
+              </motion.div>
+
+              {/* Quote Navigation Dots */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 0.8 }}
+                className="flex justify-center space-x-3 mt-12"
+              >
+                {quotes.map((_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => setCurrentQuoteIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentQuoteIndex
+                        ? 'bg-luxury-gold scale-125'
+                        : 'bg-luxury-white/40 hover:bg-luxury-white/60'
+                    }`}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                  />
+                ))}
+              </motion.div>
+            </div>
+
+            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.1 }}
+              transition={{ duration: 1, delay: 1.2 }}
             >
               <MagneticButton strength={0.4}>
                 <Link
                   to="/projects"
-                  className="inline-block px-8 py-4 bg-luxury-gold text-luxury-charcoal font-medium tracking-wider uppercase text-sm hover:bg-luxury-white transition-all duration-500"
+                  className="inline-block px-10 py-4 bg-luxury-gold text-luxury-charcoal font-medium tracking-wider uppercase text-sm hover:bg-luxury-white transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-luxury-gold/30"
                 >
-                  Explore
+                  Explore Our Work
                 </Link>
               </MagneticButton>
             </motion.div>
@@ -228,27 +423,30 @@ const Home = () => {
         
         {/* Scroll indicator */}
         <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-luxury-white/70"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-luxury-white/60"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 2, duration: 1 }}
         >
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center space-y-4">
             <motion.span 
-              className="text-sm mb-2"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ repeat: Infinity, duration: 2 }}
+              className="text-sm tracking-wider font-light"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ repeat: Infinity, duration: 3 }}
             >
-              Discover
+              Scroll to Discover
             </motion.span>
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-              whileHover={{ scale: 1.2 }}
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1 }}
+              className="w-6 h-10 border-2 border-luxury-white/40 rounded-full flex justify-center"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.2 }}
+                className="w-1 h-3 bg-luxury-gold rounded-full mt-2"
+              />
             </motion.div>
           </div>
         </motion.div>
