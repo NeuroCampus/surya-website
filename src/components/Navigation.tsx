@@ -43,9 +43,7 @@ const Navigation = () => {
       transition={{ duration: 0.8, delay: 3, ease: [0.25, 0.1, 0.25, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-cinematic ${
         scrolled 
-          ? isDarkPage 
-            ? "bg-black/70 backdrop-blur-xl border-b border-white/20 shadow-lg" 
-            : "bg-background/70 backdrop-blur-xl border-b border-border/40 shadow-lg"
+          ? "bg-black/20 backdrop-blur-md border-b border-black/10 shadow-lg" 
           : "bg-transparent backdrop-blur-0"
       }`}
     >
@@ -53,9 +51,7 @@ const Navigation = () => {
         <MagneticButton strength={0.2}>
           <Link to="/" className="group flex flex-col" onClick={closeMobileMenu}>
             <motion.span 
-              className={`text-base sm:text-lg md:text-xl tracking-luxury-wide font-light font-display-1 transition-colors duration-300 ${
-                isDarkPage ? "text-white" : "text-luxury-charcoal"
-              }`}
+              className="text-base sm:text-lg md:text-xl tracking-luxury-wide font-light font-display-1 text-black transition-colors duration-300"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -85,17 +81,11 @@ const Navigation = () => {
               <MagneticButton strength={0.15}>
                 <Link
                   to={link.path}
-                  className={`relative text-sm tracking-luxury uppercase font-medium transition-fast group ${
-                    location.pathname === link.path
-                      ? isDarkPage ? "text-white" : "text-luxury-charcoal"
-                      : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-luxury-charcoal"
-                  }`}
+                  className={`relative text-sm tracking-luxury uppercase font-medium transition-fast group text-black`}
                 >
                   {link.label}
                   <motion.span
-                    className={`absolute -bottom-1 left-0 h-[1px] ${
-                      isDarkPage ? "bg-white" : "bg-foreground"
-                    }`}
+                    className="absolute -bottom-1 left-0 h-[1px] bg-black"
                     initial={{ width: location.pathname === link.path ? "100%" : "0%" }}
                     whileHover={{ width: "100%" }}
                     transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
@@ -112,9 +102,7 @@ const Navigation = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 3.2, duration: 0.8 }}
           onClick={toggleMobileMenu}
-          className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
-            isDarkPage ? "text-white hover:bg-white/10" : "text-luxury-charcoal hover:bg-foreground/10"
-          }`}
+          className="md:hidden p-2 rounded-lg transition-colors duration-300 text-black hover:bg-black/10"
           aria-label="Toggle mobile menu"
         >
           <motion.div
@@ -134,9 +122,7 @@ const Navigation = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-            className={`md:hidden border-t ${
-              isDarkPage ? "border-white/20 bg-black/90" : "border-border/40 bg-background/95"
-            } backdrop-blur-xl`}
+            className="md:hidden border-t border-black/10 bg-black/10 backdrop-blur-md"
           >
             <div className="container mx-auto px-4 sm:px-6 py-4 md:py-6 space-y-2 md:space-y-4">
               {navLinks.map((link, index) => (
@@ -149,11 +135,7 @@ const Navigation = () => {
                   <Link
                     to={link.path}
                     onClick={closeMobileMenu}
-                    className={`block py-2 md:py-3 text-base md:text-lg tracking-luxury uppercase font-medium transition-colors duration-300 touch-target ${
-                      location.pathname === link.path
-                        ? isDarkPage ? "text-white font-semibold" : "text-luxury-charcoal font-semibold"
-                        : isDarkPage ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-luxury-charcoal"
-                    }`}
+                    className="block py-2 md:py-3 text-base md:text-lg tracking-luxury uppercase font-medium transition-colors duration-300 touch-target text-black"
                   >
                     {link.label}
                   </Link>
