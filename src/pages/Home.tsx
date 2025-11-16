@@ -470,7 +470,7 @@ const Home = () => {
           className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10"
         >
           <div className="max-w-6xl mx-auto relative">
-            {/* Logo with enhanced animation and parallax */}
+            {/* Logo with enhanced animation */}
             <motion.div
               initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
               animate={{ scale: 1, opacity: 1, rotate: 0 }}
@@ -479,16 +479,7 @@ const Home = () => {
                 ease: [0.23, 1, 0.32, 1],
                 delay: 0.3
               }}
-              whileHover={{
-                scale: 1.05,
-                rotate: [0, -2, 2, 0],
-                transition: { duration: 0.8, ease: "easeInOut" }
-              }}
-              style={{
-                x: mousePosition.x * 0.5,
-                y: mousePosition.y * 0.5,
-              }}
-              className="mb-16 cursor-pointer"
+              className="mb-16"
             >
               <motion.img
                 src={suryaLogo}
