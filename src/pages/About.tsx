@@ -64,13 +64,6 @@ const About = () => {
 
   const team = [
     {
-      name: "Mr Chiru",
-      role: "Principal Architect",
-      experience: "22+ years",
-      specialization: "Luxury Residential & Commercial",
-      image: project1
-    },
-    {
       name: "Sowmya Chiru",
       role: "Design Director",
       experience: "18+ years",
@@ -236,7 +229,7 @@ const About = () => {
               transition={{ delay: 0.8, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative mt-8 lg:mt-0"
             >
-              <div className="relative w-full max-w-[160px] sm:max-w-[180px] md:max-w-[200px] lg:max-w-[240px] mx-auto px-4 sm:px-6 md:px-8 lg:px-0">
+              <div className="relative w-full max-w-[240px] sm:max-w-[220px] md:max-w-[360px] lg:max-w-[320px] mx-auto px-4 sm:px-6 md:px-8 lg:px-0">
                 <video
                   className="w-full aspect-[9/16] object-cover rounded-3xl shadow-2xl border border-luxury-gold/20"
                   autoPlay
@@ -590,7 +583,7 @@ const About = () => {
             >
               Meet Our Team
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+            <div className="grid grid-cols-1 gap-8 md:gap-12 lg:gap-16 justify-center max-w-2xl mx-auto">
               {team.map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -598,27 +591,32 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
                   viewport={{ once: true }}
-                  className="group relative"
+                  className="group relative mx-auto"
                 >
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-luxury-beige/20 to-luxury-beige/5">
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-luxury-beige/20 to-luxury-beige/5 hover:shadow-2xl transition-all duration-500">
                     <motion.img
                       src={member.image}
                       alt={member.name}
                       className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <img 
+                      src="https://res.cloudinary.com/ddcl4drlp/image/upload/v1763270156/CC022963_cuhjkx.jpg" 
+                      alt="Overlay" 
+                      className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" 
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-luxury-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      <h3 className="text-2xl tracking-luxury-wide font-display-1 font-light mb-2">
+                      <h3 className="text-2xl tracking-luxury-wide font-display-1 font-light mb-2 group-hover:text-luxury-gold transition-colors duration-300">
                         {member.name}
                       </h3>
-                      <p className="text-luxury-gold font-medium mb-2">
+                      <p className="text-luxury-gold font-medium mb-2 group-hover:text-luxury-white transition-colors duration-300">
                         {member.role}
                       </p>
-                      <p className="text-sm opacity-90 mb-1">
+                      <p className="text-sm opacity-90 mb-1 group-hover:opacity-100 group-hover:text-luxury-white transition-all duration-300">
                         {member.experience}
                       </p>
-                      <p className="text-sm opacity-80">
+                      <p className="text-sm opacity-80 group-hover:opacity-100 group-hover:text-luxury-white transition-all duration-300">
                         {member.specialization}
                       </p>
                     </div>

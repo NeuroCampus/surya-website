@@ -18,6 +18,67 @@ const Projects = () => {
   const [viewMode, setViewMode] = useState<"grid" | "masonry">("grid");
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [currentImages, setCurrentImages] = useState<{ [key: number]: number }>({});
+  const [currentReview, setCurrentReview] = useState(0);
+
+  // Sample reviews data
+  const reviews = [
+    {
+      id: 1,
+      name: "Priya Sharma",
+      role: "Homeowner",
+      review: "Surya Architects transformed our vision into reality. The attention to detail and creative solutions exceeded our expectations. Our home is now a masterpiece of modern design and functionality.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 2,
+      name: "Rajesh Kumar",
+      role: "Commercial Client",
+      review: "Working with Surya Architects was a game-changer for our business. The innovative design solutions not only enhanced our workspace but also boosted employee productivity and client satisfaction.",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      id: 3,
+      name: "Anita Desai",
+      role: "Interior Design Client",
+      review: "The team's expertise in creating luxurious yet functional spaces is unparalleled. They understood our aesthetic preferences perfectly and delivered beyond our wildest dreams.",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
+  ];
+
+  // Handle review rotation
+  useEffect(() => {
+    const intervals: NodeJS.Timeout[] = [];
+    
+    // Staggered image rotation for each project
+    projects.forEach((project, index) => {
+      // Check if project has images array and more than one image
+      if ('images' in project && Array.isArray(project.images) && project.images.length > 1) {
+        // Special handling for Deeps Mansion (id: 1), Sharath Mansion (id: 2), and Sudharshan Mansion (id: 3) to rotate every 3 seconds
+        const intervalTime = (project.id === 1 || project.id === 2 || project.id === 3) ? 3000 : 5000 + (index * 1000);
+        
+        const interval = setInterval(() => {
+          setCurrentImages(prev => ({
+            ...prev,
+            [project.id]: ((prev[project.id] || 0) + 1) % project.images!.length
+          }));
+        }, intervalTime);
+        
+        intervals.push(interval);
+      }
+    });
+    
+    // Add interval for review rotation
+    const reviewInterval = setInterval(() => {
+      setCurrentReview(prev => (prev + 1) % reviews.length);
+    }, 6000); // Change review every 6 seconds
+    
+    intervals.push(reviewInterval);
+    
+    return () => {
+      intervals.forEach(clearInterval);
+    };
+  }, [reviews]);
 
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
@@ -26,29 +87,49 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Bangalore Residence",
+      title: "Deeps Mansion",
       description: "Contemporary Luxury Living",
       image: project1,
+      images: [
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274248/SAN_6416-min_bsoioq.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274248/SAN_6372-min_nytwnh.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274246/SAN_6468-min_zo1xue.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274245/SAN_6359-min_em3mhm.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274245/SAN_6274-min_cadep4.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274245/SAN_6266-min_lostm9.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274245/SAN_6255-min_wbxzfz.jpg"
+      ],
       year: "2025",
       category: "Residential",
       featured: true
     },
     {
       id: 2,
-      title: "Modern Kitchen",
+      title: "Sharath Mansion",
       description: "Minimalist Elegance Redefined",
       image: project2,
+      images: [
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274906/1J9A7682_vf792r.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274907/1J9A7714_srdse2.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763274908/1J9A7731_f92w8m.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763275046/1J9A7610_jizwqx.jpg"
+      ],
       year: "2025",
       category: "Residential",
       featured: false
     },
     {
       id: 3,
-      title: "Urban Living",
+      title: "Sudharshan Mansion",
       description: "City Views & Modern Comfort",
       image: project3,
+      images: [
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763275386/CC023265_daor0z.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763275383/CC023189_p72jl3.jpg",
+        "https://res.cloudinary.com/ddcl4drlp/image/upload/v1763275385/CC023348_koglv4.jpg"
+      ],
       year: "2025",
-      category: "Luxury Suites",
+      category: "Residential",
       featured: true
     },
     {
@@ -202,74 +283,6 @@ const Projects = () => {
             </p>
           </motion.div>
 
-          {/* Controls */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 mb-8 md:mb-12"
-          >
-            {/* Category Filters */}
-            <div className="flex flex-wrap items-center gap-2 md:gap-3 w-full md:w-auto">
-              <Filter className="w-5 h-5 text-luxury-gold mr-2" />
-              {categories.map((category, index) => (
-                <motion.button
-                  key={category}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  viewport={{ once: true }}
-                  onClick={() => setSelectedCategory(category)}
-                  onHoverStart={() => setHoveredCategory(category)}
-                  onHoverEnd={() => setHoveredCategory(null)}
-                  className={`relative px-4 md:px-6 py-2 md:py-3 text-xs md:text-sm tracking-luxury-wide uppercase transition-all duration-300 rounded-full border ${
-                    selectedCategory === category
-                      ? "bg-luxury-charcoal text-luxury-white border-luxury-charcoal shadow-lg"
-                      : "border-luxury-charcoal/30 text-luxury-charcoal hover:bg-luxury-charcoal hover:text-luxury-white hover:border-luxury-charcoal"
-                  }`}
-                >
-                  {category}
-                  {hoveredCategory === category && (
-                    <motion.div
-                      layoutId="activeCategory"
-                      className="absolute inset-0 bg-luxury-gold/10 rounded-full -z-10"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                </motion.button>
-              ))}
-            </div>
-
-            {/* View Mode Toggle */}
-            <div className="flex items-center gap-2 bg-luxury-beige/10 rounded-full p-1 w-full md:w-auto justify-center md:justify-start">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setViewMode("grid")}
-                className={`p-2 md:p-3 rounded-full transition-all duration-300 ${
-                  viewMode === "grid"
-                    ? "bg-luxury-charcoal text-luxury-white shadow-lg"
-                    : "text-luxury-charcoal hover:bg-luxury-charcoal/10"
-                }`}
-              >
-                <Grid3X3 className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setViewMode("masonry")}
-                className={`p-2 md:p-3 rounded-full transition-all duration-300 ${
-                  viewMode === "masonry"
-                    ? "bg-luxury-charcoal text-luxury-white shadow-lg"
-                    : "text-luxury-charcoal hover:bg-luxury-charcoal/10"
-                }`}
-              >
-                <List className="w-4 h-4" />
-              </motion.button>
-            </div>
-          </motion.div>
-
           {/* Projects Grid */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -301,23 +314,41 @@ const Projects = () => {
                       ? "aspect-[4/5] mb-4 md:mb-6"
                       : "aspect-[4/3] mb-4 md:mb-6"
                   } bg-gradient-to-br from-luxury-beige/20 to-luxury-beige/5 rounded-2xl shadow-lg`}>
-                    <motion.img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                    />
+                    {/* Carousel for projects with multiple images, static image for others */}
+                    {'images' in project && Array.isArray(project.images) && project.images.length > 1 ? (
+                      <div className="relative w-full h-full">
+                        <AnimatePresence mode="wait">
+                          <motion.img
+                            key={`${project.id}-${currentImages[project.id] || 0}`}
+                            src={project.images[currentImages[project.id] || 0]}
+                            alt={`${project.title} - Image ${(currentImages[project.id] || 0) + 1}`}
+                            className="w-full h-full object-cover"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ 
+                              duration: 1.2,
+                              ease: [0.25, 0.1, 0.25, 1]
+                            }}
+                            whileHover={{ scale: 1.1 }}
+                          />
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ 
+                          duration: 1.2,
+                          ease: [0.25, 0.1, 0.25, 1]
+                        }}
+                      />
+                    )}
 
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-                    {/* Featured Badge */}
-                    {project.featured && (
-                      <div className="absolute top-4 left-4 bg-luxury-gold text-luxury-white px-3 py-1 rounded-full text-xs font-medium tracking-luxury-wide uppercase z-10">
-                        Featured
-                      </div>
-                    )}
 
                     {/* Hover Content */}
                     <motion.div
@@ -407,7 +438,15 @@ const Projects = () => {
           <ProjectLightbox
             isOpen={selectedProject !== null}
             onClose={() => setSelectedProject(null)}
-            images={[projects.find(p => p.id === selectedProject)?.image || ""]}
+            images={
+              (() => {
+                const project = projects.find(p => p.id === selectedProject);
+                if (project && 'images' in project && Array.isArray(project.images) && project.images.length > 1) {
+                  return project.images;
+                }
+                return [project?.image || ""];
+              })()
+            }
             title={projects.find(p => p.id === selectedProject)?.title || ""}
             description={projects.find(p => p.id === selectedProject)?.description || ""}
           />
