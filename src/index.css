@@ -423,3 +423,29 @@ All colors MUST be HSL.
     contain: layout style paint;
   }
 }
+
+/* Simple CSS-driven auto-scroll carousel for InstagramFeed */
+.carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The animating class enables the scrolling animation only when the element is in view */
+.carousel-track.animating {
+  animation: scroll-left 20s linear infinite;
+}
+
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Pause animation on hover for better accessibility */
+.carousel-track.animating:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track.animating { animation: none; }
+}

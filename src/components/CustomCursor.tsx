@@ -8,15 +8,25 @@ const CustomCursor = () => {
 
   useEffect(() => {
     let trailId = 0;
+    const lastPos = { x: 0, y: 0 };
+    let rafId: number | null = null;
 
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      
+    const updateMousePositionRaf = () => {
+      setMousePosition({ x: lastPos.x, y: lastPos.y });
       // Add trail effect
       setCursorTrail(prev => {
-        const newTrail = [...prev, { x: e.clientX, y: e.clientY, id: trailId++ }];
+        const newTrail = [...prev, { x: lastPos.x, y: lastPos.y, id: trailId++ }];
         return newTrail.slice(-5); // Keep only last 5 positions
       });
+      rafId = null;
+    };
+
+    const updateMousePosition = (e: MouseEvent) => {
+      lastPos.x = e.clientX;
+      lastPos.y = e.clientY;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateMousePositionRaf);
+      }
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -34,6 +44,7 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 

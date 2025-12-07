@@ -265,3 +265,135 @@ Enhanced responsive design for multiple sections on the Home page to improve dis
 
 **Developer:** Qoder AI Assistant  
 **Project:** Surya Luxe Canvas
+
+
+
+
+
+
+
+
+
+
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
+import CTASection from "@/components/CTASection";
+import ImageReveal from "@/components/ImageReveal";
+import MaskedTextReveal from "@/components/MaskedTextReveal";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+import project4 from "@/assets/project-4.jpg";
+import visual from "@/assets/visual.mp4";
+import heroInterior from "@/assets/hero-interior.jpg";
+
+const Home = () => {
+  const featured = [
+    { id: 1, title: "Deeps Mansion", image: project1 },
+    { id: 2, title: "Sharath Mansion", image: project2 },
+    { id: 3, title: "Sudharshan Mansion", image: project3 },
+    { id: 4, title: "Spa Bathroom", image: project4 },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-luxury-beige/5 to-background cursor-none">
+      <CustomCursor />
+      <Navigation />
+
+      {/* Hero */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-32">
+        {/* background video */}
+        <div className="absolute inset-0 z-0">
+          <video className="w-full h-full object-cover opacity-20" autoPlay muted loop playsInline poster={heroInterior}>
+            <source src={visual} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/80" />
+        </div>
+
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <MaskedTextReveal className="mb-6" delay={0.2}>
+              SURYA ARCHITECTS
+            </MaskedTextReveal>
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl tracking-luxury-wide font-display-1 font-light text-luxury-charcoal mb-4">
+              Minimal, Luxurious & Timeless.
+            </h2>
+
+            <p className="max-w-2xl mx-auto text-muted-foreground text-base sm:text-lg md:text-xl leading-relaxed mb-8">
+              We craft elegant spaces with relentless attention to detail — balancing modern design with refined materiality.
+            </p>
+
+            <div className="flex items-center justify-center gap-4">
+              <Link to="/projects" className="inline-flex items-center px-6 py-3 bg-luxury-charcoal text-luxury-white uppercase text-xs sm:text-sm tracking-luxury-wide rounded-lg hover:bg-luxury-gold/90 transition-colors duration-300">
+                View Projects
+              </Link>
+              <Link to="/contact" className="inline-flex items-center px-6 py-3 border border-luxury-charcoal text-luxury-charcoal uppercase text-xs sm:text-sm tracking-luxury-wide rounded-lg hover:bg-luxury-charcoal hover:text-white transition-all duration-300">
+                Start a Project
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Decorative image band */}
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {featured.map((f, idx) => (
+              <motion.div
+                key={f.id}
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.35 + idx * 0.12, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+                viewport={{ once: true }}
+                className="rounded-xl shadow-2xl overflow-hidden"
+              >
+                <ImageReveal src={f.image} alt={f.title} className="aspect-[4/3] rounded-xl" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tiny project highlights + CTA */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {featured.slice(0, 3).map((p, i) => (
+              <motion.div key={p.id} className="bg-gradient-to-br from-luxury-beige/10 to-background rounded-2xl overflow-hidden shadow-2xl" whileHover={{ y: -6 }} transition={{ duration: 0.35 }}>
+                <ImageReveal src={p.image} alt={p.title} className="aspect-[4/3]" />
+                <div className="p-4 sm:p-6">
+                  <h3 className="font-display-1 font-light text-luxury-charcoal text-lg sm:text-xl mb-2">{p.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">A short glance at a recently completed project that showcases our approach to light, material, and spatial flow.</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="mt-8 flex items-center justify-center">
+            <Link to="/projects" className="inline-flex items-center px-6 py-3 border border-luxury-charcoal text-luxury-charcoal uppercase text-xs sm:text-sm tracking-luxury-wide rounded-lg hover:bg-luxury-charcoal hover:text-white transition-all duration-300">
+              Browse Full Portfolio
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <CTASection />
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Home;

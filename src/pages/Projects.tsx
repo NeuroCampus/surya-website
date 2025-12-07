@@ -248,11 +248,11 @@ const Projects = () => {
                     />
                   )}
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-700" />
+                  {/* Gradient Overlay - limit to bottom area and reduce opacity to keep image visible */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none" />
 
-                  {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 lg:p-12">
+                  {/* Content Overlay - keep content anchored to the bottom and limited in height */}
+                  <div className="absolute inset-x-0 bottom-0 max-h-1/2 overflow-hidden flex flex-col justify-end p-4 sm:p-6 lg:p-8 pointer-events-auto">
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}

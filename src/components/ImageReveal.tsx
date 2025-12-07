@@ -16,16 +16,16 @@ const ImageReveal = ({ src, alt, className = "" }: ImageRevealProps) => {
       <motion.img
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover"
         style={{
-          filter: isInView ? "grayscale(0)" : "grayscale(1)",
+          willChange: "transform, opacity",
         }}
-        animate={{
-          scale: isInView ? 1 : 1.1,
-          filter: isInView ? "grayscale(0)" : "grayscale(1)",
-        }}
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: isInView ? 1 : 0.8, scale: isInView ? 1 : 1.05 }}
         transition={{
-          duration: 1.2,
+          duration: 0.9,
           ease: [0.25, 0.1, 0.25, 1],
         }}
       />
