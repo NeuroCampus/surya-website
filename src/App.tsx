@@ -7,7 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import StructuredData from "./components/StructuredData";
-// import IntroAnimation from "./components/IntroAnimation";
+import IntroAnimation from "./components/IntroAnimation";
 import SmoothScroll, { SmoothScrollRef } from "./components/SmoothScroll";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
@@ -125,7 +125,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <StructuredData />
-        {/* <IntroAnimation /> */}
+        <IntroAnimation />
         <Toaster />
         <Sonner />
         <BrowserRouter>

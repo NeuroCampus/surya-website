@@ -411,4 +411,15 @@ All colors MUST be HSL.
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
+
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  /* Reduce paint on scroll */
+  .optimized-scroll {
+    contain: layout style paint;
+  }
 }
