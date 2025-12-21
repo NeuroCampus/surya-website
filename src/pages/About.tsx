@@ -14,6 +14,7 @@ import project4 from "@/assets/project-4.jpg";
 import visualVideo from "@/assets/visual.mp4";
 import visual1Video from "@/assets/visual1.mp4";
 import visual2Video from "@/assets/visual2.mp4";
+import whatsappImage from "@/assets/WhatsApp Image 2025-12-17 at 6.14.09 PM.jpeg";
 
 const About = () => {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
@@ -125,7 +126,7 @@ const About = () => {
 
       {/* Hero Section with Video Background */}
       <motion.section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-32"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-40 pb-32 sm:pb-40"
         style={{ opacity: heroOpacity, scale: heroScale }}
       >
         {/* Background Video */}
@@ -148,7 +149,7 @@ const About = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center"
           >
             {/* Content on Left */}
             <div className="space-y-8">
@@ -227,9 +228,9 @@ const About = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative mt-8 lg:mt-0"
+              className="relative flex items-center justify-center"
             >
-              <div className="relative w-full max-w-[240px] sm:max-w-[220px] md:max-w-[360px] lg:max-w-[320px] mx-auto px-4 sm:px-6 md:px-8 lg:px-0">
+              <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[360px]">
                 <video
                   className="w-full aspect-[9/16] object-cover rounded-3xl shadow-2xl border border-luxury-gold/20"
                   autoPlay
@@ -245,12 +246,15 @@ const About = () => {
           </motion.div>
         </div>
 
+        {/* Subtle section separator */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-luxury-gold/30 to-transparent"></div>
+
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
@@ -566,7 +570,7 @@ const About = () => {
             </motion.div>
           </motion.div>
 
-          {/* Team Section */}
+          {/* Team Section - Replaced with high-end editorial design */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -574,55 +578,57 @@ const About = () => {
             viewport={{ once: true }}
             className="mb-32"
           >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-luxury-wide font-display-1 font-light text-center text-luxury-charcoal mb-12 md:mb-16"
-            >
-              Meet Our Team
-            </motion.h2>
-            <div className="grid grid-cols-1 gap-8 md:gap-12 lg:gap-16 justify-center max-w-2xl mx-auto">
-              {team.map((member, index) => (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                  viewport={{ once: true }}
-                  className="group relative mx-auto"
-                >
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-luxury-beige/20 to-luxury-beige/5 hover:shadow-2xl transition-all duration-500">
-                    <motion.img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <img 
-                      src="https://res.cloudinary.com/ddcl4drlp/image/upload/v1763270156/CC022963_cuhjkx.jpg" 
-                      alt="Overlay" 
-                      className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" 
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    <div className="absolute bottom-0 left-0 right-0 p-8 text-luxury-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      <h3 className="text-2xl tracking-luxury-wide font-display-1 font-light mb-2 group-hover:text-luxury-gold transition-colors duration-300">
-                        {member.name}
-                      </h3>
-                      <p className="text-luxury-gold font-medium mb-2 group-hover:text-luxury-white transition-colors duration-300">
-                        {member.role}
-                      </p>
-                      <p className="text-sm opacity-90 mb-1 group-hover:opacity-100 group-hover:text-luxury-white transition-all duration-300">
-                        {member.experience}
-                      </p>
-                      <p className="text-sm opacity-80 group-hover:opacity-100 group-hover:text-luxury-white transition-all duration-300">
-                        {member.specialization}
-                      </p>
-                    </div>
+            <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+              {/* High-end editorial hero section for Meet Our Team */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
+                {/* Left: Name introduction text */}
+                <div className="flex flex-col justify-center">
+                  <div className="mb-6">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl uppercase tracking-[0.5em] text-luxury-charcoal font-sans font-bold">
+                      MEET
+                    </h3>
                   </div>
-                </motion.div>
-              ))}
+                  <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-light text-luxury-charcoal leading-none">
+                    SOWMYA
+                  </h2>
+                </div>
+
+                {/* Center: Black-and-white cut-out photo of a person */}
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <motion.img
+                      src={whatsappImage}
+                      alt={team[0].name}
+                      className="w-full max-w-md mx-auto object-contain"
+                      style={{ 
+                        mixBlendMode: 'multiply',
+                        filter: 'grayscale(100%) contrast(110%) brightness(110%)'
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+                </div>
+
+                {/* Right: Descriptive keywords */}
+                <div className="flex flex-col justify-center">
+                  <div className="space-y-6">
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl bbh-bartle-regular text-luxury-charcoal font-bold">
+                      VISIONARY
+                    </h3>
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl bbh-bartle-regular text-luxury-charcoal font-bold">
+                      DISTINGUISHED
+                    </h3>
+                    <h3 className="text-3xl sm:text-4xl md:text-5xl bbh-bartle-regular text-luxury-charcoal font-bold">
+                      RENOWNED
+                    </h3>
+                    <blockquote className="text-lg sm:text-xl font-sans text-luxury-charcoal tracking-wide max-w-xs">
+                      Architecture shaped by context,<br />
+                      defined by purpose.
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
 
