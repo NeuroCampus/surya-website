@@ -421,53 +421,6 @@ const Projects = () => {
                         {project.description}
                       </p>
 
-                      {/* Client Review */}
-                      {project.clientReview && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                          className="mb-4 sm:mb-6 p-2 sm:p-4 bg-luxury-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-luxury-white/20"
-                        >
-                          <div className="flex items-start gap-2 sm:gap-3">
-                            <motion.img
-                              src={project.clientReview.image}
-                              alt={project.clientReview.name}
-                              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-luxury-gold/50"
-                              whileHover={{ scale: 1.1 }}
-                              transition={{ duration: 0.3 }}
-                            />
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                                <span className="text-xs sm:text-sm font-medium text-luxury-white truncate">
-                                  {project.clientReview.name}
-                                </span>
-                                <span className="text-xs opacity-75 text-luxury-white hidden sm:inline">
-                                  {project.clientReview.role}
-                                </span>
-                              </div>
-                              <p className="text-xs sm:text-sm text-luxury-white/90 leading-relaxed italic overflow-hidden" style={{ maxHeight: '2.5rem' }}>
-                                "{project.clientReview.review.length > 80 ? `${project.clientReview.review.substring(0, 80)}...` : project.clientReview.review}"
-                              </p>
-                              <div className="flex items-center gap-1 mt-1 sm:mt-2">
-                                {[...Array(project.clientReview.rating)].map((_, i) => (
-                                  <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, scale: 0 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.4 + index * 0.1 + i * 0.1, duration: 0.3 }}
-                                  >
-                                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-luxury-gold fill-current" viewBox="0 0 20 20">
-                                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                  </motion.div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-
                       {/* Action Buttons */}
                       <div className="flex items-center gap-2 sm:gap-4">
                         <motion.button
@@ -551,12 +504,7 @@ const Projects = () => {
                 itemClassName={testimonialCardVariants[index % testimonialCardVariants.length]}
               >
                 <div className="p-8 md:p-10 flex flex-col gap-6 md:gap-8">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-current/20 flex-shrink-0"
-                    />
+                  <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
                     <div className="flex-1 min-w-0">
                       <h3 className="text-xl md:text-2xl font-light">{testimonial.name}</h3>
                       <p className="opacity-80 text-sm md:text-base">{testimonial.role}</p>
@@ -566,6 +514,12 @@ const Projects = () => {
                         ))}
                       </div>
                     </div>
+                    {/* Profile image completely on the right side with taller rectangular frame */}
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-24 h-32 md:w-32 md:h-40 rounded-xl object-cover border-4 border-current/20 flex-shrink-0"
+                    />
                   </div>
 
                   <p className="text-lg md:text-xl italic leading-relaxed">

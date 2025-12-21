@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -66,8 +67,10 @@ export default {
       },
       fontFamily: {
         sans: ['Source Sans 3', 'Inter', 'system-ui', 'sans-serif'],
-        display: ['Cinzel', 'Cormorant Garamond', 'serif'],
+        display: ['Gafiya', 'Cinzel', 'Cormorant Garamond', 'serif'],
         elegant: ['Cormorant Garamond', 'serif'],
+        // Added BBH Bartle (Bungee Hairline) for distinctive descriptors
+        bartle: ['Bungee Hairline', 'sans-serif'],
       },
       letterSpacing: {
         luxury: '0.05em',
@@ -102,5 +105,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
