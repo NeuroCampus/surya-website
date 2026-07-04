@@ -242,7 +242,7 @@ const ScrollStack = ({
 
   return (
     <div className={`relative w-full ${className}`.trim()}>
-      <div className="scroll-stack-inner pt-[20vh] px-4 sm:px-8 md:px-12 lg:px-20 pb-[150vh] min-h-[300vh]">
+      <div className="scroll-stack-inner pt-[20vh] px-4 sm:px-8 md:px-12 lg:px-20 pb-[70vh] min-h-[200vh]">
         {children}
         <div className="scroll-stack-end w-full h-px" />
       </div>

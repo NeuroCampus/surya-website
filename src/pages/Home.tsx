@@ -84,7 +84,7 @@ const Home = () => {
             <motion.img
               src={suryaLogo}
               alt="Surya Architects logo"
-              className="mx-auto mb-6 h-24 sm:h-32 md:h-40 lg:h-48"
+              className="mx-auto mb-6 h-40 sm:h-56 md:h-72 lg:h-80"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}

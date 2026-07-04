@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import project1 from "@/assets/project-1.jpg";
@@ -9,9 +9,6 @@ import heroImage from "@/assets/hero-interior.jpg";
 import studioImage from "@/assets/studio-workspace.jpg";
 
 const FollowJourney = () => {
-  const ref = useRef<HTMLElement | null>(null);
-  const [isInView, setIsInView] = useState(false);
-
   const photos = [
     { id: 1, image: project1, alt: "Deeps mansion - living" },
     { id: 2, image: project2, alt: "Sharath mansion - kitchen" },
@@ -21,21 +18,16 @@ const FollowJourney = () => {
     { id: 6, image: studioImage, alt: "Design studio workspace" },
   ];
 
+  // Preload images into browser cache so scrolling is perfectly smooth
   useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => setIsInView(entry.isIntersecting));
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    photos.forEach(photo => {
+      const img = new Image();
+      img.src = photo.image;
+    });
   }, []);
 
   return (
-    <section ref={ref as any} className="py-20 px-6 bg-background overflow-hidden">
+    <section className="py-20 px-6 bg-background overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8">
           <h3 className="text-3xl sm:text-4xl font-display-1 font-light text-luxury-charcoal">Follow Our <span className="text-luxury-gold">Journey</span></h3>
@@ -58,14 +50,13 @@ const FollowJourney = () => {
 
         <div className="relative overflow-hidden">
           <div
-            className={`carousel-track flex gap-4 items-center ${isInView ? "animating" : ""}`}
+            className="carousel-track flex w-max gap-4 items-center animating"
             style={{ willChange: "transform" }}
-            aria-hidden={!isInView}
           >
             {/* First set */}
             {photos.map((p) => (
               <figure key={`first-${p.id}`} className="group relative flex-shrink-0 w-64 h-64 sm:w-72 sm:h-72 overflow-hidden rounded-xl shadow-md">
-                <img src={p.image} alt={p.alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src={p.image} alt={p.alt} className="w-full h-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 h-24 sm:h-28 bg-black/20 opacity-0 group-hover:opacity-90 transition-opacity duration-200 flex items-end p-3 pointer-events-none group-hover:pointer-events-auto">
                   <span className="text-background text-sm">{p.alt}</span>
                 </div>
@@ -75,7 +66,7 @@ const FollowJourney = () => {
             {/* Duplicate for seamless loop */}
             {photos.map((p) => (
               <figure key={`second-${p.id}`} className="group relative flex-shrink-0 w-64 h-64 sm:w-72 sm:h-72 overflow-hidden rounded-xl shadow-md">
-                <img src={p.image} alt={p.alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src={p.image} alt={p.alt} className="w-full h-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 h-24 sm:h-28 bg-black/20 opacity-0 group-hover:opacity-90 transition-opacity duration-200 flex items-end p-3 pointer-events-none group-hover:pointer-events-auto">
                   <span className="text-background text-sm">{p.alt}</span>
                 </div>

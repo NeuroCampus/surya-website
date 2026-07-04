@@ -434,16 +434,20 @@ All colors MUST be HSL.
   display: flex;
   align-items: center;
   gap: 1rem;
+  /* Force GPU acceleration */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* The animating class enables the scrolling animation only when the element is in view */
 .carousel-track.animating {
-  animation: scroll-left 20s linear infinite;
+  animation: scroll-left 30s linear infinite;
 }
 
 @keyframes scroll-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* Pause animation on hover for better accessibility */

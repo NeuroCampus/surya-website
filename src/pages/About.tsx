@@ -503,7 +503,7 @@ const About = () => {
             </div>
 
             {/* Second Video Option */}
-           
+
           </motion.div>
 
           {/* Our Philosophy */}
@@ -524,7 +524,7 @@ const About = () => {
               Our Philosophy
             </motion.h2>
 
-            
+
 
             {/* Process Steps */}
             <motion.div
@@ -534,7 +534,7 @@ const About = () => {
               viewport={{ once: true }}
               className="relative"
             >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {process.map((step, index) => (
                   <motion.div
                     key={step.step}
@@ -582,27 +582,34 @@ const About = () => {
               {/* High-end editorial hero section for Meet Our Team */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
                 {/* Left: Name introduction text */}
-                <div className="flex flex-col justify-center">
-                  <div className="mb-6">
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl uppercase tracking-[0.5em] text-luxury-charcoal font-sans font-bold">
-                      MEET
-                    </h3>
+                <div className="flex flex-col justify-center items-center lg:items-end text-center lg:text-right pr-0 lg:pr-8">
+                  <div className="flex items-center justify-center lg:justify-end gap-4 mb-4 w-full">
+                    <span className="text-xl sm:text-2xl md:text-3xl uppercase tracking-[0.4em] text-luxury-gold font-medium">MEET</span>
+                    <div className="w-16 h-[2px] bg-luxury-gold/40"></div>
                   </div>
-                  <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-light text-luxury-charcoal leading-none">
-                    SOWMYA
-                  </h2>
+                  <div className="flex items-baseline justify-center lg:justify-end gap-3 mb-6">
+                    <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-5xl xl:text-6xl font-display-1 font-light text-luxury-charcoal leading-none">
+                      SOWMYA
+                    </h2>
+                    <div className="w-2 h-2 rounded-full bg-luxury-gold mb-2"></div>
+                  </div>
+                  <div className="flex items-center justify-center lg:justify-end gap-4 w-full">
+                    <div className="w-full max-w-[150px] h-[2px] bg-gradient-to-l from-luxury-gold/40 to-transparent"></div>
+                  </div>
                 </div>
 
                 {/* Center: Black-and-white cut-out photo of a person */}
-                <div className="flex justify-center">
+                <div className="flex justify-center relative">
                   <div className="relative">
+                    {/* Subtle Floor Shadow */}
+                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[70%] h-6 bg-black/15 blur-xl rounded-[100%] pointer-events-none"></div>
                     <motion.img
                       src={whatsappImage}
                       alt={team[0].name}
-                      className="w-full max-w-md mx-auto object-contain"
-                      style={{ 
+                      className="w-full max-w-[320px] sm:max-w-md mx-auto object-contain relative z-10"
+                      style={{
                         mixBlendMode: 'multiply',
-                        filter: 'grayscale(100%) contrast(110%) brightness(110%)'
+                        filter: 'grayscale(100%) contrast(115%) brightness(105%)'
                       }}
                       whileHover={{ scale: 1.02 }}
                       transition={{ duration: 0.5 }}
@@ -611,21 +618,35 @@ const About = () => {
                 </div>
 
                 {/* Right: Descriptive keywords */}
-                <div className="flex flex-col justify-center">
-                  <div className="space-y-6">
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl bbh-bartle-regular text-luxury-charcoal font-bold">
-                      VISIONARY
-                    </h3>
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl bbh-bartle-regular text-luxury-charcoal font-bold">
-                      DISTINGUISHED
-                    </h3>
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl bbh-bartle-regular text-luxury-charcoal font-bold">
-                      RENOWNED
-                    </h3>
-                    <blockquote className="text-lg sm:text-xl font-sans text-luxury-charcoal tracking-wide max-w-xs">
-                      Architecture shaped by context,<br />
-                      defined by purpose.
-                    </blockquote>
+                <div className="flex flex-col justify-center items-center lg:items-start pl-0 lg:pl-8 mt-8 lg:mt-0">
+                  <div className="space-y-5 w-full max-w-[280px] sm:max-w-sm">
+                    <div className="flex items-center justify-between gap-4">
+                      <h3 className="text-xl sm:text-2xl tracking-[0.2em] text-luxury-charcoal font-bold uppercase">
+                        VISIONARY
+                      </h3>
+                    </div>
+                    <div className="w-full h-[2px] bg-luxury-gold/20"></div>
+
+                    <div className="flex items-center justify-between gap-4">
+                      <h3 className="text-xl sm:text-2xl tracking-[0.2em] text-luxury-charcoal font-bold uppercase">
+                        DISTINGUISHED
+                      </h3>
+                    </div>
+                    <div className="w-full h-[2px] bg-luxury-gold/20"></div>
+
+                    <div className="flex items-center justify-between gap-4">
+                      <h3 className="text-xl sm:text-2xl tracking-[0.2em] text-luxury-charcoal font-bold uppercase">
+                        RENOWNED
+                      </h3>
+                    </div>
+                    <div className="w-full h-[2px] bg-luxury-gold/20"></div>
+
+                    <div className="pt-2 border-l-2 border-luxury-gold/40 pl-5 mt-6">
+                      <p className="text-xs sm:text-sm font-light text-black leading-relaxed tracking-wide">
+                        Architecture shaped by context,<br />
+                        defined by purpose.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

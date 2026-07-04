@@ -69,7 +69,7 @@ const CTASection = () => {
           </motion.h2>
 
           <motion.p
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground tracking-luxury leading-relaxed mb-6 md:mb-8 lg:mb-10 max-w-2xl mx-auto font-light px-4"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-black tracking-luxury leading-relaxed mb-6 md:mb-8 lg:mb-10 max-w-2xl mx-auto font-light px-4"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
