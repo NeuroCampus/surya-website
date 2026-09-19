@@ -14,8 +14,12 @@ import Projects from "./pages/Projects";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Maintenance from "./pages/Maintenance";
 
 const queryClient = new QueryClient();
+
+// Set to false when ready to bring the full site live
+const IS_MAINTENANCE_MODE = true;
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -40,6 +44,57 @@ const AnimatedRoutes = () => {
     }
   }, [location.pathname]);
 
+  if (IS_MAINTENANCE_MODE) {
+    return (
+      <SmoothScroll ref={smoothScrollRef}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/preview-home"
+              element={
+                <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+                  <Home />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/preview-projects"
+              element={
+                <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+                  <Projects />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/preview-about"
+              element={
+                <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+                  <About />
+                </motion.div>
+              }
+            />
+            <Route
+              path="/preview-contact"
+              element={
+                <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+                  <Contact />
+                </motion.div>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <motion.div initial="initial" animate="animate" exit="exit" variants={pageVariants} transition={pageTransition}>
+                  <Maintenance />
+                </motion.div>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
+      </SmoothScroll>
+    );
+  }
+
   return (
     <SmoothScroll ref={smoothScrollRef}>
       <AnimatePresence mode="wait">
@@ -55,6 +110,20 @@ const AnimatedRoutes = () => {
                 transition={pageTransition}
               >
                 <Home />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/maintenance"
+            element={
+              <motion.div
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageVariants}
+                transition={pageTransition}
+              >
+                <Maintenance />
               </motion.div>
             }
           />
